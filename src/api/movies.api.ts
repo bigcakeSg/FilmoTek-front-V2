@@ -1,6 +1,6 @@
-import { axiosInst } from '@config/axiosInstance';
+import { axiosInstance } from '@config/axiosInstance';
 
 export const getMovies = async () => {
-  const response = await axiosInst.post('/movies?sortby=releaseDate');
+  const response = await axiosInstance.post('/movies?sortby=releaseDate');
   return response.data;
 };
