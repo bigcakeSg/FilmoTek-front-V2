@@ -1,18 +1,37 @@
-import { isLoggedIn, setAuthTokens, clearAuthTokens } from 'axios-jwt';
+import { setAuthTokens, clearAuthTokens } from 'axios-jwt';
 import { axiosInstance } from '@/config/axiosInstance';
+import {
+  clearAllAuthData,
+  clearRememberMePreference,
+  setRememberMePreference
+} from '@/utils/storage.utils';
 
-export const login = async (params: { username: string; password: string }) => {
-  const response = await axiosInstance.post('/auth/signin', params);
+export const login = async (
+  params: Readonly<{
+    username: string;
+    password: string;
+    rememberMe?: boolean;
+  }>
+) => {
+  const response = await axiosInstance.post('/auth/signin', {
+    username: params.username,
+    password: params.password
+  });
 
-  // save tokens to storage
+  // Store the rememberMe preference before setting tokens
+  if (params.rememberMe !== undefined) {
+    setRememberMePreference(JSON.parse(params.rememberMe.toString()));
+  }
+
+  // Save tokens to storage
   setAuthTokens({
     accessToken: response.data.access_token,
     refreshToken: response.data.refresh_token
   });
 };
 
-export const logout = async () => await clearAuthTokens();
-
-if (await isLoggedIn()) {
-  // assume we are logged in because we have a refresh token
-}
+export const logout = async () => {
+  clearRememberMePreference();
+  clearAllAuthData();
+  await clearAuthTokens();
+};

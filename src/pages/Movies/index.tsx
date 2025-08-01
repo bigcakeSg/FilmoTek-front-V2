@@ -1,10 +1,10 @@
-import { login, logout } from '@/api/login.api';
-import { axiosInstance } from '@/config/axiosInstance';
-import { useMovies } from '@/hooks/movies.hooks';
 import { Route } from '@/routes';
 import { Link } from '@tanstack/react-router';
-import { getAccessToken, getRefreshToken } from 'axios-jwt';
 import { useTranslation } from 'react-i18next';
+import { useMovies } from '@/hooks/movies.hooks';
+import { axiosInstance } from '@/config/axiosInstance';
+import AuthProvider from '@/components/AuthProvider';
+import UserInfos from '@/components/AuthProvider/UserInfos';
 
 export default function Movies() {
   const moviesQuery = useMovies();
@@ -12,8 +12,13 @@ export default function Movies() {
   const { t } = useTranslation();
 
   const handleTest = async () => {
-    const response = await axiosInstance.get('/auth/me');
-    console.log(response.data);
+    try {
+      const response = await axiosInstance.get('/auth/me');
+      alert(`Hello ${response.data.firstname} ${response.data.lastname}`);
+    } catch (error) {
+      console.log('Error fetching user data:', error);
+      alert('Error fetching user data');
+    }
   };
 
   return (
@@ -21,25 +26,11 @@ export default function Movies() {
       <h3>
         {t('movieList')} - page {page}
       </h3>
-      <div>
-        <button
-          onClick={() => login({ username: 'bigcake', password: '1234' })}
-        >
-          Login
-        </button>
-        <button
-          onClick={async () => {
-            const accessToken = await getAccessToken();
-            const refreshToken = await getRefreshToken();
-            console.log('Access Token:', accessToken);
-            console.log('Refresh Token:', refreshToken);
-          }}
-        >
-          Console JWT
-        </button>
-        <button onClick={() => handleTest()}>Test</button>
-        <button onClick={() => logout()}>Logout</button>
-      </div>
+      <button onClick={() => handleTest()}>Test</button>
+      <AuthProvider>
+        <UserInfos />
+      </AuthProvider>
+
       <Link to="/" search={{ page: page + 1 }}>
         Next
       </Link>

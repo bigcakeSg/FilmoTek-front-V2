@@ -1,7 +1,8 @@
 import {
   IAuthTokens,
   TokenRefreshRequest,
-  applyAuthTokenInterceptor
+  applyAuthTokenInterceptor,
+  getBrowserLocalStorage
 } from 'axios-jwt';
 import axios from 'axios';
 
@@ -9,14 +10,14 @@ import axios from 'axios';
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
 export const axiosInstance = axios.create({
-  baseURL: BASE_URL
+  baseURL: BASE_URL,
+  withCredentials: true
 });
 
 // Define token refresh function
 const requestRefresh: TokenRefreshRequest = async (
   refreshToken: string
 ): Promise<IAuthTokens | string> => {
-  console.log('Refreshing token with:', refreshToken);
   const response = await axios.post(`${BASE_URL}/auth/refresh-token`, {
     refreshToken
   });
@@ -24,4 +25,8 @@ const requestRefresh: TokenRefreshRequest = async (
   return response.data.access_token;
 };
 
-applyAuthTokenInterceptor(axiosInstance, { requestRefresh });
+// initialize with dynamic storage
+applyAuthTokenInterceptor(axiosInstance, {
+  requestRefresh,
+  getStorage: getBrowserLocalStorage
+});
