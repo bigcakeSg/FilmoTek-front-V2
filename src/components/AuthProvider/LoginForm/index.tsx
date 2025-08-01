@@ -1,5 +1,4 @@
-import { axiosInstance } from '@/config/axiosInstance';
-import { useAuth } from '@/hooks/auth.hooks';
+import { useLogin, useMe } from '@/hooks/auth.hooks';
 import useUserStore from '@/stores/user.store';
 import { useState } from 'react';
 
@@ -11,18 +10,37 @@ export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { login, isLoading, error } = useAuth();
   const { setUser } = useUserStore();
+
+  const { refetch: refetchMe } = useMe();
+  const { refetch: refetchLogin } = useLogin({
+    username,
+    password,
+    rememberMe
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const success = await login(username, password, rememberMe);
-    if (success && onSuccess) {
-      const response = await axiosInstance.get('/auth/me'); // TODO: reactQuery
-      setUser(response.data);
-      onSuccess();
+    const {
+      isSuccess: isLoginSuccess,
+      isFetching: isLoginFetching,
+      error: loginError
+    } = await refetchLogin();
+    setError(loginError);
+    setIsLoading(isLoginFetching);
+
+    if (isLoginSuccess) {
+      const { data: user, isSuccess: isMeSuccess } = await refetchMe();
+      if (isMeSuccess && user) {
+        setUser(user);
+      }
+      if (onSuccess) {
+        onSuccess();
+      }
     }
   };
 
@@ -60,7 +78,7 @@ export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
         />
         <label htmlFor="rememberMe">Rester connecté</label>
       </div>
-      {error && <div>{error}</div>}
+      {error && <div>{error.message}</div>}
       <button type="submit" disabled={isLoading}>
         {isLoading ? 'Connexion...' : 'Se connecter'}
       </button>

@@ -25,7 +25,6 @@ export default function AuthProvider({
     const checkAuth = async () => {
       try {
         const rememberMe = getRememberMePreference();
-        console.log(user);
 
         if (!rememberMe.local && rememberMe.session === null && user) {
           clearAllAuthData();

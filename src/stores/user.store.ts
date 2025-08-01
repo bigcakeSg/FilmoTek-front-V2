@@ -1,23 +1,17 @@
+import { User } from '@/interfaces/user.interfaces';
 import { create } from 'zustand';
 import { combine, persist } from 'zustand/middleware';
 
-export interface UserState {
-  id: string;
-  firstname: string;
-  lastname: string;
-  username: string;
-}
-
 export interface UserActions {
-  setUser: (user: UserState) => void;
+  setUser: (user: User) => void;
   clearUser: () => void;
 }
 
-const defaultUserContext: { user: UserState | null } = {
+const defaultUserContext: { user: User | null } = {
   user: null
 };
 
-const useUserStore = create<{ user: UserState | null } & UserActions>()(
+const useUserStore = create<{ user: User | null } & UserActions>()(
   persist(
     combine(defaultUserContext, (set) => ({
       setUser: (user) => set((state) => ({ ...state, user })),
