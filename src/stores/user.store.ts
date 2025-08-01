@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { combine, persist } from 'zustand/middleware';
 
 export interface UserActions {
-  setUser: (user: User) => void;
+  setUser: (user: User | null) => void;
   clearUser: () => void;
 }
 

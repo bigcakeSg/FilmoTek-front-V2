@@ -6,6 +6,7 @@ import {
   getRememberMePreference
 } from '@/utils/storage.utils';
 import LoginForm from './LoginForm';
+import { useTranslation } from 'react-i18next';
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -13,8 +14,10 @@ interface AuthProviderProps {
 }
 export default function AuthProvider({
   children,
-  fallback = <div>Vérification de l'authentification...</div>
+  fallback
 }: Readonly<AuthProviderProps>) {
+  const { t } = useTranslation();
+
   const [isChecking, setIsChecking] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -26,16 +29,16 @@ export default function AuthProvider({
       try {
         const rememberMe = getRememberMePreference();
 
+        // If rememberMe is not set, clear all auth data
         if (!rememberMe.local && rememberMe.session === null && user) {
           clearAllAuthData();
           clearUser();
         }
+
+        // Authenticated if user exists
         setIsAuthenticated(!!user);
       } catch (error) {
-        console.error(
-          "Erreur lors de la vérification de l'authentification:",
-          error
-        );
+        console.error('Error during authentication check:', error);
         setIsAuthenticated(false);
       } finally {
         setIsChecking(false);
@@ -45,12 +48,12 @@ export default function AuthProvider({
   }, [clearUser, user]);
 
   if (isChecking) {
-    return <>{fallback}</>;
+    return <>{fallback || <div>{t('user.checkAuth')}</div>}</>;
   }
 
   if (isAuthenticated) {
     return <>{children}</>;
   }
 
-  return <LoginForm onSuccess={() => console.log('LOGGED!!!')} />;
+  return <LoginForm onSuccess={() => console.log('User logged in')} />;
 }

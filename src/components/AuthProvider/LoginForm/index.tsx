@@ -1,71 +1,79 @@
 import { useLogin, useMe } from '@/hooks/auth.hooks';
 import useUserStore from '@/stores/user.store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface LoginFormProps {
   onSuccess?: () => void;
 }
 
 export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
+  const { t } = useTranslation();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const { setUser } = useUserStore();
 
-  const { refetch: refetchMe } = useMe();
-  const { refetch: refetchLogin } = useLogin({
+  const {
+    refetch: fetchLogin,
+    isSuccess: isLoginSuccess,
+    isFetching: isLoginFetching,
+    error: loginError
+  } = useLogin({
     username,
     password,
     rememberMe
   });
 
+  const {
+    refetch: fetchMe,
+    isSuccess: isMeSuccess,
+    data: user,
+    isFetching: isMeFetching,
+    error: meError
+  } = useMe();
+
+  useEffect(() => {
+    const refetch = async () => {
+      await fetchMe();
+      setUser(user || null);
+      if (onSuccess && isMeSuccess) {
+        onSuccess();
+      }
+    };
+    if (!isLoginFetching && isLoginSuccess) refetch();
+  }, [isLoginFetching, isLoginSuccess, user]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const {
-      isSuccess: isLoginSuccess,
-      isFetching: isLoginFetching,
-      error: loginError
-    } = await refetchLogin();
-    setError(loginError);
-    setIsLoading(isLoginFetching);
-
-    if (isLoginSuccess) {
-      const { data: user, isSuccess: isMeSuccess } = await refetchMe();
-      if (isMeSuccess && user) {
-        setUser(user);
-      }
-      if (onSuccess) {
-        onSuccess();
-      }
-    }
+    await fetchLogin();
   };
+
+  if (isLoginFetching || isMeFetching) return <div>{t('loading')}</div>;
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="username">Nom d'utilisateur</label>
+        <label htmlFor="username">{t('user.username')}</label>
         <input
           id="username"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          disabled={isLoading}
         />
       </div>
       <div>
-        <label htmlFor="password">Mot de passe</label>
+        <label htmlFor="password">{t('user.password')}</label>
         <input
           id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          disabled={isLoading}
         />
       </div>
       <div className="flex items-center">
@@ -74,14 +82,11 @@ export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
           type="checkbox"
           checked={rememberMe}
           onChange={(e) => setRememberMe(e.target.checked)}
-          disabled={isLoading}
         />
-        <label htmlFor="rememberMe">Rester connecté</label>
+        <label htmlFor="rememberMe">{t('user.rememberMe')}</label>
       </div>
-      {error && <div>{error.message}</div>}
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? 'Connexion...' : 'Se connecter'}
-      </button>
+      {(meError || loginError) && <div>{t('user.unknownUser')}</div>}
+      <button type="submit">{t('user.login')}</button>
     </form>
   );
 }

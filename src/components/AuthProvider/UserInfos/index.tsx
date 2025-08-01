@@ -3,10 +3,14 @@ import {
   clearAllAuthData,
   clearRememberMePreference
 } from '@/utils/storage.utils';
+import { useQueryClient } from '@tanstack/react-query';
 import { clearAuthTokens } from 'axios-jwt';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/react/shallow';
 
 export default function UserInfos() {
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
   const { clearUser } = useUserStore();
 
   const user = useUserStore(useShallow((state) => state.user));
@@ -14,19 +18,21 @@ export default function UserInfos() {
   const handleLogout = (e: React.FormEvent) => {
     e.preventDefault();
 
-    clearUser();
-
+    queryClient.removeQueries({ queryKey: ['login'] });
+    queryClient.removeQueries({ queryKey: ['user'] });
     clearRememberMePreference();
     clearAllAuthData();
     clearAuthTokens();
+    clearUser();
   };
 
   return (
     <div>
       <div>
-        Bonjour {user?.firstname} {user?.lastname}!
+        {user?.firstname} {user?.lastname}
       </div>
-      <button onClick={handleLogout}>Logout</button>
+      {/* <button onClick={handelTest}>CLICK</button> */}
+      <button onClick={handleLogout}>{t('user.logout')}</button>
     </div>
   );
 }

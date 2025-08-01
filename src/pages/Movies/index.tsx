@@ -1,6 +1,5 @@
 import { Route } from '@/routes';
 import { Link } from '@tanstack/react-router';
-import { useTranslation } from 'react-i18next';
 import { useMovies } from '@/hooks/movies.hooks';
 import { axiosInstance } from '@/config/axiosInstance';
 import AuthProvider from '@/components/AuthProvider';
@@ -9,7 +8,6 @@ import UserInfos from '@/components/AuthProvider/UserInfos';
 export default function Movies() {
   const moviesQuery = useMovies();
   const { page = 1 } = Route.useSearch();
-  const { t } = useTranslation();
 
   const handleTest = async () => {
     try {
@@ -23,9 +21,7 @@ export default function Movies() {
 
   return (
     <div>
-      <h3>
-        {t('movieList')} - page {page}
-      </h3>
+      <h3>Liste de films - page {page}</h3>
       <button onClick={() => handleTest()}>Test</button>
       <AuthProvider>
         <UserInfos />
