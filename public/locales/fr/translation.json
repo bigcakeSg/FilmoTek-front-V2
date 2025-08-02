@@ -1,3 +1,12 @@
 {
-  "movieList": "Liste de films"
+  "loading": "Chargement...",
+  "user": {
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "unknownUser": "Utilisateur inconnu",
+    "checkAuth": "Vérification de l'authentification..."
+  }
 }
