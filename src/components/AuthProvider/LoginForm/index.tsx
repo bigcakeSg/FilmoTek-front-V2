@@ -1,7 +1,22 @@
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { useLogin, useMe } from '@/hooks/auth.hooks';
 import useUserStore from '@/stores/user.store';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+
+const formLoginSchema = z.object({
+  username: z.string().min(3, {
+    message: 'Username must be at least 3 characters.'
+  }),
+  password: z.string().min(4, {
+    message: 'Password must be at least 4 characters.'
+  }),
+  rememberMe: z.boolean().optional()
+});
+
+type FormLogin = z.infer<typeof formLoginSchema>;
 
 interface LoginFormProps {
   onSuccess?: () => void;
@@ -9,10 +24,19 @@ interface LoginFormProps {
 
 export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
   const { t } = useTranslation();
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors }
+  } = useForm<FormLogin>({
+    resolver: zodResolver(formLoginSchema),
+    defaultValues: {
+      username: '',
+      password: '',
+      rememberMe: false
+    }
+  });
 
   const { setUser } = useUserStore();
 
@@ -21,11 +45,7 @@ export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
     isSuccess: isLoginSuccess,
     isFetching: isLoginFetching,
     error: loginError
-  } = useLogin({
-    username,
-    password,
-    rememberMe
-  });
+  } = useLogin(watch());
 
   const {
     refetch: fetchMe,
@@ -46,44 +66,68 @@ export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
     if (!isLoginFetching && isLoginSuccess) refetch();
   }, [isLoginFetching, isLoginSuccess, user]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleSubmitLogin: SubmitHandler<FormLogin> = async () => {
     await fetchLogin();
   };
 
   if (isLoginFetching || isMeFetching) return <div>{t('loading')}</div>;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(handleSubmitLogin)}>
       <div>
-        <label htmlFor="username">{t('user.username')}</label>
-        <input
-          id="username"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
+        <Controller
+          name="username"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => {
+            return (
+              <>
+                <label htmlFor="username">{t('user.username')}</label>
+                <input {...field} id="username" type="text" required />
+                <div>
+                  {errors.username && <span>{errors.username.message}</span>}
+                </div>
+              </>
+            );
+          }}
         />
       </div>
       <div>
-        <label htmlFor="password">{t('user.password')}</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
+        <Controller
+          name="password"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => {
+            return (
+              <>
+                <label htmlFor="password">{t('user.password')}</label>
+                <input {...field} id="password" type="password" required />
+                <div>
+                  {errors.password && <span>{errors.password.message}</span>}
+                </div>
+              </>
+            );
+          }}
         />
       </div>
       <div className="flex items-center">
-        <input
-          id="rememberMe"
-          type="checkbox"
-          checked={rememberMe}
-          onChange={(e) => setRememberMe(e.target.checked)}
+        <Controller
+          name="rememberMe"
+          control={control}
+          render={({ field }) => {
+            return (
+              <>
+                <input
+                  id="rememberMe"
+                  type="checkbox"
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
+                />
+                <label htmlFor="rememberMe">{t('user.rememberMe')}</label>
+              </>
+            );
+          }}
         />
-        <label htmlFor="rememberMe">{t('user.rememberMe')}</label>
       </div>
       {(meError || loginError) && <div>{t('user.unknownUser')}</div>}
       <button type="submit">{t('user.login')}</button>

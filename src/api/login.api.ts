@@ -10,7 +10,8 @@ export const login = async (params: {
 }): Promise<null> => {
   const response = await axiosInstance.post('/auth/signin', {
     username: params.username,
-    password: params.password
+    password: params.password,
+    isNoExpire: true
   });
 
   // Store the rememberMe preference before setting tokens

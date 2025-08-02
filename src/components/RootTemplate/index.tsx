@@ -1,10 +1,12 @@
 import { Link, Outlet } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+// import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import AuthProvider from '../AuthProvider';
+import UserInfos from '../AuthProvider/UserInfos';
 
 export default function RootTemplate() {
   return (
     <>
-      <div>
+      <nav>
         <Link to="/" search={{ page: 1 }}>
           Home
         </Link>{' '}
@@ -12,10 +14,13 @@ export default function RootTemplate() {
           Movie
         </Link>{' '}
         <Link to="/statistics/genre">Stats</Link>
-      </div>
+      </nav>
+      <AuthProvider>
+        <UserInfos />
+      </AuthProvider>
       <hr />
       <Outlet />
-      <TanStackRouterDevtools />
+      {/* <TanStackRouterDevtools /> */}
     </>
   );
 }

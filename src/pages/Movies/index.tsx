@@ -1,9 +1,8 @@
 import { Route } from '@/routes';
 import { Link } from '@tanstack/react-router';
+import { format } from 'date-fns';
 import { useMovies } from '@/hooks/movies.hooks';
 import { axiosInstance } from '@/config/axiosInstance';
-import AuthProvider from '@/components/AuthProvider';
-import UserInfos from '@/components/AuthProvider/UserInfos';
 
 export default function Movies() {
   const moviesQuery = useMovies();
@@ -23,16 +22,20 @@ export default function Movies() {
     <div>
       <h3>Liste de films - page {page}</h3>
       <button onClick={() => handleTest()}>Test</button>
-      <AuthProvider>
-        <UserInfos />
-      </AuthProvider>
-
       <Link to="/" search={{ page: page + 1 }}>
         Next
       </Link>
       <div>
         {moviesQuery.data.map((movie) => (
-          <div key={movie._id}>{movie.originalTitle}</div>
+          <div key={movie._id}>
+            {/* <img
+              src={'http://localhost:5000/media/' + movie.picture}
+              alt={movie.originalTitle}
+              width={50}
+            /> */}
+            {movie.originalTitle} -{' '}
+            {format(new Date(movie.releaseDate), 'yyyy')}
+          </div>
         ))}
       </div>
     </div>
