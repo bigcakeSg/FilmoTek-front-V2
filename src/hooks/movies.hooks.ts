@@ -20,7 +20,7 @@ export const useGetMovieList = () => {
       return lastPage.start + lastPage.limit;
     }
   });
-  console.log('data', data);
+
   return {
     data,
     error,

@@ -1,14 +1,41 @@
-import { useRef } from 'react';
-import { Route } from '@/routes';
-import { Link } from '@tanstack/react-router';
+import { useEffect, useRef, useState } from 'react';
+// import { Route } from '@/routes';
+// import { Link } from '@tanstack/react-router';
 import { format } from 'date-fns';
 import { useGetMovieList } from '@/hooks/movies.hooks';
 import { axiosInstance } from '@/config/axiosInstance';
 
 export default function Movies() {
-  const { data: moviesData, fetchNextPage, hasNextPage } = useGetMovieList();
-  const { page = 1 } = Route.useSearch();
-  const loaderRef = useRef(null);
+  const loaderRef = useRef<HTMLDivElement>(null);
+  const { data: moviesData, fetchNextPage, isFetching } = useGetMovieList();
+  const [distanceFromBottom, setDistanceFromBottom] = useState(0);
+  // const { page = 1 } = Route.useSearch();
+
+  const calculateDistanceFromBottom = () => {
+    if (loaderRef.current) {
+      const rect = loaderRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const distance = windowHeight - rect.bottom;
+      setDistanceFromBottom(distance);
+      return distance;
+    }
+    return 0;
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', calculateDistanceFromBottom);
+    window.addEventListener('resize', calculateDistanceFromBottom);
+    calculateDistanceFromBottom();
+
+    return () => {
+      window.removeEventListener('scroll', calculateDistanceFromBottom);
+      window.addEventListener('resize', calculateDistanceFromBottom);
+    };
+  }, []);
+
+  if (distanceFromBottom > -500 && distanceFromBottom < 100 && !isFetching) {
+    fetchNextPage();
+  }
 
   const handleTest = async () => {
     try {
@@ -21,14 +48,11 @@ export default function Movies() {
   };
 
   const movieList = moviesData?.pages.flatMap((page) => page.data) || [];
-  console.log('hasNextPage', hasNextPage);
+
   return (
     <div>
-      <h3>Liste de films - page {page}</h3>
+      <h3>Liste de films</h3>
       <button onClick={() => handleTest()}>Test</button>
-      <Link to="/" search={{ page: page + 1 }}>
-        Next
-      </Link>
       <div>
         {movieList.map((movie) => (
           <div key={movie._id}>
@@ -42,9 +66,7 @@ export default function Movies() {
           </div>
         ))}
       </div>
-      <button ref={loaderRef} onClick={() => fetchNextPage()}>
-        Films suivants
-      </button>
+      <div ref={loaderRef}></div>
     </div>
   );
 }
