@@ -8,10 +8,10 @@ import useUserStore from '@/stores/user.store';
 
 const formLoginSchema = z.object({
   username: z.string().min(3, {
-    message: 'Username must be at least 3 characters.'
+    message: 'Username must be at least 3 characters.' // TODO: translation
   }),
   password: z.string().min(4, {
-    message: 'Password must be at least 4 characters.'
+    message: 'Password must be at least 4 characters.' // TODO: translation
   }),
   rememberMe: z.boolean().optional()
 });

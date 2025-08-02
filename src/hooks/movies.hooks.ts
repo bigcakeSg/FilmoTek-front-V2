@@ -1,15 +1,33 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getMovies } from '@api/movies.api';
-import type { ResultQuery } from '@interfaces/queries.interfaces';
-import type { MovieLite } from '@interfaces/movies.interfaces';
 
-export const useMovies = () => {
-  const { data, isFetching } = useQuery<ResultQuery<MovieLite>>({
+export const useGetMovieList = () => {
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status
+  } = useInfiniteQuery({
     queryKey: ['movieList'],
-    queryFn: () => {
-      return getMovies();
+    queryFn: getMovies,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      const param = lastPage.start + lastPage.limit;
+      if (param >= lastPage.totalCount) return null;
+      return lastPage.start + lastPage.limit;
     }
   });
-
-  return { data: data?.data || [], isFetching };
+  console.log('data', data);
+  return {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status
+  };
 };

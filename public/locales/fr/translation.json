@@ -7,6 +7,8 @@
     "login": "Se connecter",
     "logout": "Se déconnecter",
     "unknownUser": "Utilisateur inconnu",
-    "checkAuth": "Vérification de l'authentification..."
+    "checkAuth": "Vérification de l'authentification...",
+    "userNameError": "Le nom d'utilisateur doit comporter au moins 3 caractères.",
+    "passwordError": "Le mot de passe doit comporter au moins 4 caractères."
   }
 }
