@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getMovies } from '@api/movies.api';
+import { getMovie, getMovieList } from '@api/movies.api';
 
 export const useGetMovieList = () => {
   const {
@@ -12,12 +12,16 @@ export const useGetMovieList = () => {
     status
   } = useInfiniteQuery({
     queryKey: ['movieList'],
-    queryFn: getMovies,
+    queryFn: ({ pageParam }) => getMovieList({ start: pageParam }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
-      const param = lastPage.start + lastPage.limit;
+      const start = lastPage.start || 0;
+      const limit = lastPage.limit || 50;
+      const param = start + limit;
+
+      if (lastPage.totalCount === undefined) return null;
       if (param >= lastPage.totalCount) return null;
-      return lastPage.start + lastPage.limit;
+      return start + limit;
     }
   });
 
@@ -31,3 +35,8 @@ export const useGetMovieList = () => {
     status
   };
 };
+
+export const movieQuery = (movieId: string) => ({
+  queryKey: ['movie', movieId],
+  queryFn: () => getMovie({ movieId })
+});
