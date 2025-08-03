@@ -80,7 +80,7 @@ export default function Movies() {
         <div
           ref={loaderRef}
           style={{
-            height: '1000px',
+            height: '100vh',
             width: '100px',
             background: 'transparent',
             position: 'absolute',
