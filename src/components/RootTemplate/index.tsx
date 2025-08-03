@@ -7,12 +7,7 @@ export default function RootTemplate() {
   return (
     <>
       <nav>
-        <Link to="/" search={{ page: 1 }}>
-          Home
-        </Link>{' '}
-        <Link to="/movie/$movieId" params={{ movieId: '1234' }}>
-          Movie
-        </Link>{' '}
+        <Link to="/">Home</Link> <Link to=".">Add movie</Link>{' '}
         <Link to="/statistics/genre">Stats</Link>
       </nav>
       <AuthProvider>

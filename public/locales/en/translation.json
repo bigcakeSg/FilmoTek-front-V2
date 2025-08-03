@@ -7,6 +7,8 @@
     "login": "Login",
     "logout": "Logout",
     "unknownUser": "Unknown user",
-    "checkAuth": "Checking authentication..."
+    "checkAuth": "Checking authentication...",
+    "userNameError": "Username must be at least 3 characters.",
+    "passwordError": "Password must be at least 4 characters."
   }
 }

@@ -8,10 +8,10 @@ import useUserStore from '@/stores/user.store';
 
 const formLoginSchema = z.object({
   username: z.string().min(3, {
-    message: 'Username must be at least 3 characters.'
+    message: 'user.userNameError'
   }),
   password: z.string().min(4, {
-    message: 'Password must be at least 4 characters.'
+    message: 'user.passwordError'
   }),
   rememberMe: z.boolean().optional()
 });
@@ -84,9 +84,9 @@ export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
               <>
                 <label htmlFor="username">{t('user.username')}</label>
                 <input {...field} id="username" type="text" required />
-                <div>
-                  {errors.username && <span>{errors.username.message}</span>}
-                </div>
+                {errors.username?.message && (
+                  <div>{t(errors.username.message)}</div>
+                )}
               </>
             );
           }}
@@ -102,9 +102,9 @@ export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
               <>
                 <label htmlFor="password">{t('user.password')}</label>
                 <input {...field} id="password" type="password" required />
-                <div>
-                  {errors.password && <span>{errors.password.message}</span>}
-                </div>
+                {errors.password?.message && (
+                  <div>{t(errors.password?.message)}</div>
+                )}
               </>
             );
           }}

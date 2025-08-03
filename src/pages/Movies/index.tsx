@@ -1,12 +1,12 @@
-import { Route } from '@/routes';
-import { Link } from '@tanstack/react-router';
+import { useEffect, useRef } from 'react';
 import { format } from 'date-fns';
-import { useMovies } from '@/hooks/movies.hooks';
+import { useGetMovieList } from '@/hooks/movies.hooks';
 import { axiosInstance } from '@/config/axiosInstance';
+import { Link } from '@tanstack/react-router';
 
 export default function Movies() {
-  const moviesQuery = useMovies();
-  const { page = 1 } = Route.useSearch();
+  const loaderRef = useRef<HTMLDivElement>(null);
+  const { data: moviesData, fetchNextPage, isFetching } = useGetMovieList();
 
   const handleTest = async () => {
     try {
@@ -18,26 +18,78 @@ export default function Movies() {
     }
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (loaderRef.current) {
+      observer.observe(loaderRef.current);
+    }
+    return () => {
+      if (loaderRef.current) {
+        observer.unobserve(loaderRef.current);
+      }
+    };
+  }, [loaderRef]);
+
+  const movieList = moviesData?.pages.flatMap((page) => page.data) || [];
+
   return (
     <div>
-      <h3>Liste de films - page {page}</h3>
-      <button onClick={() => handleTest()}>Test</button>
-      <Link to="/" search={{ page: page + 1 }}>
-        Next
-      </Link>
+      <h3>Liste de films</h3>
       <div>
-        {moviesQuery.data.map((movie) => (
-          <div key={movie._id}>
-            {/* <img
-              src={'http://localhost:5000/media/' + movie.picture}
-              alt={movie.originalTitle}
-              width={50}
-            /> */}
-            {movie.originalTitle} -{' '}
-            {format(new Date(movie.releaseDate), 'yyyy')}
-          </div>
-        ))}
+        Filtres - Tier par : date / titre original / titre français - Aller à :
+        décénnie / lettre
       </div>
+      <button onClick={() => handleTest()}>Test</button>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          position: 'relative'
+        }}
+      >
+        {movieList.map((movie) => (
+          <Link
+            key={movie._id}
+            to="/movie/$movieId"
+            params={{ movieId: movie._id }}
+          >
+            <div
+              style={{
+                margin: '20px',
+                width: '200px',
+                height: '300px'
+              }}
+            >
+              <img
+                src={'http://localhost:5000/media/posters/' + movie.picture}
+                alt={movie.originalTitle}
+                width={100}
+              />
+              {movie.originalTitle} -{' '}
+              {format(new Date(movie.releaseDate), 'yyyy')}
+            </div>
+          </Link>
+        ))}
+        <div
+          ref={loaderRef}
+          style={{
+            height: '100vh',
+            width: '100px',
+            background: 'transparent',
+            position: 'absolute',
+            bottom: '0',
+            zIndex: -1
+          }}
+        ></div>
+      </div>
+      {isFetching && <div>Loading...</div>}
     </div>
   );
 }

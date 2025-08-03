@@ -22,6 +22,11 @@ const requestRefresh: TokenRefreshRequest = async (
     refreshToken
   });
 
+  const tokens = {
+    accessToken: response.data.access_token,
+    refreshToken: response.data.refresh_token
+  };
+  localStorage.setItem('auth-tokens-development', JSON.stringify(tokens));
   return response.data.access_token;
 };
 
