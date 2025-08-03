@@ -1,15 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-// import { Route } from '@/routes';
-// import { Link } from '@tanstack/react-router';
 import { format } from 'date-fns';
 import { useGetMovieList } from '@/hooks/movies.hooks';
 import { axiosInstance } from '@/config/axiosInstance';
+import { Link } from '@tanstack/react-router';
 
 export default function Movies() {
   const loaderRef = useRef<HTMLDivElement>(null);
   const { data: moviesData, fetchNextPage, isFetching } = useGetMovieList();
   const [distanceFromBottom, setDistanceFromBottom] = useState(0);
-  // const { page = 1 } = Route.useSearch();
 
   const calculateDistanceFromBottom = () => {
     if (loaderRef.current) {
@@ -34,7 +32,7 @@ export default function Movies() {
   }, []);
 
   if (distanceFromBottom > -500 && distanceFromBottom < 100 && !isFetching) {
-    fetchNextPage();
+    // fetchNextPage(); // FIXME: ne pas fetch next à l'ouverture de la page
   }
 
   const handleTest = async () => {
@@ -52,18 +50,26 @@ export default function Movies() {
   return (
     <div>
       <h3>Liste de films</h3>
+      <div>
+        Filtres - Tier par : date / titre original / titre français - Aller à :
+        décénnie / lettre
+      </div>
       <button onClick={() => handleTest()}>Test</button>
       <div>
         {movieList.map((movie) => (
-          <div key={movie._id}>
+          <Link
+            key={movie._id}
+            to="/movie/$movieId"
+            params={{ movieId: movie._id }}
+          >
             <img
               src={'http://localhost:5000/media/posters/' + movie.picture}
               alt={movie.originalTitle}
-              width={50}
+              width={100}
             />
             {movie.originalTitle} -{' '}
             {format(new Date(movie.releaseDate), 'yyyy')}
-          </div>
+          </Link>
         ))}
       </div>
       <div ref={loaderRef}></div>
