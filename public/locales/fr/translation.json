@@ -1,5 +1,10 @@
 {
   "loading": "Chargement...",
+  "mainNav": {
+    "home": "Accueil",
+    "addMovie": "Ajouter un film",
+    "stats": "Statistiques"
+  },
   "user": {
     "username": "Nom d'utilisateur",
     "password": "Mot de passe",

@@ -5,7 +5,9 @@ import { axiosInstance } from '@/config/axiosInstance';
 import { Link } from '@tanstack/react-router';
 
 export default function Movies() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const loaderRef = useRef<HTMLDivElement>(null);
+
   const { data: moviesData, fetchNextPage, isFetching } = useGetMovieList();
 
   const handleTest = async () => {
@@ -25,7 +27,7 @@ export default function Movies() {
           fetchNextPage();
         }
       },
-      { threshold: 0.1 }
+      { root: containerRef.current, threshold: 0.1 }
     );
     if (loaderRef.current) {
       observer.observe(loaderRef.current);
@@ -48,46 +50,56 @@ export default function Movies() {
       </div>
       <button onClick={() => handleTest()}>Test</button>
       <div
+        ref={containerRef}
         style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          position: 'relative'
+          background: 'lightgray',
+          height: '60vh',
+          overflowY: 'auto'
         }}
       >
-        {movieList.map((movie) => (
-          <Link
-            key={movie._id}
-            to="/movie/$movieId"
-            params={{ movieId: movie._id }}
-          >
-            <div
-              style={{
-                margin: '20px',
-                width: '200px',
-                height: '300px'
-              }}
-            >
-              <img
-                src={'http://localhost:5000/media/posters/' + movie.picture}
-                alt={movie.originalTitle}
-                width={100}
-              />
-              {movie.originalTitle} -{' '}
-              {format(new Date(movie.releaseDate), 'yyyy')}
-            </div>
-          </Link>
-        ))}
         <div
-          ref={loaderRef}
           style={{
-            height: '100vh',
-            width: '100px',
-            background: 'transparent',
-            position: 'absolute',
-            bottom: '0',
-            zIndex: -1
+            position: 'relative',
+            display: 'flex',
+            flexWrap: 'wrap',
+            width: '100%'
           }}
-        ></div>
+        >
+          {movieList.map((movie) => (
+            <Link
+              key={movie._id}
+              to="/movie/$movieId"
+              params={{ movieId: movie._id }}
+            >
+              <div
+                style={{
+                  margin: '20px',
+                  width: '200px',
+                  height: '300px'
+                }}
+              >
+                <img
+                  src={'http://localhost:5000/media/posters/' + movie.picture}
+                  alt={movie.originalTitle}
+                  width={100}
+                />
+                {movie.originalTitle} -{' '}
+                {format(new Date(movie.releaseDate), 'yyyy')}
+              </div>
+            </Link>
+          ))}
+          <div
+            ref={loaderRef}
+            style={{
+              height: '60vh', // same size as the container
+              width: '100px',
+              background: 'transparent',
+              position: 'absolute',
+              bottom: '0',
+              zIndex: -1
+            }}
+          ></div>
+        </div>
       </div>
       {isFetching && <div>Loading...</div>}
     </div>

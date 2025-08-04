@@ -1,5 +1,10 @@
 {
   "loading": "Loading...",
+  "mainNav": {
+    "home": "Home",
+    "addMovie": "Add movie",
+    "stats": "Stats"
+  },
   "user": {
     "username": "User name",
     "password": "Password",
