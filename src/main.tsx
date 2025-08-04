@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from '@/routeTree.gen';
+import '@fontsource-variable/outfit/index.css';
 import '@/i18n';
 import './index.css';
 

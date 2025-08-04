@@ -11,10 +11,10 @@ export default defineConfig({
   exclude: [],
 
   globalVars: {
-    '--font-fira-code': 'Fira Code Variable, monospace',
-    '--font-mona-sans': 'Mona Sans, sans-serif',
-    '--font-roboto-sans': 'Roboto Sans, sans-serif',
-    '--font-roboto-condensed': 'Roboto Condensed, sans-serif'
+    '--font-outfit': 'Outfit Variable, monospace'
+    // '--font-mona-sans': 'Mona Sans, sans-serif',
+    // '--font-roboto-sans': 'Roboto Sans, sans-serif',
+    // '--font-roboto-condensed': 'Roboto Condensed, sans-serif'
   },
 
   // Useful for theme customization
@@ -28,8 +28,9 @@ export default defineConfig({
           }
         },
         fonts: {
-          roboto: { value: 'var(--font-roboto-sans), sans-serif' },
-          robotoCondensed: { value: 'var(--font-roboto-condensed), sans-serif' }
+          fontOutfit: { value: 'var(--font-outfit), monospace' }
+          // roboto: { value: 'var(--font-roboto-sans), sans-serif' },
+          // robotoCondensed: { value: 'var(--font-roboto-condensed), sans-serif' }
         }
       },
       semanticTokens: {
@@ -56,7 +57,8 @@ export default defineConfig({
     body: {
       backgroundColor: '{background}',
       color: '{text}',
-      fontFamily: '{robotoCondensed}',
+      fontFamily: '{fontOutfit}',
+      fontWeight: '100',
       fontSize: '20px',
       lineHeight: '1.5',
       margin: '0'
