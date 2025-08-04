@@ -1,7 +1,8 @@
 import { css } from '../../../styled-system/css';
 
 export const moviesContainer = css({
-  background: 'lightgray',
+  bg: 'background',
+  color: 'text',
   height: '60vh',
   overflowY: 'auto'
 });

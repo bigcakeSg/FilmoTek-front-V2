@@ -43,7 +43,7 @@ export default function Movies() {
         observer.unobserve(loaderRef.current);
       }
     };
-  }, [loaderRef]);
+  }, [fetchNextPage, loaderRef]);
 
   const movieList = moviesData?.pages.flatMap((page) => page.data) || [];
 

@@ -11,7 +11,6 @@ export interface MovieLite {
     text: string;
   }[];
   supports: string[];
-  watched?: boolean;
 }
 
 export interface Movie {
@@ -32,5 +31,4 @@ export interface Movie {
   }[];
   supports: string[];
   videos: string[];
-  watched?: boolean;
 }
