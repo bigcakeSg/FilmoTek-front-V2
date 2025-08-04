@@ -3,6 +3,12 @@ import { format } from 'date-fns';
 import { useGetMovieList } from '@/hooks/movies.hooks';
 import { axiosInstance } from '@/config/axiosInstance';
 import { Link } from '@tanstack/react-router';
+import {
+  loaderRefStyle,
+  moviesContainer,
+  moviesContent,
+  movieTile
+} from './movies.styles';
 
 export default function Movies() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -27,7 +33,7 @@ export default function Movies() {
           fetchNextPage();
         }
       },
-      { root: containerRef.current, threshold: 0.1 }
+      { root: containerRef.current, threshold: 1 }
     );
     if (loaderRef.current) {
       observer.observe(loaderRef.current);
@@ -49,35 +55,15 @@ export default function Movies() {
         décénnie / lettre
       </div>
       <button onClick={() => handleTest()}>Test</button>
-      <div
-        ref={containerRef}
-        style={{
-          background: 'lightgray',
-          height: '60vh',
-          overflowY: 'auto'
-        }}
-      >
-        <div
-          style={{
-            position: 'relative',
-            display: 'flex',
-            flexWrap: 'wrap',
-            width: '100%'
-          }}
-        >
+      <div ref={containerRef} className={moviesContainer}>
+        <div className={moviesContent}>
           {movieList.map((movie) => (
             <Link
               key={movie._id}
               to="/movie/$movieId"
               params={{ movieId: movie._id }}
             >
-              <div
-                style={{
-                  margin: '20px',
-                  width: '200px',
-                  height: '300px'
-                }}
-              >
+              <div className={movieTile}>
                 <img
                   src={'http://localhost:5000/media/posters/' + movie.picture}
                   alt={movie.originalTitle}
@@ -88,17 +74,7 @@ export default function Movies() {
               </div>
             </Link>
           ))}
-          <div
-            ref={loaderRef}
-            style={{
-              height: '60vh', // same size as the container
-              width: '100px',
-              background: 'transparent',
-              position: 'absolute',
-              bottom: '0',
-              zIndex: -1
-            }}
-          ></div>
+          <div ref={loaderRef} className={loaderRefStyle}></div>
         </div>
       </div>
       {isFetching && <div>Loading...</div>}

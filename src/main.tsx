@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from '@/routeTree.gen';
 import '@/i18n';
+import './index.css';
 
 export const queryClient = new QueryClient();
 

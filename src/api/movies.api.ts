@@ -7,7 +7,7 @@ export const getMovieList = async (pageParam: {
   sortBy?: string;
   filter?: string;
 }): Promise<ResultQuery<MovieLite>> => {
-  const response = await axiosInstance.post(
+  const response = await axiosInstance.get(
     `/movies?sortby=releaseDate&start=${pageParam.start}&limit=50`
   );
   return response.data;
