@@ -1,8 +1,5 @@
 import { css } from '@styled-system/css';
 
-const miniWidth = 200;
-const miniHeight = 294;
-
 export const movieTile = css({
   position: 'relative',
   boxShadow: {
@@ -10,16 +7,16 @@ export const movieTile = css({
     _dark: 'rgba(0, 0, 0, 1) 1px 1px 15px 2px'
   },
   transitionDuration: '0.5s',
-  width: `${miniWidth}px`,
-  height: `${miniHeight}px`,
+  aspectRatio: 0.68,
+  width: { base: '100%', xl: '200px', md: '180px', sm: '40%' },
   fontSize: '20px',
   lineHeight: '20px',
   '& .movie': {
     '&-picture': {
       position: 'absolute',
       transitionDuration: '0.5s',
-      width: `${miniWidth}px`,
-      height: `${miniHeight}px`,
+      width: '100%',
+      height: '100%',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       backgroundSize: '101% 101%'
@@ -29,16 +26,16 @@ export const movieTile = css({
       borderColor: '{foreground}',
       backdropFilter: 'blur(0px) brightness(100%)',
       position: 'absolute',
-      width: `${miniWidth}px`,
-      height: `${miniHeight}px`
+      width: '100%',
+      height: '100%'
     },
     '&-infos': {
       display: 'none',
       position: 'absolute',
       top: 0,
       left: 0,
-      width: `${miniWidth}px`,
-      height: `${miniHeight}px`,
+      width: '100%',
+      height: '100%',
       color: '#fff',
       padding: '15px',
       flexDirection: 'column',

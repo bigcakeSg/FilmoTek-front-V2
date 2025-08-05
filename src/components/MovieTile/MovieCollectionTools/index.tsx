@@ -1,4 +1,5 @@
 import { FaEye, FaMapPin, FaStar } from 'react-icons/fa6';
+import { Tooltip } from '@ark-ui/react/tooltip';
 import {
   movieCollectionTools,
   toolButton
@@ -38,17 +39,17 @@ export default function MovieCollectionTools({
     <div>
       <div className={movieCollectionTools}>
         <ToolButton
-          icon={<FaEye size={16} />}
+          icon={<FaEye size={18} />}
           isActive={!!watched}
           onClick={() => null}
         />
         <ToolButton
-          icon={<FaMapPin size={16} />}
+          icon={<FaMapPin size={18} />}
           isActive={!!favorite}
           onClick={() => null}
         />
         <ToolButton
-          icon={<FaStar size={16} />}
+          icon={<FaStar size={18} />}
           isActive={!!pinned}
           onClick={() => null}
         />

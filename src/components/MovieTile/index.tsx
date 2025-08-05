@@ -9,8 +9,13 @@ type MovieTileProps = MovieLite;
 
 export default function MovieTile(movie: Readonly<MovieTileProps>) {
   return (
-    <Link key={movie._id} to="/movie/$movieId" params={{ movieId: movie._id }}>
-      <div className={movieTile}>
+    <Link
+      key={movie._id}
+      to="/movie/$movieId"
+      params={{ movieId: movie._id }}
+      className={movieTile}
+    >
+      <div className="movie-container">
         <div
           className="movie-picture"
           style={{
