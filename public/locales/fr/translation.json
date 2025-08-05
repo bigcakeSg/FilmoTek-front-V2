@@ -15,5 +15,13 @@
     "checkAuth": "Vérification de l'authentification...",
     "userNameError": "Le nom d'utilisateur doit comporter au moins 3 caractères.",
     "passwordError": "Le mot de passe doit comporter au moins 4 caractères."
+  },
+  "tileTooltip": {
+    "watched": "Déjà visionné",
+    "notWatched": "Pas encore visionné",
+    "favorite": "Ajouté aux favoris",
+    "notFavorite": "Pas encore ajouté aux favoris",
+    "pinned": "Épinglé",
+    "notPinned": "Pas encore épinglé"
   }
 }

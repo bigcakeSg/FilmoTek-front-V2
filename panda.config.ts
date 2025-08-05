@@ -21,6 +21,16 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
+      keyframes: {
+        fadein: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        },
+        fadeout: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' }
+        }
+      },
       tokens: {
         colors: {
           lightGold: { value: 'var(--color-light-gold)' },
@@ -52,6 +62,12 @@ export default defineConfig({
             value: {
               base: 'black',
               _dark: 'white'
+            }
+          },
+          negativeText: {
+            value: {
+              base: '{colors.contrast.light}',
+              _dark: '{colors.contrast.dark}'
             }
           }
         }

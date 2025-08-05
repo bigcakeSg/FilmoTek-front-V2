@@ -15,5 +15,13 @@
     "checkAuth": "Checking authentication...",
     "userNameError": "Username must be at least 3 characters.",
     "passwordError": "Password must be at least 4 characters."
+  },
+  "tileTooltip": {
+    "watched": "Already watched",
+    "notWatched": "Not yet watched",
+    "favorite": "Added to favorites",
+    "notFavorite": "Not yet added to favorites",
+    "pinned": "Pinned",
+    "notPinned": "Not yet pinned"
   }
 }

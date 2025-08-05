@@ -20,7 +20,9 @@ export default function RootTemplate() {
         <UserInfos />
       </AuthProvider>
       <hr />
-      <Outlet />
+      <div>
+        <Outlet />
+      </div>
       {/* <TanStackRouterDevtools /> */}
     </>
   );

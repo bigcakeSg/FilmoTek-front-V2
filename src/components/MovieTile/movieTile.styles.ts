@@ -36,7 +36,7 @@ export const movieTile = css({
       left: 0,
       width: '100%',
       height: '100%',
-      color: '#fff',
+      color: '#ffffff',
       padding: '15px',
       flexDirection: 'column',
       justifyContent: 'space-between'
