@@ -5,8 +5,6 @@ const miniHeight = 294;
 
 export const movieTile = css({
   position: 'relative',
-  border: 'solid 1px',
-  borderColor: '{foreground}',
   boxShadow: {
     base: 'rgba(0, 0, 0, 0.5) 2px 2px 7px 1px',
     _dark: 'rgba(0, 0, 0, 1) 1px 1px 15px 2px'
@@ -20,17 +18,19 @@ export const movieTile = css({
     '&-picture': {
       position: 'absolute',
       transitionDuration: '0.5s',
-      width: `${miniWidth - 2}px`,
-      height: `${miniHeight - 2}px`,
+      width: `${miniWidth}px`,
+      height: `${miniHeight}px`,
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       backgroundSize: '101% 101%'
     },
     '&-overlay': {
+      border: 'solid 1px',
+      borderColor: '{foreground}',
       backdropFilter: 'blur(0px) brightness(100%)',
       position: 'absolute',
-      width: `${miniWidth - 2}px`,
-      height: `${miniHeight - 2}px`
+      width: `${miniWidth}px`,
+      height: `${miniHeight}px`
     },
     '&-infos': {
       display: 'none',
@@ -46,10 +46,13 @@ export const movieTile = css({
     },
     '&-original_title': {
       fontWeight: 700,
-      marginBottom: '5px'
+      marginBottom: '5px',
+      textShadow: '#000 1px 1px'
     },
     '&-french_title': {
-      fontWeight: 300
+      fontSize: '18px',
+      fontWeight: 300,
+      textShadow: '#000 1px 1px'
     },
     '&-release_date': {
       position: 'absolute',

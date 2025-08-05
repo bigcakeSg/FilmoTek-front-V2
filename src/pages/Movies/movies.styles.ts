@@ -1,11 +1,12 @@
 import { css } from '../../../styled-system/css';
 
+const containerHeight = '70vh';
+
 export const moviesContainer = css({
-  bg: 'background',
   color: 'text',
-  height: '60vh',
+  height: containerHeight,
   overflowY: 'auto',
-  margin: '30px'
+  padding: '50px'
 });
 
 export const moviesContent = css({
@@ -22,6 +23,6 @@ export const loaderRefStyle = css({
   width: '1px',
   background: 'transparent',
   position: 'absolute',
-  bottom: '60vh', // same size as the container
+  bottom: containerHeight,
   zIndex: -1
 });

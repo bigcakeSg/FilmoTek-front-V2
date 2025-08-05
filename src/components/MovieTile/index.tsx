@@ -33,7 +33,7 @@ export default function MovieTile(movie: Readonly<MovieTileProps>) {
                 : null}
             </div>
           </div>
-          <MovieCollectionTools watched={false} />
+          <MovieCollectionTools watched={true} />
           <div className="movie-release_date">
             {format(new Date(movie.releaseDate), 'yyyy')}
           </div>

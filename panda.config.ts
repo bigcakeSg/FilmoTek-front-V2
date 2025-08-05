@@ -11,7 +11,11 @@ export default defineConfig({
   exclude: [],
 
   globalVars: {
-    '--font-outfit': 'Outfit Variable, monospace'
+    '--font-outfit': 'Outfit Variable, monospace',
+    '--color-light': '#f0f2e9ff',
+    '--color-dark': '#11141bff',
+    '--color-light-gold': '#eaba2bff',
+    '--color-dark-gold': '#df8600ff'
   },
 
   // Useful for theme customization
@@ -19,9 +23,11 @@ export default defineConfig({
     extend: {
       tokens: {
         colors: {
-          brand: {
-            light: { value: '#b6d6d6' },
-            dark: { value: '#041014' }
+          lightGold: { value: 'var(--color-light-gold)' },
+          darkGold: { value: 'var(--color-dark-gold)' },
+          contrast: {
+            light: { value: 'var(--color-light)' },
+            dark: { value: 'var(--color-dark)' }
           }
         },
         fonts: {
@@ -32,14 +38,14 @@ export default defineConfig({
         colors: {
           background: {
             value: {
-              base: '{colors.brand.light}',
-              _dark: '{colors.brand.dark}'
+              base: '{colors.contrast.light}',
+              _dark: '{colors.contrast.dark}'
             }
           },
           foreground: {
             value: {
-              base: '{colors.brand.dark}',
-              _dark: '{colors.brand.light}'
+              base: '{colors.contrast.dark}',
+              _dark: '{colors.contrast.light}'
             }
           },
           text: {
