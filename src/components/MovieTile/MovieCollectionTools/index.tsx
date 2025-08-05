@@ -1,26 +1,33 @@
 import { FaEye, FaMapPin, FaStar } from 'react-icons/fa6';
-import { Tooltip } from '@ark-ui/react/tooltip';
 import {
   movieCollectionTools,
   toolButton
 } from './movieCollectionTools.styles';
+import TooltipComponent from '@/components/ui/TooltipComponent';
+import { useTranslation } from 'react-i18next';
+
+interface ToolButtonProps {
+  icon: React.ReactNode;
+  isActive: boolean;
+  tooltipMessage: string | React.ReactNode;
+  onClick: () => void;
+}
 
 function ToolButton({
   icon,
   isActive,
+  tooltipMessage,
   onClick
-}: {
-  icon: React.ReactNode;
-  isActive: boolean;
-  onClick: () => void;
-}) {
+}: Readonly<ToolButtonProps>) {
   return (
-    <button
-      className={toolButton({ status: isActive ? 'active' : 'inactive' })}
-      onClick={onClick}
-    >
-      {icon}
-    </button>
+    <TooltipComponent message={tooltipMessage}>
+      <button
+        className={toolButton({ status: isActive ? 'active' : 'inactive' })}
+        onClick={onClick}
+      >
+        {icon}
+      </button>
+    </TooltipComponent>
   );
 }
 
@@ -35,22 +42,33 @@ export default function MovieCollectionTools({
   favorite,
   pinned
 }: Readonly<MovieCollectionToolsProps>) {
+  const { t } = useTranslation();
+
   return (
     <div>
       <div className={movieCollectionTools}>
         <ToolButton
           icon={<FaEye size={18} />}
           isActive={!!watched}
+          tooltipMessage={
+            watched ? t('tileTooltip.watched') : t('tileTooltip.notWatched')
+          }
           onClick={() => null}
         />
         <ToolButton
           icon={<FaMapPin size={18} />}
           isActive={!!favorite}
+          tooltipMessage={
+            favorite ? t('tileTooltip.favorite') : t('tileTooltip.notFavorite')
+          }
           onClick={() => null}
         />
         <ToolButton
           icon={<FaStar size={18} />}
           isActive={!!pinned}
+          tooltipMessage={
+            pinned ? t('tileTooltip.pinned') : t('tileTooltip.notPinned')
+          }
           onClick={() => null}
         />
       </div>
