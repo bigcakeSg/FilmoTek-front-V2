@@ -12,9 +12,6 @@ export default defineConfig({
 
   globalVars: {
     '--font-outfit': 'Outfit Variable, monospace'
-    // '--font-mona-sans': 'Mona Sans, sans-serif',
-    // '--font-roboto-sans': 'Roboto Sans, sans-serif',
-    // '--font-roboto-condensed': 'Roboto Condensed, sans-serif'
   },
 
   // Useful for theme customization
@@ -29,8 +26,6 @@ export default defineConfig({
         },
         fonts: {
           fontOutfit: { value: 'var(--font-outfit), monospace' }
-          // roboto: { value: 'var(--font-roboto-sans), sans-serif' },
-          // robotoCondensed: { value: 'var(--font-roboto-condensed), sans-serif' }
         }
       },
       semanticTokens: {
@@ -62,6 +57,9 @@ export default defineConfig({
       fontSize: '20px',
       lineHeight: '1.5',
       margin: '0'
+    },
+    button: {
+      cursor: 'pointer'
     }
   },
 
