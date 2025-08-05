@@ -31,6 +31,7 @@ export default function AuthProvider({
 
         // If rememberMe is not set, clear all auth data
         if (!rememberMe.local && rememberMe.session === null && user) {
+          console.log('Remember me is not set, clearing auth data');
           clearAllAuthData();
           clearUser();
         }

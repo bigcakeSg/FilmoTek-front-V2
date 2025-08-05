@@ -4,20 +4,17 @@ export const moviesContainer = css({
   bg: 'background',
   color: 'text',
   height: '60vh',
-  overflowY: 'auto'
+  overflowY: 'auto',
+  margin: '30px'
 });
 
 export const moviesContent = css({
   position: 'relative',
   display: 'flex',
   flexWrap: 'wrap',
-  width: '100%'
-});
-
-export const movieTile = css({
-  margin: '20px',
-  width: '200px',
-  height: '300px'
+  width: '100%',
+  justifyContent: 'space-around',
+  gap: '20px'
 });
 
 export const loaderRefStyle = css({

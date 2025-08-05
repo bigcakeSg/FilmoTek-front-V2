@@ -32,7 +32,8 @@
       "@config/*": ["src/config/*"],
       "@assets/*": ["src/assets/*"],
       "@pages/*": ["src/pages/*"],
-      "@routes/*": ["src/routes/*"]
+      "@routes/*": ["src/routes/*"],
+      "@styled-system/*": ["styled-system/*"],
     }
   },
   "include": ["src"]

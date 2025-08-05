@@ -18,6 +18,7 @@ export default function UserInfos() {
   const handleLogout = (e: React.FormEvent) => {
     e.preventDefault();
 
+    console.log('Logging out user:', user?.username);
     queryClient.removeQueries({ queryKey: ['login'] });
     queryClient.removeQueries({ queryKey: ['user'] });
     clearRememberMePreference();

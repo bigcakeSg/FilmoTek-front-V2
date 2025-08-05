@@ -36,6 +36,12 @@ export default defineConfig({
               _dark: '{colors.brand.dark}'
             }
           },
+          foreground: {
+            value: {
+              base: '{colors.brand.dark}',
+              _dark: '{colors.brand.light}'
+            }
+          },
           text: {
             value: {
               base: 'black',

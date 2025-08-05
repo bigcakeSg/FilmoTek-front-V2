@@ -1,14 +1,12 @@
 import { useEffect, useRef } from 'react';
-import { format } from 'date-fns';
 import { useGetMovieList } from '@/hooks/movies.hooks';
 import { axiosInstance } from '@/config/axiosInstance';
-import { Link } from '@tanstack/react-router';
 import {
   loaderRefStyle,
   moviesContainer,
-  moviesContent,
-  movieTile
+  moviesContent
 } from './movies.styles';
+import MovieTile from '@/components/MovieTile';
 
 export default function Movies() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,21 +56,7 @@ export default function Movies() {
       <div ref={containerRef} className={moviesContainer}>
         <div className={moviesContent}>
           {movieList.map((movie) => (
-            <Link
-              key={movie._id}
-              to="/movie/$movieId"
-              params={{ movieId: movie._id }}
-            >
-              <div className={movieTile}>
-                <img
-                  src={'http://localhost:5000/media/posters/' + movie.picture}
-                  alt={movie.originalTitle}
-                  width={100}
-                />
-                {movie.originalTitle} -{' '}
-                {format(new Date(movie.releaseDate), 'yyyy')}
-              </div>
-            </Link>
+            <MovieTile key={movie._id} {...movie} />
           ))}
           <div ref={loaderRef} className={loaderRefStyle}></div>
         </div>

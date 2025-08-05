@@ -11,8 +11,7 @@ export default function ConfigTools() {
 
   return (
     <div>
-      <h1>Configuration Tools</h1>
-      <button onClick={() => toggleColorMode()}>Dark/Light Mode</button>
+      <button onClick={() => toggleColorMode()}>Dark/Light Mode</button> |{' '}
       <button onClick={() => handleToggleLang()}>Language</button>
     </div>
   );
