@@ -50,13 +50,29 @@ export default function Movies() {
   const collections: Collection[] =
     queryClient.getQueryData(['collections']) || [];
 
+  const collectionWatchedId = collections.find(
+    (c) => c.name === 'collection.watched'
+  )?._id;
+  const collectionFavoriteId = collections.find(
+    (c) => c.name === 'collection.favorite'
+  )?._id;
+  const collectionPinnedId = collections.find(
+    (c) => c.name === 'collection.pinned'
+  )?._id;
+
   const movieList =
     moviesData?.pages.flatMap((page) =>
-      page.data.map((p) => ({
-        ...p,
-        watched: collections.some((c) => p.collections.includes(c._id)),
-        favorite: collections.some((c) => p.collections.includes(c._id)),
-        pinned: collections.some((c) => p.collections.includes(c._id))
+      page.data.map((movie) => ({
+        ...movie,
+        watched: collectionWatchedId
+          ? movie.collections.includes(collectionWatchedId)
+          : undefined,
+        favorite: collectionFavoriteId
+          ? movie.collections.includes(collectionFavoriteId)
+          : undefined,
+        pinned: collectionPinnedId
+          ? movie.collections.includes(collectionPinnedId)
+          : undefined
       }))
     ) || [];
 

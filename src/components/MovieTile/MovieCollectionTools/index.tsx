@@ -81,19 +81,19 @@ export default function MovieCollectionTools({
         />
         <ToolButton
           icon={<FaMapPin size={18} />}
-          isActive={!!favorite}
-          tooltipMessage={
-            favorite ? t('tileTooltip.favorite') : t('tileTooltip.notFavorite')
-          }
-          onClick={handleClickFavorite}
-        />
-        <ToolButton
-          icon={<FaStar size={18} />}
           isActive={!!pinned}
           tooltipMessage={
             pinned ? t('tileTooltip.pinned') : t('tileTooltip.notPinned')
           }
           onClick={handleClickPinned}
+        />
+        <ToolButton
+          icon={<FaStar size={18} />}
+          isActive={!!favorite}
+          tooltipMessage={
+            favorite ? t('tileTooltip.favorite') : t('tileTooltip.notFavorite')
+          }
+          onClick={handleClickFavorite}
         />
       </div>
     </div>
