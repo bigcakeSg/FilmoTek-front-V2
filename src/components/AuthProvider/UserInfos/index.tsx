@@ -32,7 +32,6 @@ export default function UserInfos() {
       <div>
         {user?.firstname} {user?.lastname}
       </div>
-      {/* <button onClick={handelTest}>CLICK</button> */}
       <button onClick={handleLogout}>{t('user.logout')}</button>
     </div>
   );

@@ -1,9 +1,12 @@
 {
   "loading": "Loading...",
   "mainNav": {
-    "home": "Home",
+    "movieList": "Movie List",
     "addMovie": "Add movie",
-    "stats": "Stats"
+    "stats": "Stats",
+    "movieListTooltip": "View the list of movies",
+    "addMovieTooltip": "Add a new movie to the list",
+    "statsTooltip": "View statistics about movies"
   },
   "user": {
     "username": "User name",

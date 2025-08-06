@@ -9,8 +9,6 @@ export const movieTile = css({
   transitionDuration: '0.5s',
   aspectRatio: 0.68,
   width: { base: '100%', sm: '40%', md: '180px', xl: '200px' },
-  fontSize: '20px',
-  lineHeight: '20px',
   '& .movie': {
     '&-picture': {
       position: 'absolute',
@@ -42,16 +40,20 @@ export const movieTile = css({
       justifyContent: 'space-between'
     },
     '&-original_title': {
+      fontSize: '1.2rem',
+      lineHeight: '1.6rem',
       fontWeight: 700,
       marginBottom: '5px',
       textShadow: '#000 1px 1px'
     },
     '&-french_title': {
-      fontSize: '18px',
+      fontSize: '1.1rem',
+      lineHeight: '1.2rem',
       fontWeight: 300,
       textShadow: '#000 1px 1px'
     },
     '&-release_date': {
+      fontSize: '1.1rem',
       position: 'absolute',
       textAlign: 'right',
       bottom: '45px',

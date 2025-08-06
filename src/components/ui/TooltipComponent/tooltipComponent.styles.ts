@@ -3,14 +3,14 @@ import { css } from '@styled-system/css';
 export const tooltip = css({
   '& [data-scope="tooltip"][data-part="content"]': {
     backgroundColor: {
-      base: '#382629ff',
-      _dark: '#c2c4b9'
+      base: '{colors.contrast.secondaryLight}',
+      _dark: '{colors.contrast.light}'
     },
     color: 'negativeText',
     padding: '10px',
     rounded: '10px',
     zIndex: '10000',
-    fontSize: '14px',
+    fontSize: '0.8rem',
     fontWeight: '500',
     boxShadow: {
       base: 'rgba(0, 0, 0, 0.5) 2px 2px 7px 1px',
@@ -32,8 +32,8 @@ export const tooltip = css({
     rotate: '45deg',
     borderColor: '{background}',
     backgroundColor: {
-      base: '#382629ff',
-      _dark: '#c2c4b9'
+      base: '{colors.contrast.secondaryLight}',
+      _dark: '{colors.contrast.light}'
     }
   },
   '& [data-scope="tooltip"][data-placement="top"]': {

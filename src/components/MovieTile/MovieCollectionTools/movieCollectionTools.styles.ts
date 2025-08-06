@@ -9,7 +9,8 @@ export const movieCollectionTools = css({
   bottom: '10px',
   left: '-10px',
   right: 0,
-  padding: '3px 3px 3px 10px',
+  paddingLeft: '10px',
+  paddingTop: '3px',
   background: {
     base: 'linear-gradient(90deg,rgba(38, 50, 56, 1) 0%,rgba(38, 50, 56, 1) 50%,rgba(38, 50, 56, 0) 100%)',
     _dark:

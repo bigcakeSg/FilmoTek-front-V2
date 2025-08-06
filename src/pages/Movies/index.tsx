@@ -6,9 +6,9 @@ import {
   moviesContainer,
   moviesContent
 } from './movies.styles';
-import MovieTile from '@/components/MovieTile';
+import MovieTile from '@components/MovieTile';
 import { useQueryClient } from '@tanstack/react-query';
-import { Collection } from '@/interfaces/collections.interface';
+import { Collection } from '@interfaces/collections.interface';
 
 export default function Movies() {
   const queryClient = useQueryClient();
@@ -34,7 +34,7 @@ export default function Movies() {
           fetchNextPage();
         }
       },
-      { root: containerRef.current, threshold: 1 }
+      { root: containerRef.current, threshold: 0.1 }
     );
     if (loaderRef.current) {
       observer.observe(loaderRef.current);
@@ -78,7 +78,7 @@ export default function Movies() {
 
   return (
     <div>
-      <h3>Liste de films</h3>
+      <h3>{moviesData?.pages[0]?.totalCount}</h3>
       <div>
         Filtres - Tier par : date / titre original / titre français - Aller à :
         décénnie / lettre

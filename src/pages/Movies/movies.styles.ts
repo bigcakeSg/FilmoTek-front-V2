@@ -1,4 +1,4 @@
-import { css } from '../../../styled-system/css';
+import { css } from '@styled-system/css';
 
 const containerHeight = '70vh';
 
@@ -15,9 +15,9 @@ export const moviesContainer = css({
 export const moviesContent = css({
   position: 'relative',
   display: 'flex',
+  justifyContent: 'space-evenly',
   flexWrap: 'wrap',
   width: '100%',
-  justifyContent: 'space-around',
   gap: '20px'
 });
 

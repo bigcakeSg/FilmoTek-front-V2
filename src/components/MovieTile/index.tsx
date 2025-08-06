@@ -12,6 +12,8 @@ interface MovieTileProps extends MovieLite {
 }
 
 export default function MovieTile(movie: Readonly<MovieTileProps>) {
+  const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
+
   return (
     <Link
       key={movie._id}
@@ -29,7 +31,7 @@ export default function MovieTile(movie: Readonly<MovieTileProps>) {
         <div
           className="movie-picture"
           style={{
-            backgroundImage: `url(http://localhost:5000/media/posters/${movie.picture})`
+            backgroundImage: `url(${BASE_URL}/media/posters/thumbnails/${movie.picture})`
           }}
         ></div>
         <div className="movie-overlay"></div>

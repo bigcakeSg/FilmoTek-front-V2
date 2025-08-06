@@ -12,10 +12,12 @@ export default defineConfig({
 
   globalVars: {
     '--font-outfit': 'Outfit Variable, monospace',
-    '--color-light': '#f0f2e9ff',
-    '--color-dark': '#11141bff',
-    '--color-light-gold': '#eaba2bff',
-    '--color-dark-gold': '#df8600ff'
+    '--color-light': '#f0f2e9',
+    '--color-dark': '#11171b',
+    '--color-secondary-light': '#2a3943ff',
+    '--color-secondary-dark': '#353532',
+    '--color-light-gold': '#eaba2b',
+    '--color-dark-gold': '#df8600'
   },
 
   // Useful for theme customization
@@ -37,7 +39,9 @@ export default defineConfig({
           darkGold: { value: 'var(--color-dark-gold)' },
           contrast: {
             light: { value: 'var(--color-light)' },
-            dark: { value: 'var(--color-dark)' }
+            dark: { value: 'var(--color-dark)' },
+            secondaryLight: { value: 'var(--color-secondary-light)' },
+            secondaryDark: { value: 'var(--color-secondary-dark)' }
           }
         },
         fonts: {
@@ -52,6 +56,12 @@ export default defineConfig({
               _dark: '{colors.contrast.dark}'
             }
           },
+          secondaryBackground: {
+            value: {
+              base: '{colors.contrast.secondaryLight}',
+              _dark: '{colors.contrast.secondaryDark}'
+            }
+          },
           foreground: {
             value: {
               base: '{colors.contrast.dark}',
@@ -62,6 +72,12 @@ export default defineConfig({
             value: {
               base: 'black',
               _dark: 'white'
+            }
+          },
+          hover: {
+            value: {
+              base: '{colors.lightGold}',
+              _dark: '{colors.darkGold}'
             }
           },
           negativeText: {

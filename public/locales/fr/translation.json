@@ -1,9 +1,12 @@
 {
   "loading": "Chargement...",
   "mainNav": {
-    "home": "Accueil",
+    "movieList": "Liste de films",
     "addMovie": "Ajouter un film",
-    "stats": "Statistiques"
+    "stats": "Statistiques",
+    "movieListTooltip": "Voir la liste des films",
+    "addMovieTooltip": "Ajouter un nouveau film à la liste",
+    "statsTooltip": "Voir les statistiques sur les films"
   },
   "user": {
     "username": "Nom d'utilisateur",
