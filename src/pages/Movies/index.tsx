@@ -7,8 +7,11 @@ import {
   moviesContent
 } from './movies.styles';
 import MovieTile from '@/components/MovieTile';
+import { useQueryClient } from '@tanstack/react-query';
+import { Collection } from '@/interfaces/collections.interface';
 
 export default function Movies() {
+  const queryClient = useQueryClient();
   const containerRef = useRef<HTMLDivElement>(null);
   const loaderRef = useRef<HTMLDivElement>(null);
 
@@ -44,7 +47,18 @@ export default function Movies() {
     };
   }, [fetchNextPage, loaderRef]);
 
-  const movieList = moviesData?.pages.flatMap((page) => page.data) || [];
+  const collections: Collection[] =
+    queryClient.getQueryData(['collections']) || [];
+
+  const movieList =
+    moviesData?.pages.flatMap((page) =>
+      page.data.map((p) => ({
+        ...p,
+        watched: collections.some((c) => p.collections.includes(c._id)),
+        favorite: collections.some((c) => p.collections.includes(c._id)),
+        pinned: collections.some((c) => p.collections.includes(c._id))
+      }))
+    ) || [];
 
   return (
     <div>

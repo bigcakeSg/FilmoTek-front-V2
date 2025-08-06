@@ -3,14 +3,10 @@ export interface MovieLite {
   imdbId: string;
   originalTitle: string;
   frenchTitle?: string;
+  englishTitle?: string;
   picture: string;
   releaseDate: string;
-  duration: number;
-  genres: {
-    id: string;
-    text: string;
-  }[];
-  supports: string[];
+  collections: string[];
 }
 
 export interface Movie {
@@ -31,4 +27,5 @@ export interface Movie {
   }[];
   supports: string[];
   videos: string[];
+  collections: string[];
 }

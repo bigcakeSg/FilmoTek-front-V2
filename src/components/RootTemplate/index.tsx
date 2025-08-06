@@ -1,12 +1,14 @@
 import { Link, Outlet } from '@tanstack/react-router';
-// import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+// import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'; // TODO: remove this when not needed
 import AuthProvider from '../AuthProvider';
 import UserInfos from '../AuthProvider/UserInfos';
 import { useTranslation } from 'react-i18next';
 import ConfigTools from '../ConfigTools';
+import { useCollections } from '@/hooks/collections.hooks';
 
 export default function RootTemplate() {
   const { t } = useTranslation();
+  useCollections();
 
   return (
     <>

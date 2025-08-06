@@ -8,7 +8,7 @@ export const movieTile = css({
   },
   transitionDuration: '0.5s',
   aspectRatio: 0.68,
-  width: { base: '100%', xl: '200px', md: '180px', sm: '40%' },
+  width: { base: '100%', sm: '40%', md: '180px', xl: '200px' },
   fontSize: '20px',
   lineHeight: '20px',
   '& .movie': {

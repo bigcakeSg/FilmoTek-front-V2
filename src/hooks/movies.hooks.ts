@@ -14,6 +14,7 @@ export const useGetMovieList = () => {
     queryKey: ['movieList'],
     queryFn: ({ pageParam }) => getMovieList({ start: pageParam }),
     initialPageParam: 0,
+    refetchOnWindowFocus: false,
     getNextPageParam: (lastPage) => {
       const start = lastPage.start || 0;
       const limit = lastPage.limit || 50;
@@ -36,6 +37,7 @@ export const useGetMovieList = () => {
   };
 };
 
+// TODO: faire un hook
 export const movieQuery = (movieId: string) => ({
   queryKey: ['movie', movieId],
   queryFn: () => getMovie({ movieId })

@@ -6,7 +6,10 @@ export const moviesContainer = css({
   color: 'text',
   height: containerHeight,
   overflowY: 'auto',
-  padding: '50px'
+  padding: {
+    base: '50px',
+    xl: '50px 200px'
+  }
 });
 
 export const moviesContent = css({

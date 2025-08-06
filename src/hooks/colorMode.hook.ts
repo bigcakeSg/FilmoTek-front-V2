@@ -25,6 +25,7 @@ export function useColorMode() {
     applyColorMode(colorMode);
   }, [colorMode]);
 
+  // TODO:
   // Écouter les changements de préférence système *si* l'utilisateur n'a pas forcé (optionnel)
   // useEffect(() => {
   //   const stored = localStorage.getItem(STORAGE_KEY);

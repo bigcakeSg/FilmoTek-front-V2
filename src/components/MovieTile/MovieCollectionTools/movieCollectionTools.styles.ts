@@ -20,6 +20,7 @@ export const movieCollectionTools = css({
 export const toolButton = cva({
   base: {
     transition: 'color 0.2s',
+    cursor: 'pointer',
     _hover: {
       color: {
         base: 'lightGold',

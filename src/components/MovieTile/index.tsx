@@ -5,7 +5,11 @@ import NoImg from '@assets/noMovie.jpg';
 import { movieTile } from './movieTile.styles';
 import MovieCollectionTools from './MovieCollectionTools';
 
-type MovieTileProps = MovieLite;
+interface MovieTileProps extends MovieLite {
+  watched?: boolean;
+  favorite?: boolean;
+  pinned?: boolean;
+}
 
 export default function MovieTile(movie: Readonly<MovieTileProps>) {
   return (
@@ -38,7 +42,11 @@ export default function MovieTile(movie: Readonly<MovieTileProps>) {
                 : null}
             </div>
           </div>
-          <MovieCollectionTools watched={true} />
+          <MovieCollectionTools
+            watched={movie.watched}
+            favorite={movie.favorite}
+            pinned={movie.pinned}
+          />
           <div className="movie-release_date">
             {format(new Date(movie.releaseDate), 'yyyy')}
           </div>

@@ -26,7 +26,7 @@ export const tooltip = css({
     animation: 'fadeout 0.3s ease-out'
   },
   '& [data-scope="tooltip"][data-part="arrow"]': {
-    '--arrow-size': '16px',
+    '--arrow-size': '12px',
     width: 'var(--arrow-size)',
     height: 'var(--arrow-size)',
     rotate: '45deg',
@@ -38,24 +38,28 @@ export const tooltip = css({
   },
   '& [data-scope="tooltip"][data-placement="top"]': {
     '& [data-scope="tooltip"][data-part="arrow"]': {
+      rounded: '0px 0 3px 0',
       borderBottom: 'solid 1px',
       borderRight: 'solid 1px'
     }
   },
   '& [data-scope="tooltip"][data-placement="bottom"]': {
     '& [data-scope="tooltip"][data-part="arrow"]': {
+      rounded: '3px 0 0 0',
       borderTop: 'solid 1px',
       borderLeft: 'solid 1px'
     }
   },
   '& [data-scope="tooltip"][data-placement="left"]': {
     '& [data-scope="tooltip"][data-part="arrow"]': {
+      rounded: '0 3px 0 0',
       borderTop: 'solid 1px',
       borderRight: 'solid 1px'
     }
   },
   '& [data-scope="tooltip"][data-placement="right"]': {
     '& [data-scope="tooltip"][data-part="arrow"]': {
+      rounded: '0 0 0 3px',
       borderLeft: 'solid 1px',
       borderBottom: 'solid 1px'
     }

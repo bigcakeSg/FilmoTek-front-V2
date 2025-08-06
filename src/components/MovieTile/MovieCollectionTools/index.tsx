@@ -21,12 +21,24 @@ function ToolButton({
 }: Readonly<ToolButtonProps>) {
   return (
     <TooltipComponent message={tooltipMessage}>
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         className={toolButton({ status: isActive ? 'active' : 'inactive' })}
-        onClick={onClick}
+        aria-pressed={isActive}
+        onClick={(e) => {
+          e.preventDefault();
+          onClick();
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onClick();
+          }
+        }}
       >
         {icon}
-      </button>
+      </div>
     </TooltipComponent>
   );
 }
@@ -44,6 +56,18 @@ export default function MovieCollectionTools({
 }: Readonly<MovieCollectionToolsProps>) {
   const { t } = useTranslation();
 
+  const handleClickWatched = (): void => {
+    console.log('WATCHED CLICKED');
+  };
+
+  const handleClickFavorite = (): void => {
+    console.log('FAVORITE CLICKED');
+  };
+
+  const handleClickPinned = (): void => {
+    console.log('PINNED CLICKED');
+  };
+
   return (
     <div>
       <div className={movieCollectionTools}>
@@ -53,7 +77,7 @@ export default function MovieCollectionTools({
           tooltipMessage={
             watched ? t('tileTooltip.watched') : t('tileTooltip.notWatched')
           }
-          onClick={() => null}
+          onClick={handleClickWatched}
         />
         <ToolButton
           icon={<FaMapPin size={18} />}
@@ -61,7 +85,7 @@ export default function MovieCollectionTools({
           tooltipMessage={
             favorite ? t('tileTooltip.favorite') : t('tileTooltip.notFavorite')
           }
-          onClick={() => null}
+          onClick={handleClickFavorite}
         />
         <ToolButton
           icon={<FaStar size={18} />}
@@ -69,7 +93,7 @@ export default function MovieCollectionTools({
           tooltipMessage={
             pinned ? t('tileTooltip.pinned') : t('tileTooltip.notPinned')
           }
-          onClick={() => null}
+          onClick={handleClickPinned}
         />
       </div>
     </div>
