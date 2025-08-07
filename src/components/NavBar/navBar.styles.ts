@@ -17,6 +17,12 @@ export const navMainNav = css({
   gap: '5px'
 });
 
+export const navSecondaryNav = css({
+  display: 'flex',
+  flexDirection: { base: 'row-reverse', xl: 'column' },
+  alignItems: { base: 'center', xl: 'flex-end' }
+});
+
 export const filmotekTitle = css({
   fontSize: '1.5rem',
   border: 'solid 1px',

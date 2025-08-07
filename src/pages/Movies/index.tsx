@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useGetMovieList } from '@/hooks/movies.hooks';
-import { axiosInstance } from '@/config/axiosInstance';
+// import { axiosInstance } from '@/config/axiosInstance';
 import {
   loaderRefStyle,
   moviesContainer,
@@ -9,23 +9,27 @@ import {
 import MovieTile from '@components/MovieTile';
 import { useQueryClient } from '@tanstack/react-query';
 import { Collection } from '@interfaces/collections.interface';
+import { useTranslation } from 'react-i18next';
 
 export default function Movies() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
+
   const containerRef = useRef<HTMLDivElement>(null);
   const loaderRef = useRef<HTMLDivElement>(null);
 
   const { data: moviesData, fetchNextPage, isFetching } = useGetMovieList();
 
-  const handleTest = async () => {
-    try {
-      const response = await axiosInstance.get('/auth/me');
-      alert(`Hello ${response.data.firstname} ${response.data.lastname}`);
-    } catch (error) {
-      console.log('Error fetching user data:', error);
-      alert('Error fetching user data');
-    }
-  };
+  // TODO: to remove
+  // const handleTest = async () => {
+  //   try {
+  //     const response = await axiosInstance.get('/auth/me');
+  //     alert(`Hello ${response.data.firstname} ${response.data.lastname}`);
+  //   } catch (error) {
+  //     console.log('Error fetching user data:', error);
+  //     alert('Error fetching user data');
+  //   }
+  // };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -79,11 +83,7 @@ export default function Movies() {
   return (
     <div>
       <h3>{moviesData?.pages[0]?.totalCount}</h3>
-      <div>
-        Filtres - Tier par : date / titre original / titre français - Aller à :
-        décénnie / lettre
-      </div>
-      <button onClick={() => handleTest()}>Test</button>
+      {/* <button onClick={() => handleTest()}>Test</button> */}
       <div ref={containerRef} className={moviesContainer}>
         <div className={moviesContent}>
           {movieList.map((movie) => (
@@ -92,7 +92,7 @@ export default function Movies() {
           <div ref={loaderRef} className={loaderRefStyle}></div>
         </div>
       </div>
-      {isFetching && <div>Loading...</div>}
+      {isFetching && <div>{t('loading')}</div>}
     </div>
   );
 }
