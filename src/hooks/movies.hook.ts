@@ -48,7 +48,7 @@ export const usePrefetchMovies = () => {
   }: MoviesQuery) => {
     await queryClient.prefetchQuery({
       queryKey: [key, start, limit, sortBy, direction, ...filter],
-      queryFn: () => getMovieList({ start, limit, sortBy, direction }),
+      queryFn: () => getMovieList({ start, limit, sortBy, direction, filter }),
       staleTime: 60000 * 5
     });
   };

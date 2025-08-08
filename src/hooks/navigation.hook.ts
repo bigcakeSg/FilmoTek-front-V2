@@ -1,7 +1,7 @@
 import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
 import { useSearch } from '@tanstack/react-router';
 
-export const MOVIES_LIMIT = 20;
+export const MOVIES_LIMIT = 30;
 
 export const useNavigation = () => {
   const search = useSearch({ from: '/' });

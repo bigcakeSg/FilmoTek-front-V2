@@ -2,14 +2,28 @@ import { css } from '@styled-system/css';
 
 export const pagination = css({
   '& [data-scope="pagination"]': {
+    fontSize: '1rem',
+    height: '40px',
+    color: {
+      base: 'contrast.secondaryLight',
+      _dark: 'contrast.secondaryUltraLight'
+    },
     '&[data-part="root"]': {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       gap: '4px'
     },
-    '&[data-part="item"][data-selected]': {
-      backgroundColor: '{hover}'
+    '&[data-part="item"]': {
+      width: '28px',
+      '&[data-selected]': {
+        backgroundColor: '{hover}',
+        fontWeight: '700',
+        color: {
+          base: 'contrast.secondaryLight',
+          _dark: '#ffffff'
+        }
+      }
     },
     '&[data-part="prev-trigger"][data-disabled], [data-part="next-trigger"][data-disabled]':
       {
@@ -18,17 +32,20 @@ export const pagination = css({
       },
     '&[data-part="prev-trigger"], [data-part="next-trigger"], [data-part="item"]':
       {
-        minWidth: '24px',
-        minHeight: '24px',
+        height: '28px',
         paddingInline: '6px',
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: '4px',
-        border: '1px solid #ccc',
-        color: 'inherit',
         textDecoration: 'none',
-        fontWeight: '500'
+        fontWeight: '400',
+        _hover: {
+          backgroundColor: {
+            base: 'contrast.secondaryUltraLight',
+            _dark: 'contrast.secondaryLight'
+          }
+        }
       }
   }
 });

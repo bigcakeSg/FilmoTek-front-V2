@@ -16,9 +16,9 @@ export default defineConfig({
     '--color-dark': '#11171b',
     '--color-secondary-light': '#2a3943ff',
     '--color-secondary-dark': '#353532',
-    '--color-secondary-ultralight': '#a9b3baff',
+    '--color-secondary-ultralight': '#ced9e0ff',
     '--color-secondary-ultradark': '#20201e',
-    '--color-light-gold': '#eaba2b',
+    '--color-light-gold': '#d0ac3eff',
     '--color-dark-gold': '#7d5a26ff'
   },
 

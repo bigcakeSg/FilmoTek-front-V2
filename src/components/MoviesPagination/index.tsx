@@ -39,6 +39,7 @@ export default function MoviesPagination({
         siblingCount={2}
         page={currentPage}
         onPageChange={(details) => {
+          console.log(search);
           navigate({
             search: { ...search, page: details.page }
           });
@@ -61,6 +62,7 @@ export default function MoviesPagination({
                   key={index}
                   {...page}
                   onMouseEnter={() => {
+                    console.log(moviesQueries);
                     prefetchMovies({
                       ...moviesQueries,
                       start: (page.value - 1) * MOVIES_LIMIT
