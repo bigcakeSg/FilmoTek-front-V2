@@ -2,8 +2,8 @@ import { Pagination } from '@ark-ui/react/pagination';
 import { useEffect, useState } from 'react';
 import { pagination } from './moviesPagination.styles';
 import { useNavigate, useSearch } from '@tanstack/react-router';
-import { MOVIES_LIMIT } from '@/pages/Movies';
-import { usePrefetchMovies } from '@/hooks/movies.hooks';
+import { usePrefetchMovies } from '@/hooks/movies.hook';
+import { MOVIES_LIMIT, useNavigation } from '@/hooks/navigation.hook';
 
 interface MoviesPaginationProps {
   count: number | undefined;
@@ -14,6 +14,7 @@ export default function MoviesPagination({
   count,
   page = 1
 }: Readonly<MoviesPaginationProps>) {
+  const { moviesQueries } = useNavigation();
   const search = useSearch({ from: '/' });
   const navigate = useNavigate({ from: '/' });
 
@@ -46,12 +47,8 @@ export default function MoviesPagination({
       >
         <Pagination.PrevTrigger
           onMouseEnter={() => {
-            prefetchMovies(
-              currentPage - 1,
-              MOVIES_LIMIT,
-              search.sortBy || 'releaseDate',
-              search.direction || 'asc'
-            );
+            const start = moviesQueries.start - MOVIES_LIMIT;
+            prefetchMovies({ ...moviesQueries, start });
           }}
         >
           Previous
@@ -64,12 +61,10 @@ export default function MoviesPagination({
                   key={index}
                   {...page}
                   onMouseEnter={() => {
-                    prefetchMovies(
-                      page.value,
-                      MOVIES_LIMIT,
-                      search.sortBy || 'releaseDate',
-                      search.direction || 'asc'
-                    );
+                    prefetchMovies({
+                      ...moviesQueries,
+                      start: (page.value - 1) * MOVIES_LIMIT
+                    });
                   }}
                 >
                   {page.value}
@@ -84,12 +79,8 @@ export default function MoviesPagination({
         </Pagination.Context>
         <Pagination.NextTrigger
           onMouseEnter={() => {
-            prefetchMovies(
-              currentPage + 1,
-              MOVIES_LIMIT,
-              search.sortBy || 'releaseDate',
-              search.direction || 'asc'
-            );
+            const start = moviesQueries.start + MOVIES_LIMIT;
+            prefetchMovies({ ...moviesQueries, start });
           }}
         >
           Next Page

@@ -7,7 +7,8 @@ const moviesSearchSchema = z.object({
   page: z.number().optional(),
   filterBy: z.string().optional(),
   sortBy: z.custom<SortName>().optional(),
-  direction: z.custom<SortDirection>().optional()
+  direction: z.custom<SortDirection>().optional(),
+  filter: z.union([z.string(), z.array(z.string())]).optional()
 });
 
 export const Route = createFileRoute('/')({

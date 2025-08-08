@@ -1,4 +1,4 @@
-import { movieQuery } from '@/hooks/movies.hooks';
+import { movieQuery } from '@/hooks/movies.hook';
 import { Route } from '@/routes/movie.$movieId.index';
 import { useSuspenseQuery } from '@tanstack/react-query';
 

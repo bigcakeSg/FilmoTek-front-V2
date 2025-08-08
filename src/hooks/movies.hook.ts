@@ -2,16 +2,26 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getMovie, getMovieList } from '@api/movies.api';
 import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
 
-export const useGetMovieList = (
-  page: number,
-  limit: number,
-  sortBy: SortName,
-  direction: SortDirection
-) => {
-  const start = page >= 1 ? limit * (page - 1) : 0;
+interface MoviesQuery {
+  key: string;
+  start: number;
+  limit: number;
+  sortBy: SortName;
+  direction: SortDirection;
+  filter: string[];
+}
+
+export const useGetMovieList = ({
+  key,
+  start,
+  limit,
+  sortBy,
+  direction,
+  filter
+}: MoviesQuery) => {
   const { data, refetch, error, isFetching, status } = useQuery({
-    queryKey: ['movieList', page >= 1 ? page : 1, limit, sortBy, direction],
-    queryFn: () => getMovieList({ start, limit, sortBy, direction }),
+    queryKey: [key, start, limit, sortBy, direction, ...filter],
+    queryFn: () => getMovieList({ start, limit, sortBy, direction, filter }),
     refetchOnWindowFocus: false,
     staleTime: 60000 * 5
   });
@@ -28,15 +38,16 @@ export const useGetMovieList = (
 export const usePrefetchMovies = () => {
   const queryClient = useQueryClient();
 
-  const prefetchMovies = async (
-    page: number,
-    limit: number,
-    sortBy: SortName,
-    direction: SortDirection
-  ) => {
-    const start = page >= 1 ? limit * (page - 1) : 0;
+  const prefetchMovies = async ({
+    key,
+    start,
+    limit,
+    sortBy,
+    direction,
+    filter
+  }: MoviesQuery) => {
     await queryClient.prefetchQuery({
-      queryKey: ['movieList', page >= 1 ? page : 1, limit, sortBy, direction],
+      queryKey: [key, start, limit, sortBy, direction, ...filter],
       queryFn: () => getMovieList({ start, limit, sortBy, direction }),
       staleTime: 60000 * 5
     });

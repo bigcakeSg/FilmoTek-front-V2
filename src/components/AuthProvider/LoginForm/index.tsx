@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useLogin, useMe } from '@/hooks/auth.hooks';
+import { useLogin, useMe } from '@/hooks/auth.hook';
 import useUserStore from '@/stores/user.store';
 
 const formLoginSchema = z.object({
@@ -58,7 +58,7 @@ export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
   useEffect(() => {
     const refetch = async () => {
       await fetchMe();
-      setUser(user || null);
+      setUser(user || null); // FIXME:
       if (onSuccess && isMeSuccess) {
         onSuccess();
       }

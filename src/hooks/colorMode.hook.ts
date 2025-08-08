@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 export type ColorMode = 'light' | 'dark';
 const STORAGE_KEY = 'color-mode';
 
-export function useColorMode() {
+export const useColorMode = () => {
   const [colorMode, setColorMode] = useState<ColorMode>(() => {
     if (typeof window === 'undefined') return 'light';
     const stored = localStorage.getItem(STORAGE_KEY) as ColorMode | null;
@@ -53,4 +53,4 @@ export function useColorMode() {
   };
 
   return { colorMode, toggleColorMode, setColorMode: applyColorMode };
-}
+};

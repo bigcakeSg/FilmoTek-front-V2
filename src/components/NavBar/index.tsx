@@ -13,23 +13,16 @@ import {
   navSecondaryNav,
   sortBy
 } from './navBar.styles';
-import { useQueryClient } from '@tanstack/react-query';
-import { MovieLite } from '@/interfaces/movies.interfaces';
-import { ResultQuery } from '@/interfaces/queries.interfaces';
 import { useNavigate, useSearch } from '@tanstack/react-router';
 import { SortName } from '@/interfaces/filterSort.interface';
-import { MOVIES_LIMIT } from '@/pages/Movies';
+import { useNavigation } from '@/hooks/navigation.hook';
+import { useGetMovieList } from '@/hooks/movies.hook';
 
 function FilterButton() {
   const { t } = useTranslation();
-  const queryClient = useQueryClient();
+  const { moviesQueries } = useNavigation();
 
-  const search = useSearch({ from: '/' });
-  const { page = 0, sortBy = 'releaseDate', direction = 'asc' } = search;
-  const queryKey = ['movieList', page, MOVIES_LIMIT, sortBy, direction];
-
-  const moviesData: ResultQuery<MovieLite> | undefined =
-    queryClient.getQueryData(queryKey);
+  const { data: moviesData } = useGetMovieList(moviesQueries);
 
   const totalCount = moviesData?.totalCount;
   const filteredCount = moviesData?.filterCount;
@@ -37,12 +30,10 @@ function FilterButton() {
   return (
     <>
       <button>{t('mainNav.openFilters')}</button>
-      {moviesData && (
-        <div className={movieCount}>
-          <span className="filteredCount">{filteredCount}</span>{' '}
-          {filteredCount !== totalCount && <> / {totalCount}</>} {t('movies')}
-        </div>
-      )}
+      <div className={movieCount}>
+        <span className="filteredCount">{filteredCount}</span>{' '}
+        {filteredCount !== totalCount && <> / {totalCount}</>} {t('movies')}
+      </div>
     </>
   );
 }
@@ -55,7 +46,6 @@ function SortButton({
   sortName: SortName;
 }>) {
   const navigate = useNavigate({ from: '/' });
-  // const { sortBy = 'releaseDate', direction = 'asc' } = useSearch({
   const search = useSearch({
     from: '/'
   });

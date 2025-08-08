@@ -1,30 +1,18 @@
-import { useRef } from 'react';
-import { useGetMovieList } from '@/hooks/movies.hooks';
+import { useGetMovieList } from '@/hooks/movies.hook';
 import { moviesContainer, moviesContent } from './movies.styles';
 import MovieTile from '@components/MovieTile';
 import { useTranslation } from 'react-i18next';
 import { movieTile } from '@/components/MovieTile/movieTile.styles';
-import { useCollections } from '@/hooks/collections.hooks';
-import { useSearch } from '@tanstack/react-router';
+import { useCollections } from '@/hooks/collections.hook';
 import MoviesPagination from '@/components/MoviesPagination';
-
-export const MOVIES_LIMIT = 20;
+import { useNavigation } from '@/hooks/navigation.hook';
 
 export default function Movies() {
   const { t } = useTranslation();
-
-  const search = useSearch({ from: '/' });
-  const { page = 0, sortBy = 'releaseDate', direction = 'asc' } = search;
-
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { moviesQueries } = useNavigation();
 
   const { data: collections } = useCollections();
-  const { data: moviesData, isFetching } = useGetMovieList(
-    page,
-    MOVIES_LIMIT,
-    sortBy,
-    direction
-  );
+  const { data: moviesData, isFetching } = useGetMovieList(moviesQueries);
 
   const collectionWatchedId = collections.find(
     (c) => c.name === 'collection.watched'
@@ -37,8 +25,11 @@ export default function Movies() {
   )?._id;
 
   return (
-    <div ref={containerRef} className={moviesContainer}>
-      <MoviesPagination count={moviesData?.filterCount} page={page} />
+    <div className={moviesContainer}>
+      <MoviesPagination
+        count={moviesData?.filterCount}
+        page={moviesQueries.start / moviesQueries.limit + 1}
+      />
       <div className={moviesContent}>
         {/* TODO: loader : styles + afficher le bon nombre de tuiles */}
         {isFetching ? (

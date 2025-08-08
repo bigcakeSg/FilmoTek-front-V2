@@ -1,6 +1,6 @@
 import { Outlet } from '@tanstack/react-router';
 // import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'; // TODO: remove this when not needed
-import { useCollections } from '@/hooks/collections.hooks';
+import { useCollections } from '@/hooks/collections.hook';
 import NavBar from '@components/NavBar';
 import { rootContent, rootTemplate } from './rootTemplate.styles';
 
