@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getMovie, getMovieList } from '@api/movies.api';
 import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
 
@@ -23,6 +23,26 @@ export const useGetMovieList = (
     isFetching,
     status
   };
+};
+
+export const usePrefetchMovies = () => {
+  const queryClient = useQueryClient();
+
+  const prefetchMovies = async (
+    page: number,
+    limit: number,
+    sortBy: SortName,
+    direction: SortDirection
+  ) => {
+    const start = page >= 1 ? limit * (page - 1) : 0;
+    await queryClient.prefetchQuery({
+      queryKey: ['movieList', page >= 1 ? page : 1, limit, sortBy, direction],
+      queryFn: () => getMovieList({ start, limit, sortBy, direction }),
+      staleTime: 60000 * 5
+    });
+  };
+
+  return { prefetchMovies };
 };
 
 // TODO: faire un hook

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { movieTile } from '@/components/MovieTile/movieTile.styles';
 import { useCollections } from '@/hooks/collections.hooks';
 import { useSearch } from '@tanstack/react-router';
-import PaginationComponent from '@/components/ui/PaginationComponent';
+import MoviesPagination from '@/components/MoviesPagination';
 
 export const MOVIES_LIMIT = 20;
 
@@ -38,7 +38,7 @@ export default function Movies() {
 
   return (
     <div ref={containerRef} className={moviesContainer}>
-      <PaginationComponent count={moviesData?.filterCount} page={page} />
+      <MoviesPagination count={moviesData?.filterCount} page={page} />
       <div className={moviesContent}>
         {/* TODO: loader : styles + afficher le bon nombre de tuiles */}
         {isFetching ? (
