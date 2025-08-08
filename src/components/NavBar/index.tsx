@@ -13,15 +13,26 @@ import {
   navSecondaryNav,
   sortBy
 } from './navBar.styles';
-import { useGetMovieList } from '@/hooks/movies.hooks';
-import useFilterSortStore, { SortName } from '@/stores/filterSort.store';
+import { useQueryClient } from '@tanstack/react-query';
+import { MovieLite } from '@/interfaces/movies.interfaces';
+import { ResultQuery } from '@/interfaces/queries.interfaces';
+import { useNavigate, useSearch } from '@tanstack/react-router';
+import { SortName } from '@/interfaces/filterSort.interface';
+import { MOVIES_LIMIT } from '@/pages/Movies';
 
 function FilterButton() {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
 
-  const { data: moviesData } = useGetMovieList();
-  const totalCount = moviesData?.pages[0].totalCount;
-  const filteredCount = moviesData?.pages[0].filterCount;
+  const search = useSearch({ from: '/' });
+  const { page = 0, sortBy = 'releaseDate', direction = 'asc' } = search;
+  const queryKey = ['movieList', page, MOVIES_LIMIT, sortBy, direction];
+
+  const moviesData: ResultQuery<MovieLite> | undefined =
+    queryClient.getQueryData(queryKey);
+
+  const totalCount = moviesData?.totalCount;
+  const filteredCount = moviesData?.filterCount;
 
   return (
     <>
@@ -43,21 +54,49 @@ function SortButton({
   label: string;
   sortName: SortName;
 }>) {
-  const { sort, setSort } = useFilterSortStore();
+  const navigate = useNavigate({ from: '/' });
+  // const { sortBy = 'releaseDate', direction = 'asc' } = useSearch({
+  const search = useSearch({
+    from: '/'
+  });
+
+  const actualSortBy = search.sortBy || 'releaseDate';
+  const actualDirection = search.direction || 'asc';
 
   const handleSortChange = () => {
-    const direction =
-      sort.name === sortName && sort.direction === 'asc' ? 'desc' : 'asc';
-    setSort({ name: sortName, direction });
+    const newDirection =
+      actualSortBy === sortName && actualDirection === 'asc' ? 'desc' : 'asc';
+    navigate({
+      search: { ...search, sortBy: sortName, direction: newDirection }
+    });
   };
 
   return (
     <button onClick={handleSortChange}>
       {label}{' '}
-      {sort.name === sortName && (
-        <span>{sort.direction === 'asc' ? '↑' : '↓'}</span>
+      {actualSortBy === sortName && (
+        <span>{actualDirection === 'desc' ? '↓' : '↑'}</span>
       )}
     </button>
+  );
+}
+
+function SortButtons() {
+  const { t } = useTranslation();
+
+  return (
+    <div className={sortBy}>
+      {t('mainNav.sortBy')}
+      <SortButton label={t('mainNav.releaseDate')} sortName="releaseDate" />
+      <SortButton
+        label={t('mainNav.originalTitle')}
+        sortName="normalizedOriginalTitle"
+      />
+      <SortButton
+        label={t('mainNav.frenchTitle')}
+        sortName="normalizedFrenchTitle"
+      />
+    </div>
   );
 }
 
@@ -98,21 +137,7 @@ export default function NavBar() {
         </div>
         <div className={filters}>
           <FilterButton />
-          <div className={sortBy}>
-            {t('mainNav.sortBy')}
-            <SortButton
-              label={t('mainNav.releaseDate')}
-              sortName="releaseDate"
-            />
-            <SortButton
-              label={t('mainNav.originalTitle')}
-              sortName="normalizedOriginalTitle"
-            />
-            <SortButton
-              label={t('mainNav.frenchTitle')}
-              sortName="normalizedFrenchTitle"
-            />
-          </div>
+          <SortButtons />
         </div>
       </div>
     </nav>

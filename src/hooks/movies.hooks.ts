@@ -1,46 +1,26 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getMovie, getMovieList } from '@api/movies.api';
-import useFilterSortStore from '@/stores/filterSort.store';
+import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
 
-const LIMIT = 20;
-
-export const useGetMovieList = () => {
-  const { sort } = useFilterSortStore();
-  const {
-    data,
-    refetch,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status
-  } = useInfiniteQuery({
-    queryKey: ['movieList', sort],
-    queryFn: ({ pageParam }) =>
-      getMovieList({ start: pageParam, sortBy: sort, limit: LIMIT }),
-    initialPageParam: 0,
+export const useGetMovieList = (
+  page: number,
+  limit: number,
+  sortBy: SortName,
+  direction: SortDirection
+) => {
+  const start = page >= 1 ? limit * (page - 1) : 0;
+  const { data, refetch, error, isFetching, status } = useQuery({
+    queryKey: ['movieList', page >= 1 ? page : 1, limit, sortBy, direction],
+    queryFn: () => getMovieList({ start, limit, sortBy, direction }),
     refetchOnWindowFocus: false,
-    // enabled: false,
-    getNextPageParam: (lastPage) => {
-      const start = lastPage.start || 0;
-      const limit = lastPage.limit || 50;
-      const param = start + limit;
-
-      if (lastPage.filterCount === undefined) return null;
-      if (param >= lastPage.filterCount) return null;
-      return start + limit;
-    }
+    staleTime: 60000 * 5
   });
 
   return {
     data,
     refetch,
     error,
-    fetchNextPage,
-    hasNextPage,
     isFetching,
-    isFetchingNextPage,
     status
   };
 };

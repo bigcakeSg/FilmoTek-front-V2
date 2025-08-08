@@ -19,7 +19,7 @@ export default defineConfig({
     '--color-secondary-ultralight': '#a9b3baff',
     '--color-secondary-ultradark': '#20201e',
     '--color-light-gold': '#eaba2b',
-    '--color-dark-gold': '#df8600'
+    '--color-dark-gold': '#7d5a26ff'
   },
 
   // Useful for theme customization

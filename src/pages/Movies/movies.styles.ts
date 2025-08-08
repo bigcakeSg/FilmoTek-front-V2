@@ -1,7 +1,5 @@
 import { css } from '@styled-system/css';
 
-const containerHeight = '70vh';
-
 export const moviesContainer = css({
   height: '100%',
   overflow: 'auto',
@@ -20,13 +18,4 @@ export const moviesContent = css({
   flexWrap: 'wrap',
   width: '100%',
   gap: '20px'
-});
-
-export const loaderRefStyle = css({
-  height: '1px',
-  width: '1px',
-  background: 'transparent',
-  position: 'absolute',
-  bottom: containerHeight,
-  zIndex: -1
 });

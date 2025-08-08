@@ -16,7 +16,8 @@ export default function RootTemplate() {
         <Outlet />
       </div>
       <footer>
-        <div style={{ height: '30px' }}>FilmoTek - © 2025</div>
+        {/* TODO: faire les styles */}
+        <div style={{ height: '30px' }}>FilmoTek v2.0 - © 2025</div>
       </footer>
       {/* <TanStackRouterDevtools /> */}
     </div>
