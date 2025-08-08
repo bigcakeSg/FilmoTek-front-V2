@@ -1,35 +1,23 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useGetMovieList } from '@/hooks/movies.hooks';
-// import { axiosInstance } from '@/config/axiosInstance';
 import {
   loaderRefStyle,
   moviesContainer,
   moviesContent
 } from './movies.styles';
 import MovieTile from '@components/MovieTile';
-import { useQueryClient } from '@tanstack/react-query';
-import { Collection } from '@interfaces/collections.interface';
 import { useTranslation } from 'react-i18next';
+import { movieTile } from '@/components/MovieTile/movieTile.styles';
+import { useCollections } from '@/hooks/collections.hooks';
 
 export default function Movies() {
   const { t } = useTranslation();
-  const queryClient = useQueryClient();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const loaderRef = useRef<HTMLDivElement>(null);
 
+  const { data: collections } = useCollections();
   const { data: moviesData, fetchNextPage, isFetching } = useGetMovieList();
-
-  // TODO: to remove
-  // const handleTest = async () => {
-  //   try {
-  //     const response = await axiosInstance.get('/auth/me');
-  //     alert(`Hello ${response.data.firstname} ${response.data.lastname}`);
-  //   } catch (error) {
-  //     console.log('Error fetching user data:', error);
-  //     alert('Error fetching user data');
-  //   }
-  // };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,7 +26,7 @@ export default function Movies() {
           fetchNextPage();
         }
       },
-      { root: containerRef.current, threshold: 0.1 }
+      { root: containerRef.current, threshold: 1 }
     );
     if (loaderRef.current) {
       observer.observe(loaderRef.current);
@@ -51,9 +39,6 @@ export default function Movies() {
     };
   }, [fetchNextPage, loaderRef]);
 
-  const collections: Collection[] =
-    queryClient.getQueryData(['collections']) || [];
-
   const collectionWatchedId = collections.find(
     (c) => c.name === 'collection.watched'
   )?._id;
@@ -64,35 +49,40 @@ export default function Movies() {
     (c) => c.name === 'collection.pinned'
   )?._id;
 
-  const movieList =
-    moviesData?.pages.flatMap((page) =>
-      page.data.map((movie) => ({
-        ...movie,
-        watched: collectionWatchedId
-          ? movie.collections.includes(collectionWatchedId)
-          : undefined,
-        favorite: collectionFavoriteId
-          ? movie.collections.includes(collectionFavoriteId)
-          : undefined,
-        pinned: collectionPinnedId
-          ? movie.collections.includes(collectionPinnedId)
-          : undefined
-      }))
-    ) || [];
+  const countToEnd =
+    moviesData?.pages[moviesData.pages.length - 1].countToEnd || 0;
 
   return (
-    <div>
-      <h3>{moviesData?.pages[0]?.totalCount}</h3>
-      {/* <button onClick={() => handleTest()}>Test</button> */}
-      <div ref={containerRef} className={moviesContainer}>
-        <div className={moviesContent}>
-          {movieList.map((movie) => (
-            <MovieTile key={movie._id} {...movie} />
+    <div ref={containerRef} className={moviesContainer}>
+      <div className={moviesContent}>
+        {moviesData?.pages.map((page) => (
+          <React.Fragment key={page.start}>
+            {page.data.map((movie) => {
+              const finalMovie = {
+                ...movie,
+                watched: collectionWatchedId
+                  ? movie.collections.includes(collectionWatchedId)
+                  : undefined,
+                favorite: collectionFavoriteId
+                  ? movie.collections.includes(collectionFavoriteId)
+                  : undefined,
+                pinned: collectionPinnedId
+                  ? movie.collections.includes(collectionPinnedId)
+                  : undefined
+              };
+              return <MovieTile key={movie._id} {...finalMovie} />;
+            })}
+          </React.Fragment>
+        ))}
+        {/* TODO: loader */}
+        {isFetching &&
+          Array.from({ length: countToEnd }).map((_, i) => (
+            <div key={i} className={movieTile}>
+              {t('loading')}
+            </div>
           ))}
-          <div ref={loaderRef} className={loaderRefStyle}></div>
-        </div>
+        <div ref={loaderRef} className={loaderRefStyle}></div>
       </div>
-      {isFetching && <div>{t('loading')}</div>}
     </div>
   );
 }

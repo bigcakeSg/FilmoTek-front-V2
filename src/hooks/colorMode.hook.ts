@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
-type ColorMode = 'light' | 'dark';
-
+export type ColorMode = 'light' | 'dark';
 const STORAGE_KEY = 'color-mode';
 
 export function useColorMode() {
@@ -23,6 +22,10 @@ export function useColorMode() {
 
   useEffect(() => {
     applyColorMode(colorMode);
+    const meta = document.querySelector('meta[name="color-scheme"]');
+    if (meta) {
+      meta.setAttribute('content', colorMode);
+    }
   }, [colorMode]);
 
   // TODO:

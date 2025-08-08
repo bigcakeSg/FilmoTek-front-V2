@@ -1,12 +1,18 @@
 {
   "loading": "Chargement...",
+  "movies": "films",
   "mainNav": {
     "movieList": "Liste de films",
     "addMovie": "Ajouter un film",
     "stats": "Statistiques",
     "movieListTooltip": "Voir la liste des films",
     "addMovieTooltip": "Ajouter un nouveau film à la liste",
-    "statsTooltip": "Voir les statistiques sur les films"
+    "statsTooltip": "Voir les statistiques sur les films",
+    "openFilters": "Ouvrir les filtres",
+    "sortBy": "Trier par",
+    "releaseDate": "Date de sortie",
+    "originalTitle": "Titre original",
+    "frenchTitle": "Titre français"
   },
   "user": {
     "username": "Nom d'utilisateur",

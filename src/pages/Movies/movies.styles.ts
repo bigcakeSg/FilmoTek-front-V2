@@ -3,16 +3,17 @@ import { css } from '@styled-system/css';
 const containerHeight = '70vh';
 
 export const moviesContainer = css({
-  color: 'text',
-  height: containerHeight,
-  overflowY: 'auto',
+  height: '100%',
+  overflow: 'auto',
   padding: {
-    base: '50px',
-    xl: '50px 200px'
+    base: '0 50px',
+    lg: '0 100px',
+    xl: '0 200px'
   }
 });
 
 export const moviesContent = css({
+  margin: '20px 0',
   position: 'relative',
   display: 'flex',
   justifyContent: 'space-evenly',

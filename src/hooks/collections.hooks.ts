@@ -8,5 +8,5 @@ export const useCollections = () => {
     refetchOnWindowFocus: false
   });
 
-  return { data, error, isFetching, refetch, isError, isSuccess };
+  return { data: data || [], error, isFetching, refetch, isError, isSuccess };
 };

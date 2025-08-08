@@ -8,7 +8,7 @@ export default function AvatarIcon() {
   const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
   return (
-    <button className={avatar}>
+    <div className={avatar}>
       <Avatar.Root>
         <Avatar.Fallback>
           <img src={noName} alt="User not logged in" />
@@ -20,6 +20,6 @@ export default function AvatarIcon() {
           />
         )}
       </Avatar.Root>
-    </button>
+    </div>
   );
 }

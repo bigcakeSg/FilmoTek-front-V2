@@ -16,6 +16,8 @@ export default defineConfig({
     '--color-dark': '#11171b',
     '--color-secondary-light': '#2a3943ff',
     '--color-secondary-dark': '#353532',
+    '--color-secondary-ultralight': '#a9b3baff',
+    '--color-secondary-ultradark': '#20201e',
     '--color-light-gold': '#eaba2b',
     '--color-dark-gold': '#df8600'
   },
@@ -41,7 +43,9 @@ export default defineConfig({
             light: { value: 'var(--color-light)' },
             dark: { value: 'var(--color-dark)' },
             secondaryLight: { value: 'var(--color-secondary-light)' },
-            secondaryDark: { value: 'var(--color-secondary-dark)' }
+            secondaryDark: { value: 'var(--color-secondary-dark)' },
+            secondaryUltraLight: { value: 'var(--color-secondary-ultralight)' },
+            secondaryUltraDark: { value: 'var(--color-secondary-ultradark)' }
           }
         },
         fonts: {
@@ -60,6 +64,12 @@ export default defineConfig({
             value: {
               base: '{colors.contrast.secondaryLight}',
               _dark: '{colors.contrast.secondaryDark}'
+            }
+          },
+          secondaryBackgroundOver: {
+            value: {
+              base: '{colors.contrast.secondaryUltraLight}',
+              _dark: '{colors.contrast.secondaryUltraDark}'
             }
           },
           foreground: {

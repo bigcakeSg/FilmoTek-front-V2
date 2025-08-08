@@ -25,7 +25,7 @@ export const menuLang = css({
     },
     '& [data-part="content"]': {
       padding: '5px',
-      backgroundColor: '{secondaryBackground}',
+      backgroundColor: '{secondaryBackgroundOver}',
       boxShadow: '2px 2px 7px 1px #00000044',
       rounded: '10px',
       '&[data-state=open]': {

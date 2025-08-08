@@ -1,12 +1,18 @@
 {
   "loading": "Loading...",
+  "movies": "movies",
   "mainNav": {
     "movieList": "Movie List",
     "addMovie": "Add movie",
     "stats": "Stats",
     "movieListTooltip": "View the list of movies",
     "addMovieTooltip": "Add a new movie to the list",
-    "statsTooltip": "View statistics about movies"
+    "statsTooltip": "View statistics about movies",
+    "openFilters": "Open filters",
+    "sortBy": "Sort by",
+    "releaseDate": "Release date",
+    "originalTitle": "Original title",
+    "frenchTitle": "French title"
   },
   "user": {
     "username": "User name",

@@ -1,21 +1,68 @@
 import { useTranslation } from 'react-i18next';
 import { MdMovie, MdMovieEdit } from 'react-icons/md';
 import { BiSolidBarChartSquare } from 'react-icons/bi';
-import { useCollections } from '@/hooks/collections.hooks';
 import ConfigTools from '@components/ConfigTools';
-import NavButton from '../NavButton';
+import NavButton from '@components/NavButton';
 import {
-  configTools,
   filmotekTitle,
+  filters,
+  movieCount,
   navBar,
   navButtons,
   navMainNav,
-  navSecondaryNav
+  navSecondaryNav,
+  sortBy
 } from './navBar.styles';
+import { useGetMovieList } from '@/hooks/movies.hooks';
+import useFilterSortStore, { SortName } from '@/stores/filterSort.store';
+
+function FilterButton() {
+  const { t } = useTranslation();
+
+  const { data: moviesData } = useGetMovieList();
+  const totalCount = moviesData?.pages[0].totalCount;
+  const filteredCount = moviesData?.pages[0].filterCount;
+
+  return (
+    <>
+      <button>{t('mainNav.openFilters')}</button>
+      {moviesData && (
+        <div className={movieCount}>
+          <span className="filteredCount">{filteredCount}</span>{' '}
+          {filteredCount !== totalCount && <> / {totalCount}</>} {t('movies')}
+        </div>
+      )}
+    </>
+  );
+}
+
+function SortButton({
+  label,
+  sortName
+}: Readonly<{
+  label: string;
+  sortName: SortName;
+}>) {
+  const { sort, setSort } = useFilterSortStore();
+
+  const handleSortChange = () => {
+    const direction =
+      sort.name === sortName && sort.direction === 'asc' ? 'desc' : 'asc';
+    setSort({ name: sortName, direction });
+  };
+
+  return (
+    <button onClick={handleSortChange}>
+      {label}{' '}
+      {sort.name === sortName && (
+        <span>{sort.direction === 'asc' ? '↑' : '↓'}</span>
+      )}
+    </button>
+  );
+}
 
 export default function NavBar() {
   const { t } = useTranslation();
-  useCollections();
 
   return (
     <nav className={navBar}>
@@ -46,10 +93,27 @@ export default function NavBar() {
         </div>
       </div>
       <div className={navSecondaryNav}>
-        <div className={configTools}>
+        <div>
           <ConfigTools />
         </div>
-        <div>Filtres - Tier par : date / titre original / titre français</div>
+        <div className={filters}>
+          <FilterButton />
+          <div className={sortBy}>
+            {t('mainNav.sortBy')}
+            <SortButton
+              label={t('mainNav.releaseDate')}
+              sortName="releaseDate"
+            />
+            <SortButton
+              label={t('mainNav.originalTitle')}
+              sortName="normalizedOriginalTitle"
+            />
+            <SortButton
+              label={t('mainNav.frenchTitle')}
+              sortName="normalizedFrenchTitle"
+            />
+          </div>
+        </div>
       </div>
     </nav>
   );

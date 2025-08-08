@@ -7,7 +7,8 @@ export const navBar = css({
   backgroundColor: 'secondaryBackground',
   color: '#ffffff',
   height: { base: '50px', xl: '90px' },
-  padding: '0 10px'
+  padding: '0 10px',
+  zIndex: 100
 });
 
 export const navMainNav = css({
@@ -44,6 +45,30 @@ export const navButtons = css({
   gap: '5px'
 });
 
-export const configTools = css({
-  //
+export const filters = css({
+  display: 'flex',
+  gap: '10px',
+  flexDirection: 'row',
+  alignItems: 'center',
+  fontSize: '1rem'
+});
+
+export const sortBy = css({
+  display: 'flex',
+  gap: '10px'
+});
+
+export const movieCount = css({
+  color: {
+    base: 'contrast.secondaryLight',
+    _dark: '#ffffff'
+  },
+  backgroundColor: 'background',
+  fontSize: '0.8rem',
+  padding: '5px 10px',
+  borderRadius: '5px',
+  fontWeight: '400',
+  '& .filteredCount': {
+    fontWeight: '700'
+  }
 });

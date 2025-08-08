@@ -5,7 +5,7 @@ import enIcon from '@assets/en.png';
 import frIcon from '@assets/fr.png';
 import { langIcon, menuLang } from './menuLang.styles';
 
-type LangType = 'en' | 'fr';
+export type LangType = 'en' | 'fr';
 
 const LangIcon = ({ lang }: Readonly<{ lang: LangType }>) => {
   return (
@@ -21,7 +21,7 @@ const LangIcon = ({ lang }: Readonly<{ lang: LangType }>) => {
 
 export default function MenuLang() {
   const { i18n } = useTranslation();
-  const [lang, setLang] = useState(i18n.language); // TODO: utiliser un store global pour la langue et sauvegarder dans le localStorage
+  const [lang, setLang] = useState(i18n.language);
 
   const handleChangeLang = (newLang: LangType) => {
     i18n.changeLanguage(newLang);

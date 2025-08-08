@@ -5,7 +5,7 @@ export const popover = css({
     '&[data-part="content"]': {
       zIndex: '10000',
       padding: '20px',
-      backgroundColor: '{secondaryBackground}',
+      backgroundColor: '{secondaryBackgroundOver}',
       boxShadow: '2px 2px 7px 2px #00000044',
       rounded: '10px',
       '&[data-state=open]': {
