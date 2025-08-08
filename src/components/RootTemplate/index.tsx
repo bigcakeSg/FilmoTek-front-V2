@@ -2,7 +2,7 @@ import { Outlet } from '@tanstack/react-router';
 // import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'; // TODO: remove this when not needed
 import { useCollections } from '@/hooks/collections.hook';
 import NavBar from '@components/NavBar';
-import { rootContent, rootTemplate } from './rootTemplate.styles';
+import { rootContent, rootFooter, rootTemplate } from './rootTemplate.styles';
 
 export default function RootTemplate() {
   useCollections();
@@ -17,7 +17,7 @@ export default function RootTemplate() {
       </div>
       <footer>
         {/* TODO: faire les styles */}
-        <div style={{ height: '30px' }}>FilmoTek v2.0 - © 2025</div>
+        <div className={rootFooter}>FilmoTek v2.0 - © 2025</div>
       </footer>
       {/* <TanStackRouterDevtools /> */}
     </div>
