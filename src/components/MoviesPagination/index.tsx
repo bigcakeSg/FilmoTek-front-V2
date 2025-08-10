@@ -58,7 +58,7 @@ export default function MoviesPagination({
             pagination.pages.map((page, index) =>
               page.type === 'page' ? (
                 <Pagination.Item
-                  key={index}
+                  key={`${page.type}-${page.value}`}
                   {...page}
                   onMouseEnter={() => {
                     prefetchMovies({
@@ -70,7 +70,10 @@ export default function MoviesPagination({
                   {page.value}
                 </Pagination.Item>
               ) : (
-                <Pagination.Ellipsis key={index} index={index}>
+                <Pagination.Ellipsis
+                  key={`${page.type}-${index}`}
+                  index={index}
+                >
                   &#8230;
                 </Pagination.Ellipsis>
               )

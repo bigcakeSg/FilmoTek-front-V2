@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
-import { navButton, navButtonLabel } from './navButton.styles';
 import TooltipComponent from '@components/ui/TooltipComponent';
+import { navButton, navButtonLabel } from './navButtons.sttyles';
 
 interface NavButtonProps {
   to: string;

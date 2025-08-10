@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
+import TextfieldComponent from '@components/ui/TextfieldComponent';
+import { filterTextField } from './filterTextField.styles';
 import { useDebounce } from 'use-debounce';
-import { HiSearch } from 'react-icons/hi';
-import UserAvatar from '@components/UserAvatar';
-import { configTools } from './configTools.styles';
-import MenuLang from '@components/MenuLang';
-import ColorModeButton from '@components/ColorModeButton';
-import TextfieldComponent from '../ui/TextfieldComponent';
 import { useNavigate, useSearch } from '@tanstack/react-router';
+import { HiSearch } from 'react-icons/hi';
 
-export default function ConfigTools() {
+export default function FilterTextfield() {
   const navigate = useNavigate({ from: '/' });
   const search = useSearch({ from: '/' });
 
@@ -34,22 +31,17 @@ export default function ConfigTools() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
-  console.log(isFieldChanged);
+
   return (
-    <div className={configTools}>
-      <div style={{ display: 'flex' }}>
-        <TextfieldComponent
-          value={fieldValue}
-          onChange={(val) => {
-            setIsFieldChanged(true);
-            setFieldValue(val);
-          }}
-        />
-        <HiSearch size={24} />
-      </div>
-      <UserAvatar />
-      <MenuLang />
-      <ColorModeButton />
+    <div className={filterTextField}>
+      <TextfieldComponent
+        value={fieldValue}
+        onChange={(val) => {
+          setIsFieldChanged(true);
+          setFieldValue(val);
+        }}
+      />
+      <HiSearch size={24} />
     </div>
   );
 }

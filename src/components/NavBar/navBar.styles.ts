@@ -39,36 +39,10 @@ export const filmotekTitle = css({
   }
 });
 
-export const navButtons = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '5px'
-});
-
 export const filters = css({
   display: 'flex',
   gap: '10px',
   flexDirection: 'row',
   alignItems: 'center',
   fontSize: '1rem'
-});
-
-export const sortBy = css({
-  display: 'flex',
-  gap: '10px'
-});
-
-export const movieCount = css({
-  color: {
-    base: 'contrast.secondaryLight',
-    _dark: '#ffffff'
-  },
-  backgroundColor: 'background',
-  fontSize: '0.8rem',
-  padding: '5px 10px',
-  borderRadius: '5px',
-  fontWeight: '400',
-  '& .filteredCount': {
-    fontWeight: '700'
-  }
 });

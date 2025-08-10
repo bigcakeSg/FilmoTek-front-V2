@@ -1,5 +1,11 @@
 import { css } from '@styled-system/css';
 
+export const navButtons = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '5px'
+});
+
 export const navButton = css({
   display: 'flex',
   alignItems: 'center',
