@@ -1,10 +1,10 @@
 import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
-import { useSearch } from '@tanstack/react-router';
+import { useLocation } from '@tanstack/react-router';
 
 export const MOVIES_LIMIT = 30;
 
 export const useNavigation = () => {
-  const search = useSearch({ from: '/' });
+  const { search } = useLocation();
 
   const searchFilters = Array.isArray(search.filter)
     ? search.filter

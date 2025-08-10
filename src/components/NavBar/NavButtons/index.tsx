@@ -3,14 +3,22 @@ import { MdMovie, MdMovieEdit } from 'react-icons/md';
 import { BiSolidBarChartSquare } from 'react-icons/bi';
 import { navButtons } from './navButtons.sttyles';
 import NavButton from './NavButton';
+import useRouteStore from '@/stores/route.store';
 
 export default function NavButtons() {
   const { t } = useTranslation();
+  const { page, sort, filter } = useRouteStore();
 
   return (
     <div className={navButtons}>
       <NavButton
         to="/"
+        searchParams={{
+          page,
+          sortBy: sort.name,
+          direction: sort.direction,
+          filter: filter.map((f) => `${f.name}+${f.value}`)
+        }}
         label={t('mainNav.movieList')}
         icon={<MdMovie />}
         tootltipMessage={t('mainNav.movieListTooltip')}

@@ -9,8 +9,11 @@ import {
 import NavButtons from './NavButtons';
 import FilterButton from './FilterButton';
 import SortButtons from './SortButtons';
+import { useLocation } from '@tanstack/react-router';
 
 export default function NavBar() {
+  const location = useLocation();
+
   return (
     <nav className={navBar}>
       <div className={navMainNav}>
@@ -22,11 +25,15 @@ export default function NavBar() {
       </div>
       <div className={navSecondaryNav}>
         <div>
-          <ConfigTools />
+          <ConfigTools path={location.pathname} />
         </div>
         <div className={filters}>
-          <FilterButton />
-          <SortButtons />
+          {location.pathname === '/' && (
+            <>
+              <FilterButton />
+              <SortButtons />
+            </>
+          )}
         </div>
       </div>
     </nav>

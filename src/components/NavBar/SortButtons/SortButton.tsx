@@ -1,5 +1,5 @@
 import { SortName } from '@/interfaces/filterSort.interface';
-import { useNavigate, useSearch } from '@tanstack/react-router';
+import { useLocation, useNavigate } from '@tanstack/react-router';
 
 export default function SortButton({
   label,
@@ -9,9 +9,7 @@ export default function SortButton({
   sortName: SortName;
 }>) {
   const navigate = useNavigate({ from: '/' });
-  const search = useSearch({
-    from: '/'
-  });
+  const { search } = useLocation();
 
   const actualSortBy = search.sortBy || 'releaseDate';
   const actualDirection = search.direction || 'asc';

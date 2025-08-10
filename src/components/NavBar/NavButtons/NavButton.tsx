@@ -4,6 +4,7 @@ import { navButton, navButtonLabel } from './navButtons.sttyles';
 
 interface NavButtonProps {
   to: string;
+  searchParams?: Record<string, unknown>;
   label: string;
   icon: React.ReactNode;
   tootltipMessage: string | React.ReactNode;
@@ -11,13 +12,14 @@ interface NavButtonProps {
 
 export default function NavButton({
   to,
+  searchParams = {},
   label,
   icon,
   tootltipMessage
 }: Readonly<NavButtonProps>) {
   return (
     <TooltipComponent message={tootltipMessage}>
-      <Link to={to}>
+      <Link to={to} search={searchParams}>
         <div className={navButton}>
           <div>{icon}</div>
           <div className={navButtonLabel}>{label.toUpperCase()}</div>

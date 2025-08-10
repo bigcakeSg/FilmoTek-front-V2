@@ -17,10 +17,11 @@ export default function Movies() {
   const { setRoute } = useRouteStore();
 
   const location = useLocation();
-
   const { page, sortBy, direction, filter } = location.search;
 
   useEffect(() => {
+    if (!location.searchStr) return;
+
     let filters: Filter | Filter[] = [];
     if (typeof filter === 'string') {
       const [name, ...value] = filter.split('+');
@@ -31,7 +32,6 @@ export default function Movies() {
         return { name: name as FilterName, value: value.join() };
       });
     }
-
     setRoute({
       ...(page ? { page: page ?? 1 } : {}),
       ...(sortBy
