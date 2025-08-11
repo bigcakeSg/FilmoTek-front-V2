@@ -5,6 +5,8 @@ import NoImg from '@assets/noMovie.jpg';
 import { movieTile } from './movieTile.styles';
 import MovieCollectionTools from './MovieCollectionTools';
 
+const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
+
 interface MovieTileProps extends MovieLite {
   watched?: boolean;
   favorite?: boolean;
@@ -12,8 +14,6 @@ interface MovieTileProps extends MovieLite {
 }
 
 export default function MovieTile(movie: Readonly<MovieTileProps>) {
-  const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
-
   return (
     <Link
       key={movie._id}

@@ -1,3 +1,8 @@
+export interface Name {
+  name: { id: string; text: string; picture?: string };
+  attributes: string[];
+}
+
 export interface MovieLite {
   _id: string;
   imdbId: string;
@@ -21,10 +26,17 @@ export interface Movie {
   picture: string;
   releaseDate: string;
   duration: number;
+  plot: string;
   genres: {
     id: string;
     text: string;
   }[];
+  directors: Name[];
+  writers: Name[];
+  casting: {
+    principal: Name[];
+    extended: Name[];
+  };
   supports: string[];
   videos: string[];
   collections: string[];

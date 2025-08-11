@@ -56,8 +56,25 @@ export const usePrefetchMovies = () => {
   return { prefetchMovies };
 };
 
+export const useGetMovieDetail = (movieId: string) => {
+  const { data, refetch, error, isFetching, status } = useQuery({
+    queryKey: ['movie', movieId],
+    queryFn: () => getMovie({ movieId }),
+    refetchOnWindowFocus: false,
+    staleTime: 60000 * 5
+  });
+
+  return {
+    data,
+    refetch,
+    error,
+    isFetching,
+    status
+  };
+};
+
 // TODO: faire un hook
-export const movieQuery = (movieId: string) => ({
-  queryKey: ['movie', movieId],
-  queryFn: () => getMovie({ movieId })
-});
+// export const movieQuery = (movieId: string) => ({
+//   queryKey: ['movie', movieId],
+//   queryFn: () => getMovie({ movieId })
+// });
