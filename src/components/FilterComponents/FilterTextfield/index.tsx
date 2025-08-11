@@ -12,7 +12,6 @@ export default function FilterTextfield() {
   const [isFieldChanged, setIsFieldChanged] = useState(false);
   const [fieldValue, setFieldValue] = useState(() => {
     if (Array.isArray(search.filter)) {
-      console.log(search);
       const titleFilter =
         search.filter.find((f) => f.startsWith('title+')) || '+';
       return titleFilter.split('+')[1];

@@ -1,6 +1,7 @@
 import { css } from '@styled-system/css';
 
 export const pagination = css({
+  marginBottom: '{sizes.footer}',
   '& [data-scope="pagination"]': {
     fontSize: '1rem',
     height: '40px',

@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { pagination } from './moviesPagination.styles';
 import { useNavigate, useSearch } from '@tanstack/react-router';
 import { usePrefetchMovies } from '@/hooks/movies.hook';
-import { MOVIES_LIMIT, useNavigation } from '@/hooks/navigation.hook';
+import { useNavigation } from '@/hooks/navigation.hook';
+import useRouteStore from '@/stores/route.store';
 
 interface MoviesPaginationProps {
   count: number | undefined;
@@ -17,6 +18,7 @@ export default function MoviesPagination({
   const { moviesQueries } = useNavigation();
   const search = useSearch({ from: '/' });
   const navigate = useNavigate({ from: '/' });
+  const { limit } = useRouteStore();
 
   const { prefetchMovies } = usePrefetchMovies();
 
@@ -35,7 +37,7 @@ export default function MoviesPagination({
     <div className={pagination}>
       <Pagination.Root
         count={newCount}
-        pageSize={MOVIES_LIMIT}
+        pageSize={limit}
         siblingCount={2}
         page={currentPage}
         onPageChange={(details) => {
@@ -47,7 +49,7 @@ export default function MoviesPagination({
       >
         <Pagination.PrevTrigger
           onMouseEnter={() => {
-            const start = moviesQueries.start - MOVIES_LIMIT;
+            const start = moviesQueries.start - limit;
             prefetchMovies({ ...moviesQueries, start });
           }}
         >
@@ -63,7 +65,7 @@ export default function MoviesPagination({
                   onMouseEnter={() => {
                     prefetchMovies({
                       ...moviesQueries,
-                      start: (page.value - 1) * MOVIES_LIMIT
+                      start: (page.value - 1) * limit
                     });
                   }}
                 >
@@ -82,7 +84,7 @@ export default function MoviesPagination({
         </Pagination.Context>
         <Pagination.NextTrigger
           onMouseEnter={() => {
-            const start = moviesQueries.start + MOVIES_LIMIT;
+            const start = moviesQueries.start + limit;
             prefetchMovies({ ...moviesQueries, start });
           }}
         >

@@ -11,18 +11,27 @@ export const moviesScroll = css({
   overflow: 'auto',
   padding: {
     base: '0 50px',
-    lg: '0 100px'
-    // xl: '0 200px'
+    sm: '0 20px',
+    md: '0 5px',
+    lg: '0 50px',
+    xl: '0 150px',
+    '2xl': '0 300px',
+    '3xl': '0 50px',
+    '4xl': '0 200px',
+    '5xl': '0 300px'
   }
 });
 
 export const moviesContent = css({
-  margin: '20px auto',
-  position: 'relative',
-  display: 'flex',
-  justifyContent: 'space-evenly',
-  flexWrap: 'wrap',
-  width: '100%',
-  maxWidth: '1950px',
-  gap: '15px'
+  display: 'grid',
+  justifyItems: 'center',
+  gridTemplateColumns: {
+    base: 'repeat(1, minmax(100px, 1fr))',
+    sm: 'repeat(2, minmax(100px, 1fr))',
+    md: 'repeat(3, minmax(100px, 1fr))',
+    lg: 'repeat(5, minmax(100px, 1fr))',
+    '3xl': 'repeat(10, minmax(100px, 1fr))'
+  },
+  gap: '15px',
+  margin: '20px auto'
 });

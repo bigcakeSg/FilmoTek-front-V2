@@ -1,10 +1,10 @@
 import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
+import useRouteStore from '@/stores/route.store';
 import { useLocation } from '@tanstack/react-router';
-
-export const MOVIES_LIMIT = 30;
 
 export const useNavigation = () => {
   const { search } = useLocation();
+  const { limit } = useRouteStore();
 
   const searchFilters = Array.isArray(search.filter)
     ? search.filter
@@ -19,9 +19,8 @@ export const useNavigation = () => {
     filter: string[];
   } = {
     key: 'movieList',
-    start:
-      search.page && search.page >= 1 ? MOVIES_LIMIT * (search.page - 1) : 0,
-    limit: MOVIES_LIMIT,
+    start: search.page && search.page >= 1 ? limit * (search.page - 1) : 0,
+    limit: limit,
     sortBy: search.sortBy || 'releaseDate',
     direction: search.direction || 'asc',
     filter: search.filter ? searchFilters : []

@@ -11,6 +11,7 @@ export default defineConfig({
   exclude: [],
 
   globalVars: {
+    '--footer-size': '20px',
     '--font-outfit': 'Outfit Variable, monospace',
     '--color-light': '#f0f2e9',
     '--color-dark': '#11171b',
@@ -25,6 +26,16 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
+      breakpoints: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px',
+        '3xl': '2000px',
+        '4xl': '2300px',
+        '5xl': '2500px'
+      },
       keyframes: {
         fadein: {
           '0%': { opacity: '0' },
@@ -50,6 +61,9 @@ export default defineConfig({
         },
         fonts: {
           fontOutfit: { value: 'var(--font-outfit), monospace' }
+        },
+        sizes: {
+          footer: { value: 'var(--footer-size)' }
         }
       },
       semanticTokens: {

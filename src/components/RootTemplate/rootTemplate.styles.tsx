@@ -8,18 +8,19 @@ export const rootTemplate = css({
 });
 
 export const rootContent = css({
-  overflow: 'hidden'
+  overflow: 'hidden',
+  flex: 1
 });
 
 export const rootFooter = css({
-  height: '20px',
+  height: '{sizes.footer}',
   fontSize: '0.8rem',
   padding: '0 30px',
   textAlign: 'right',
   fontWeight: '500',
-  backgroundColor: '{secondaryBackground}'
-  // TODO: fixer en bas
-  // position: 'absolute',
-  // bottom: 0,
-  // width: '100%'
+  backgroundColor: '{secondaryBackground}',
+  color: '#ffffff',
+  position: 'absolute',
+  bottom: 0,
+  width: '100%'
 });

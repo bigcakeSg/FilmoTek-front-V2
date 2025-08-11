@@ -98,12 +98,10 @@ export default function Movies() {
           )}
         </div>
       </div>
-      <div>
-        <MoviesPagination
-          count={moviesData?.filterCount}
-          page={moviesQueries.start / moviesQueries.limit + 1}
-        />
-      </div>
+      <MoviesPagination
+        count={moviesData?.filterCount}
+        page={moviesQueries.start / moviesQueries.limit + 1}
+      />
     </div>
   );
 }
