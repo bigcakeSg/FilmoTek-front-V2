@@ -1,15 +1,15 @@
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useGetMovieList } from '@/hooks/movies.hook';
 import { moviesContainer, moviesContent, moviesScroll } from './movies.styles';
-import MovieTile from '@components/MovieTile';
-import { useTranslation } from 'react-i18next';
-import { movieTile } from '@/components/MovieTile/movieTile.styles';
+import MovieTile from './MovieTile';
+import { movieTile } from './MovieTile/movieTile.styles';
 import { useCollections } from '@/hooks/collections.hook';
-import MoviesPagination from '@/components/MoviesPagination';
+import MoviesPagination from '@/pages/Movies/MoviesPagination';
 import { useNavigation } from '@/hooks/navigation.hook';
 import useRouteStore from '@/stores/route.store';
 import { useLocation } from '@tanstack/react-router';
 import { Filter, FilterName } from '@/interfaces/filterSort.interface';
-import { useEffect } from 'react';
 
 export default function Movies() {
   const { t } = useTranslation();

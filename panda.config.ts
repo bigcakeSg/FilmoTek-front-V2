@@ -12,12 +12,13 @@ export default defineConfig({
 
   globalVars: {
     '--footer-size': '20px',
+    '--banner-size': '250px',
     '--font-outfit': 'Outfit Variable, monospace',
     '--color-light': '#f0f2e9',
     '--color-dark': '#11171b',
-    '--color-secondary-light': '#2a3943ff',
+    '--color-secondary-light': '#2a3943',
     '--color-secondary-dark': '#353532',
-    '--color-secondary-ultralight': '#ced9e0ff',
+    '--color-secondary-ultralight': '#ced9e0',
     '--color-secondary-ultradark': '#20201e',
     '--color-light-gold': '#d0ac3eff',
     '--color-dark-gold': '#7d5a26ff'
@@ -63,7 +64,8 @@ export default defineConfig({
           fontOutfit: { value: 'var(--font-outfit), monospace' }
         },
         sizes: {
-          footer: { value: 'var(--footer-size)' }
+          footer: { value: 'var(--footer-size)' },
+          banner: { value: 'var(--banner-size)' }
         }
       },
       semanticTokens: {

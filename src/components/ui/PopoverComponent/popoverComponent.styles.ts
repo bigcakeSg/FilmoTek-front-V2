@@ -3,7 +3,7 @@ import { css } from '@styled-system/css';
 export const popover = css({
   '& [data-scope="popover"]': {
     '&[data-part="content"]': {
-      zIndex: '10000',
+      zIndex: '1000',
       padding: '20px',
       backgroundColor: '{secondaryBackgroundOver}',
       boxShadow: '2px 2px 7px 2px #00000044',

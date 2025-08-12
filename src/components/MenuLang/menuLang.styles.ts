@@ -23,7 +23,8 @@ export const menuLang = css({
         boxShadow: '1px 1px 4px 2px #00000066'
       }
     },
-    '& [data-part="content"]': {
+    '&[data-part="content"]': {
+      zIndex: 1000,
       padding: '5px',
       backgroundColor: '{secondaryBackgroundOver}',
       boxShadow: '2px 2px 7px 1px #00000044',

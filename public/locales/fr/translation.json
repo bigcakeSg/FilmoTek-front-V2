@@ -32,5 +32,12 @@
     "notFavorite": "Pas encore ajouté aux favoris",
     "pinned": "Épinglé",
     "notPinned": "Pas encore épinglé"
+  },
+  "movieDetail": {
+    "director": "Réalisateur :",
+    "writer": "Scénariste :",
+    "directors": "Réalisateurs :",
+    "writers": "Scénaristes :",
+    "casting": "Distribution"
   }
 }

@@ -32,5 +32,12 @@
     "notFavorite": "Not yet added to favorites",
     "pinned": "Pinned",
     "notPinned": "Not yet pinned"
+  },
+  "movieDetail": {
+    "director": "Director:",
+    "writer": "Writer:",
+    "directors": "Directors:",
+    "writers": "Writers:",
+    "casting": "Casting"
   }
 }

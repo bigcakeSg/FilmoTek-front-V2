@@ -1,5 +1,6 @@
 export interface Name {
   name: { id: string; text: string; picture?: string };
+  characters?: string[];
   attributes: string[];
 }
 
@@ -37,7 +38,7 @@ export interface Movie {
     principal: Name[];
     extended: Name[];
   };
-  supports: string[];
+  supports: Array<'vhs' | 'ld' | 'dvd' | 'bd' | 'uhd'>;
   videos: string[];
   collections: string[];
 }
