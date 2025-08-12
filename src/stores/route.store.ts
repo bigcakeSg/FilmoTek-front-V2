@@ -32,7 +32,7 @@ const defaultRouteContext: RouteStore = {
 
 const useRouteStore = create<RouteStore & RouteActions>()(
   combine(defaultRouteContext, (set) => ({
-    setRoute: (route) => set(() => ({ ...defaultRouteContext, ...route })),
+    setRoute: (route) => set((state) => ({ ...state, ...route })),
     setPage: (page) => set((state) => ({ ...state, page })),
     setLimit: (limit) => set((state) => ({ ...state, limit })),
     setSort: (sort) => set((state) => ({ ...state, sort })),

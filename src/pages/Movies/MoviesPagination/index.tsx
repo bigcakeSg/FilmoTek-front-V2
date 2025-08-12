@@ -5,6 +5,8 @@ import { useNavigate, useSearch } from '@tanstack/react-router';
 import { usePrefetchMovies } from '@/hooks/movies.hook';
 import { useNavigation } from '@/hooks/navigation.hook';
 import useRouteStore from '@/stores/route.store';
+import { BiLeftArrow, BiRightArrow } from 'react-icons/bi';
+import SelectComponent from '@/components/ui/SelectComponent';
 
 interface MoviesPaginationProps {
   count: number | undefined;
@@ -18,7 +20,7 @@ export default function MoviesPagination({
   const { moviesQueries } = useNavigation();
   const search = useSearch({ from: '/' });
   const navigate = useNavigate({ from: '/' });
-  const { limit } = useRouteStore();
+  const { limit, setLimit } = useRouteStore();
 
   const { prefetchMovies } = usePrefetchMovies();
 
@@ -53,7 +55,7 @@ export default function MoviesPagination({
             prefetchMovies({ ...moviesQueries, start });
           }}
         >
-          Previous
+          <BiLeftArrow />
         </Pagination.PrevTrigger>
         <Pagination.Context>
           {(pagination) =>
@@ -88,8 +90,22 @@ export default function MoviesPagination({
             prefetchMovies({ ...moviesQueries, start });
           }}
         >
-          Next Page
+          <BiRightArrow />
         </Pagination.NextTrigger>
+        <div>
+          <span>Movies per page</span>
+          <SelectComponent
+            options={[
+              { label: '10', value: '10' },
+              { label: '15', value: '15' },
+              { label: '30', value: '30' },
+              { label: '60', value: '60' },
+              { label: '120', value: '120' }
+            ]}
+            value={`${limit}`}
+            onChange={(items) => setLimit(+items[0].value)}
+          />
+        </div>
       </Pagination.Root>
     </div>
   );
