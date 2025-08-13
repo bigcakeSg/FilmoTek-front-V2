@@ -4,6 +4,7 @@ export const navButtons = css({
   display: 'flex',
   alignItems: 'center',
   gap: '5px'
+  // height: '20px'
 });
 
 export const navButton = css({

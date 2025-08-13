@@ -1,5 +1,7 @@
 import { SortName } from '@/interfaces/filterSort.interface';
 import { useLocation, useNavigate } from '@tanstack/react-router';
+import { sortArrow, sortButton } from './sortButtons.styles';
+import { IoIosArrowRoundUp, IoIosArrowRoundDown } from 'react-icons/io';
 
 export default function SortButton({
   label,
@@ -23,11 +25,19 @@ export default function SortButton({
   };
 
   return (
-    <button onClick={handleSortChange}>
+    <button className={sortButton} onClick={handleSortChange}>
       {label}{' '}
-      {actualSortBy === sortName && (
-        <span>{actualDirection === 'desc' ? '↓' : '↑'}</span>
-      )}
+      <div className={sortArrow}>
+        {actualSortBy === sortName && (
+          <span>
+            {actualDirection === 'desc' ? (
+              <IoIosArrowRoundDown />
+            ) : (
+              <IoIosArrowRoundUp />
+            )}
+          </span>
+        )}
+      </div>
     </button>
   );
 }

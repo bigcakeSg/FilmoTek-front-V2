@@ -45,6 +45,14 @@ export default defineConfig({
         fadeout: {
           '0%': { opacity: '1' },
           '100%': { opacity: '0' }
+        },
+        open: {
+          '0%': { width: '0', opacity: '0' },
+          '100%': { width: '100%', opacity: '1' }
+        },
+        closed: {
+          '0%': { width: '100%', opacity: '1' },
+          '100%': { width: '0', opacity: '0' }
         }
       },
       tokens: {

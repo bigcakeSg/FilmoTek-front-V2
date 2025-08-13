@@ -1,7 +1,11 @@
 import { useGetMovieList } from '@/hooks/movies.hook';
 import { useNavigation } from '@/hooks/navigation.hook';
 import { useTranslation } from 'react-i18next';
-import { movieCount } from './filterButton.styles';
+import {
+  filterButton,
+  filterButtonContainer,
+  movieCount
+} from './filterButton.styles';
 
 export default function FilterButton() {
   const { t } = useTranslation();
@@ -13,12 +17,12 @@ export default function FilterButton() {
   const filteredCount = moviesData?.filterCount;
 
   return (
-    <>
-      <button>{t('mainNav.openFilters')}</button>
+    <div className={filterButtonContainer}>
+      <button className={filterButton}>{t('mainNav.openFilters')}</button>
       <div className={movieCount}>
         <span className="filteredCount">{filteredCount}</span>{' '}
         {filteredCount !== totalCount && <> / {totalCount}</>} {t('movies')}
       </div>
-    </>
+    </div>
   );
 }

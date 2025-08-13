@@ -34,8 +34,11 @@ export default function MovieDetailCast({
               : t('movieDetail.director')}
           </span>{' '}
           <span>
-            {directors.map((director) => (
-              <button key={director.name.id}>{director.name.text}</button>
+            {directors.map((director, index) => (
+              <span key={`director-${director.name.id}`}>
+                <button>{director.name.text}</button>
+                {index < directors.length - 1 ? ', ' : ''}
+              </span>
             ))}
           </span>
         </div>
@@ -46,8 +49,11 @@ export default function MovieDetailCast({
               : t('movieDetail.writer')}
           </span>{' '}
           <span>
-            {writers.map((writer) => (
-              <button key={writer.name.id}>{writer.name.text}</button>
+            {writers.map((writer, index) => (
+              <span key={`writer-${writer.name.id}`}>
+                <button>{writer.name.text}</button>
+                {index < writers.length - 1 ? ', ' : ''}
+              </span>
             ))}
           </span>
         </div>

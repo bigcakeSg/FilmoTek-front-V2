@@ -39,5 +39,8 @@
     "directors": "Réalisateurs :",
     "writers": "Scénaristes :",
     "casting": "Distribution"
+  },
+  "filters": {
+    "search": "Rechercher un film..."
   }
 }

@@ -9,18 +9,29 @@ import {
 import NavButtons from './NavButtons';
 import FilterButton from './FilterButton';
 import SortButtons from './SortButtons';
-import { useLocation } from '@tanstack/react-router';
+import { Link, useLocation } from '@tanstack/react-router';
+import useRouteStore from '@/stores/route.store';
 
 export default function NavBar() {
   const location = useLocation();
+  const { page, sort, filter } = useRouteStore();
 
   return (
     <nav className={navBar}>
       <div className={navMainNav}>
-        <div className={filmotekTitle}>
+        <Link
+          className={filmotekTitle}
+          to="/"
+          search={{
+            page,
+            sortBy: sort.name,
+            direction: sort.direction,
+            filter: filter.map((f) => `${f.name}+${f.value}`)
+          }}
+        >
           <span className="filmo">Filmo</span>
           <span className="tek">TEK</span>
-        </div>
+        </Link>
         <NavButtons />
       </div>
       <div className={navSecondaryNav}>

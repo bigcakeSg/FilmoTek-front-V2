@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { sortBy } from './sortButtons.styles';
+import { sortBy, sortByLabel } from './sortButtons.styles';
 import SortButton from './SortButton';
 
 export default function SortButtons() {
@@ -7,7 +7,7 @@ export default function SortButtons() {
 
   return (
     <div className={sortBy}>
-      {t('mainNav.sortBy')}
+      <span className={sortByLabel}>{t('mainNav.sortBy')}</span>
       <SortButton label={t('mainNav.releaseDate')} sortName="releaseDate" />
       <SortButton
         label={t('mainNav.originalTitle')}

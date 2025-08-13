@@ -39,5 +39,8 @@
     "directors": "Directors:",
     "writers": "Writers:",
     "casting": "Casting"
+  },
+  "filters": {
+    "search": "Search for a movie..."
   }
 }

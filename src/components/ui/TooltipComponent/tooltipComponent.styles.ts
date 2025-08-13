@@ -1,6 +1,7 @@
 import { css } from '@styled-system/css';
 
 export const tooltip = css({
+  display: 'flex',
   '& [data-scope="tooltip"]': {
     '&[data-part="content"]': {
       backgroundColor: {

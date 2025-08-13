@@ -3,23 +3,26 @@ import { css } from '@styled-system/css';
 export const navBar = css({
   display: 'flex',
   justifyContent: 'space-between',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   backgroundColor: 'secondaryBackground',
   color: '#ffffff',
   height: { base: '50px', xl: '90px' },
-  padding: '0 10px',
+  padding: { base: '5px', xl: '10px 10px 5px 10px' },
   zIndex: 100
 });
 
 export const navMainNav = css({
+  height: '100%',
   display: 'flex',
-  alignItems: { base: 'center', xl: 'start' },
-  flexDirection: { base: 'row', xl: 'column' },
-  gap: '5px'
+  justifyContent: 'space-between',
+  alignItems: { base: 'center', xl: 'flex-start' },
+  flexDirection: { base: 'row', xl: 'column' }
 });
 
 export const navSecondaryNav = css({
+  height: '100%',
   display: 'flex',
+  justifyContent: 'space-between',
   flexDirection: { base: 'row-reverse', xl: 'column' },
   alignItems: { base: 'center', xl: 'flex-end' }
 });

@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import TextfieldComponent from '@components/ui/TextfieldComponent';
 import { filterTextField } from './filterTextField.styles';
 import { useDebounce } from 'use-debounce';
 import { useLocation, useNavigate } from '@tanstack/react-router';
 import { HiSearch } from 'react-icons/hi';
+import { IoClose } from 'react-icons/io5';
+import { Field } from '@ark-ui/react/field';
+import { useTranslation } from 'react-i18next';
 
 export default function FilterTextfield() {
+  const { t } = useTranslation();
   const navigate = useNavigate({ from: '/' });
   const { search } = useLocation();
 
@@ -19,6 +22,8 @@ export default function FilterTextfield() {
 
     return '';
   });
+  const [isFieldOpen, setIsFieldOpen] = useState(fieldValue !== '');
+
   const [searchValue] = useDebounce(fieldValue, 500);
 
   useEffect(() => {
@@ -32,16 +37,49 @@ export default function FilterTextfield() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
+  const handleOpen = () => {
+    setIsFieldOpen(true);
+    const input = document.querySelector(
+      `.textfield-container [data-scope="field"][data-part="input"]`
+    );
+    if (input) (input as HTMLInputElement).focus();
+  };
+
+  const handleClose = () => {
+    setIsFieldOpen(false);
+    setFieldValue('');
+    const input = document.querySelector(
+      `.textfield-container [data-scope="field"][data-part="input"]`
+    );
+    if (input) (input as HTMLInputElement).blur();
+  };
+
+  const handleChange = (value: string) => {
+    setIsFieldChanged(true);
+    setFieldValue(value);
+  };
+
   return (
     <div className={filterTextField}>
-      <TextfieldComponent
-        value={fieldValue}
-        onChange={(val) => {
-          setIsFieldChanged(true);
-          setFieldValue(val);
-        }}
-      />
-      <HiSearch size={24} />
+      <div className={`textfield-container ${isFieldOpen ? 'open' : 'closed'}`}>
+        {isFieldOpen && <HiSearch size={24} />}
+        <Field.Root>
+          <Field.Input
+            value={fieldValue}
+            onChange={(e) => handleChange(e.target.value)}
+            placeholder={t('filters.search')}
+          />
+        </Field.Root>
+        {isFieldOpen ? (
+          <button onClick={handleClose}>
+            <IoClose size={24} />
+          </button>
+        ) : (
+          <button onClick={handleOpen}>
+            <HiSearch size={24} />
+          </button>
+        )}
+      </div>
     </div>
   );
 }
