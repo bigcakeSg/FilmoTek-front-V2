@@ -1,6 +1,11 @@
 {
   "loading": "Loading...",
   "movies": "movies",
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Movies per page"
+  },
   "mainNav": {
     "movieList": "Movie List",
     "addMovie": "Add movie",

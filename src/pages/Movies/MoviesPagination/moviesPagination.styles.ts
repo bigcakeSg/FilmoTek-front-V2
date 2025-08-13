@@ -2,6 +2,12 @@ import { css } from '@styled-system/css';
 
 export const pagination = css({
   marginBottom: '{sizes.footer}',
+  display: 'flex',
+  justifyContent: 'center',
+  gap: { base: 0, sm: '40px' },
+  flexDirection: { base: 'column', sm: 'row' },
+  alignItems: 'center',
+  paddingBottom: { base: '5px', sm: 0 },
   '& [data-scope="pagination"]': {
     fontSize: '1rem',
     height: '40px',
@@ -48,5 +54,15 @@ export const pagination = css({
           }
         }
       }
+  }
+});
+
+export const paginationSelect = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
+  '& > span': {
+    fontWeight: '500',
+    fontSize: '0.9rem'
   }
 });

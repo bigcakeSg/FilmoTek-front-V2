@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
 import { Item } from '@/interfaces/ui.interface';
 import { Portal } from '@ark-ui/react/portal';
 import { Select, createListCollection } from '@ark-ui/react/select';
 import { LuChevronDown } from 'react-icons/lu';
 import { IoClose } from 'react-icons/io5';
+import { selectComponent, selectGlobalStyles } from './selectComponent.styles';
+import { FaCheck } from 'react-icons/fa';
 
 interface SelectComponentProps {
   label?: string;
@@ -25,41 +28,56 @@ export default function SelectComponent({
     items: options
   });
 
+  useEffect(() => {
+    document.body.className += ` ${selectGlobalStyles}`;
+
+    return () => {
+      document.body.className = document.body.className.replace(
+        ` ${selectGlobalStyles}`,
+        ''
+      );
+    };
+  }, []);
+
   return (
-    <Select.Root
-      collection={collection}
-      onValueChange={(e) => onChange(e.items)}
-      {...(value ? { value: [value] } : {})}
-    >
-      {label && <Select.Label>{label}</Select.Label>}
-      <Select.Control>
-        <Select.Trigger>
-          <Select.ValueText placeholder={placeholder} />
-          <Select.Indicator>
-            <LuChevronDown />
-          </Select.Indicator>
-        </Select.Trigger>
-        {isRemovable && (
-          <Select.ClearTrigger>
-            <IoClose />
-          </Select.ClearTrigger>
-        )}
-      </Select.Control>
-      <Portal>
-        <Select.Positioner>
-          <Select.Content>
-            <Select.ItemGroup>
-              {collection.items.map((item) => (
-                <Select.Item key={item.value} item={item}>
-                  <Select.ItemText>{item.label}</Select.ItemText>
-                  <Select.ItemIndicator>✓</Select.ItemIndicator>
-                </Select.Item>
-              ))}
-            </Select.ItemGroup>
-          </Select.Content>
-        </Select.Positioner>
-      </Portal>
-      <Select.HiddenSelect />
-    </Select.Root>
+    <div className={selectComponent}>
+      <Select.Root
+        collection={collection}
+        onValueChange={(e) => onChange(e.items)}
+        {...(value ? { value: [value] } : {})}
+      >
+        {label && <Select.Label>{label}</Select.Label>}
+        <Select.Control>
+          <Select.Trigger>
+            <Select.ValueText placeholder={placeholder} />
+            <Select.Indicator>
+              <LuChevronDown />
+            </Select.Indicator>
+          </Select.Trigger>
+          {isRemovable && (
+            <Select.ClearTrigger>
+              <IoClose />
+            </Select.ClearTrigger>
+          )}
+        </Select.Control>
+        <Portal>
+          <Select.Positioner>
+            <Select.Content>
+              <Select.ItemGroup>
+                {collection.items.map((item) => (
+                  <Select.Item key={item.value} item={item}>
+                    <Select.ItemText>{item.label}</Select.ItemText>
+                    <Select.ItemIndicator>
+                      <FaCheck />
+                    </Select.ItemIndicator>
+                  </Select.Item>
+                ))}
+              </Select.ItemGroup>
+            </Select.Content>
+          </Select.Positioner>
+        </Portal>
+        <Select.HiddenSelect />
+      </Select.Root>
+    </div>
   );
 }

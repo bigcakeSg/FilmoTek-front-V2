@@ -1,6 +1,11 @@
 {
   "loading": "Chargement...",
   "movies": "films",
+  "pagination": {
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page": "Films par page"
+  },
   "mainNav": {
     "movieList": "Liste de films",
     "addMovie": "Ajouter un film",
