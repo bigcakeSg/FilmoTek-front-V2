@@ -2,7 +2,7 @@ import { css, cva } from '@styled-system/css';
 
 export const directorsWriters = css({
   fontSize: '1rem',
-  margin: '20px 0 20px 20px'
+  margin: { base: '20px 0', '2xl': '20px 0 20px 20px' }
 });
 
 export const castLabel = css({
@@ -13,7 +13,7 @@ export const principalCast = css({
   display: 'flex',
   flexWrap: 'wrap',
   gap: '20px',
-  margin: '20px 0 20px 20px'
+  margin: { base: '20px 0', '2xl': '20px 0 20px 20px' }
 });
 
 export const extendedCast = css({
@@ -44,17 +44,19 @@ export const actorTile = cva({
     type: {
       principal: {
         flexDirection: 'column',
+        width: '200px',
         '& .actor-picture': {
           width: '200px',
-          height: '250px',
+          minHeight: '250px',
           border: '3px solid #000000'
         }
       },
       extended: {
         flexDirection: 'row',
         width: '300px',
+        height: '125px',
         '& .actor-picture': {
-          width: '100px',
+          minWidth: '100px',
           height: '125px',
           border: '3px solid #000000'
         }

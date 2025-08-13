@@ -3,7 +3,8 @@ import { css, cva } from '@styled-system/css';
 export const movieDetailSupport = css({
   display: 'flex',
   justifyContent: 'space-between',
-  marginTop: '10px'
+  marginTop: '10px',
+  width: { base: '350px', '2xl': 'auto' }
 });
 
 export const supportLogo = cva({

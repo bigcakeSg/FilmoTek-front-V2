@@ -21,7 +21,7 @@ export const frenchTitleStyles = css({
 
 export const releaseInfoStyles = css({
   fontSize: '1.5rem',
-  marginTop: '50px',
+  marginTop: { base: '20px', xl: '50px' },
   display: 'flex',
   alignItems: 'baseline',
   flexDirection: 'row',

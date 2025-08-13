@@ -72,7 +72,9 @@ export const movieDetailInfos = css({
   gridRowStart: { base: 'row3', sm: 'row2', ['2xl']: 'row3' },
   gridRowEnd: { base: 'span row4', sm: 'span row3', ['2xl']: 'span row4' },
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  marginTop: { base: '0px', sm: '-50px', '2xl': 0 },
+  marginLeft: { base: '0px', sm: '20px', '2xl': 0 }
 });
 
 export const movieDetailPlot = css({
@@ -88,11 +90,11 @@ export const movieDetailTitle = css({
   gridColumnEnd: { base: 'span end' },
   gridRowStart: { base: 'row2', sm: 'start' },
   gridRowEnd: { base: 'span row3', sm: 'span row2' },
-  margin: { base: 0, sm: '10px 20px' },
+  margin: { base: 0, sm: '20px 20px', '2xl': '10px 20px' },
   color: 'white',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'flex-end'
+  justifyContent: { base: 'flex-start', '2xl': 'flex-end' }
 });
 
 export const movieDetailCast = css({
