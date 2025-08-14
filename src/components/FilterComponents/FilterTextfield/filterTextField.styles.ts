@@ -9,7 +9,7 @@ export const filterTextField = css({
     padding: '0 3px',
     rounded: '5px',
     width: '100%',
-    backgroundColor: '#ffffff22',
+    backgroundColor: '#ffffff11',
     '& [data-scope="field"][data-part="input"]': {
       outline: 'none',
       fontSize: '1rem',

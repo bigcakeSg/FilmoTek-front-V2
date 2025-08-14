@@ -2,6 +2,7 @@
   "loading": "Loading...",
   "movies": "movies",
   "movie": "movie",
+  "welcome": "Welcome",
   "pagination": {
     "previous": "Previous",
     "next": "Next",

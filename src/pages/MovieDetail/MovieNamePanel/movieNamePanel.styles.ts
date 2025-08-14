@@ -22,7 +22,7 @@ export const nameMovies = css({
 export const movieTilePanel = css({
   display: 'flex',
   gap: '10px',
-  fontSize: '1rem',
+  fontSize: '0.9rem',
   padding: '10px',
   rounded: '5px',
   _hover: {
@@ -32,7 +32,7 @@ export const movieTilePanel = css({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    margin: '10px 0'
+    margin: '5px 0'
   },
   '& .original-title': {
     fontWeight: '700'
@@ -43,9 +43,13 @@ export const movieTilePanel = css({
 });
 
 export const imageFrame = css({
-  width: '100px',
-  height: '150px',
+  minWidth: '100px',
+  height: '145px',
   border: '1px solid',
   borderColor: '{foreground}',
-  overflow: 'hidden'
+  overflow: 'hidden',
+  '& img': {
+    width: '100%',
+    height: '100%'
+  }
 });

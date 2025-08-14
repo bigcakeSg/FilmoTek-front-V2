@@ -1,7 +1,7 @@
 import { setAuthTokens } from 'axios-jwt';
 import { axiosInstance } from '@/config/axiosInstance';
 import { setRememberMePreference } from '@/utils/storage.utils';
-import { Me } from '@/interfaces/user.interfaces';
+import { User } from '@/interfaces/user.interfaces';
 
 export const login = async (params: {
   username: string;
@@ -28,7 +28,7 @@ export const login = async (params: {
   return null;
 };
 
-export const getMe = async (): Promise<Me> => {
-  const response = await axiosInstance.get<Me>('/auth/me');
+export const getMe = async (): Promise<User> => {
+  const response = await axiosInstance.get<User>('/auth/me');
   return response.data;
 };

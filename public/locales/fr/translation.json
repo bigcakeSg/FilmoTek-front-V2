@@ -2,6 +2,7 @@
   "loading": "Chargement...",
   "movies": "films",
   "movie": "film",
+  "welcome": "Bienvenue",
   "pagination": {
     "previous": "Précédent",
     "next": "Suivant",

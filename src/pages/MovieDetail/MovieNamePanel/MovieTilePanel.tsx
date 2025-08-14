@@ -40,7 +40,6 @@ export default function MovieTilePanel({
     >
       <div className={imageFrame}>
         <img
-          width="100px"
           src={`${BASE_URL}/media/posters/thumbnails/${movie.picture}`}
           alt={movie.originalTitle}
         />

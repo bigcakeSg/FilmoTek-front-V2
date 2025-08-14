@@ -21,7 +21,8 @@ export const popover = css({
     '&[data-part="close-trigger"]': {
       position: 'absolute',
       top: '5px',
-      right: '5px'
+      right: '5px',
+      color: '{foreground}'
     }
   }
 });

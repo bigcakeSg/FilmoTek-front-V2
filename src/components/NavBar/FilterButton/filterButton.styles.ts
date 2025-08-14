@@ -21,7 +21,7 @@ export const movieCount = css({
     base: 'contrast.secondaryLight',
     _dark: '#ffffff'
   },
-  backgroundColor: 'background',
+  backgroundColor: '{background}',
   fontSize: '0.8rem',
   padding: '5px 10px',
   rounded: '5px',

@@ -10,7 +10,7 @@ export const selectComponent = css({
       display: 'flex',
       alignItems: 'center',
       gap: '5px',
-      backgroundColor: '{secondaryBackground}'
+      backgroundColor: '{secondaryBackgroundOver}'
     }
   }
 });
