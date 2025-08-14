@@ -26,7 +26,6 @@ export default function TextfieldComponent({
   ref,
   type = 'field'
 }: Readonly<TextfieldComponentProps>) {
-  console.log(errorText);
   return (
     <Field.Root className={fieldText} invalid={!!errorText}>
       {type === 'field' && (

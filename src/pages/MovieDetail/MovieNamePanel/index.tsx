@@ -1,4 +1,4 @@
-import RightPanel from '@/components/ui/LeftPanel';
+import RightPanel from '@/components/ui/RightPanel';
 import { useGetMovieListByName } from '@/hooks/movies.hook';
 import { Name } from '@/interfaces/movies.interfaces';
 import { Dispatch, SetStateAction, useEffect } from 'react';

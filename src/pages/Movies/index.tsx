@@ -10,6 +10,7 @@ import { useNavigation } from '@/hooks/navigation.hook';
 import useRouteStore from '@/stores/route.store';
 import { useLocation } from '@tanstack/react-router';
 import { Filter, FilterName } from '@/interfaces/filterSort.interface';
+import TopPanel from '@/components/ui/TopPanel';
 
 export default function Movies() {
   const { t } = useTranslation();
@@ -102,6 +103,9 @@ export default function Movies() {
         count={moviesData?.filterCount}
         page={moviesQueries.start / moviesQueries.limit + 1}
       />
+      <TopPanel>
+        <></>
+      </TopPanel>
     </div>
   );
 }
