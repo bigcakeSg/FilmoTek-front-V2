@@ -1,6 +1,7 @@
 {
   "loading": "Loading...",
   "movies": "movies",
+  "movie": "movie",
   "pagination": {
     "previous": "Previous",
     "next": "Next",
@@ -47,5 +48,10 @@
   },
   "filters": {
     "search": "Search for a movie..."
+  },
+  "role": {
+    "director": "Director",
+    "writer": "Writer",
+    "actor": "Actor"
   }
 }

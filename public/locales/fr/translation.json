@@ -1,6 +1,7 @@
 {
   "loading": "Chargement...",
   "movies": "films",
+  "movie": "film",
   "pagination": {
     "previous": "Précédent",
     "next": "Suivant",
@@ -47,5 +48,10 @@
   },
   "filters": {
     "search": "Rechercher un film..."
+  },
+  "role": {
+    "director": "Réalisateur",
+    "writer": "Scénariste",
+    "actor": "Acteur"
   }
 }

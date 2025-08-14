@@ -30,3 +30,17 @@ export const getMovie = async (pageParam: {
   );
   return response.data;
 };
+
+export const getMovieListByName = async (
+  nameId: string
+): Promise<ResultQuery<Movie>> => {
+  const response = await axiosInstance.get(`/movies`, {
+    params: {
+      sortby: 'releaseDate',
+      direction: 'asc',
+      filter: `name+${nameId}`,
+      format: 'full'
+    }
+  });
+  return response.data;
+};

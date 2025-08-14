@@ -3,10 +3,12 @@ import {
   castLabel,
   directorsWriters,
   extendedCast,
+  nameStyle,
   principalCast
 } from './movieDetailCast.styles';
 import { Name } from '@/interfaces/movies.interfaces';
 import CastName from './CastName';
+import useUiStore from '@/stores/ui.store';
 
 interface MovieDetailCastProps {
   directors: Name[];
@@ -15,14 +17,22 @@ interface MovieDetailCastProps {
     principal: Name[];
     extended: Name[];
   };
+  onSelectName: (name: Name | null) => void;
 }
 
 export default function MovieDetailCast({
   directors,
   writers,
-  casting
+  casting,
+  onSelectName
 }: Readonly<MovieDetailCastProps>) {
   const { t } = useTranslation();
+  const { openRightPanel } = useUiStore();
+
+  const handleSelectName = (name: Name | null) => {
+    onSelectName(name);
+    openRightPanel();
+  };
 
   return (
     <>
@@ -35,8 +45,13 @@ export default function MovieDetailCast({
           </span>{' '}
           <span>
             {directors.map((director, index) => (
-              <span key={`director-${director.name.id}`}>
-                <button>{director.name.text}</button>
+              <span key={`director-${director.name._id}`}>
+                <button
+                  className={nameStyle}
+                  onClick={() => handleSelectName(director)}
+                >
+                  {director.name.text}
+                </button>
                 {index < directors.length - 1 ? ', ' : ''}
               </span>
             ))}
@@ -50,8 +65,13 @@ export default function MovieDetailCast({
           </span>{' '}
           <span>
             {writers.map((writer, index) => (
-              <span key={`writer-${writer.name.id}`}>
-                <button>{writer.name.text}</button>
+              <span key={`writer-${writer.name._id}`}>
+                <button
+                  className={nameStyle}
+                  onClick={() => handleSelectName(writer)}
+                >
+                  {writer.name.text}
+                </button>
                 {index < writers.length - 1 ? ', ' : ''}
               </span>
             ))}
@@ -61,12 +81,22 @@ export default function MovieDetailCast({
       <div>
         <div className={principalCast}>
           {casting.principal.map((actor) => (
-            <CastName key={actor.name.id} actor={actor} type="principal" />
+            <CastName
+              key={actor.name.id}
+              onSelectName={handleSelectName}
+              actor={actor}
+              type="principal"
+            />
           ))}
         </div>
         <div className={extendedCast}>
           {casting.extended.map((actor) => (
-            <CastName key={actor.name.id} actor={actor} type="extended" />
+            <CastName
+              key={actor.name._id}
+              onSelectName={handleSelectName}
+              actor={actor}
+              type="extended"
+            />
           ))}
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getMovie, getMovieList } from '@api/movies.api';
+import { getMovie, getMovieList, getMovieListByName } from '@api/movies.api';
 import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
 
 interface MoviesQuery {
@@ -73,8 +73,20 @@ export const useGetMovieDetail = (movieId: string) => {
   };
 };
 
-// TODO: faire un hook
-// export const movieQuery = (movieId: string) => ({
-//   queryKey: ['movie', movieId],
-//   queryFn: () => getMovie({ movieId })
-// });
+export const useGetMovieListByName = (nameId: string) => {
+  const { data, refetch, error, isFetching, status } = useQuery({
+    queryKey: ['movieListByName', nameId],
+    queryFn: () => getMovieListByName(nameId),
+    refetchOnWindowFocus: false,
+    staleTime: 60000 * 5,
+    enabled: false
+  });
+
+  return {
+    data,
+    refetch,
+    error,
+    isFetching,
+    status
+  };
+};

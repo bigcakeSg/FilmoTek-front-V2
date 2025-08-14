@@ -3,9 +3,10 @@ import useUserStore from '@/stores/user.store';
 import noName from '@assets/noName.jpg';
 import { avatar } from './avatar.styles';
 
+const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
+
 export default function AvatarIcon() {
   const { user } = useUserStore();
-  const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
   return (
     <div className={avatar}>

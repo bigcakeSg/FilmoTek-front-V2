@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useGetMovieDetail } from '@/hooks/movies.hook';
 import { Route } from '@/routes/movie.$movieId.index';
 import {
@@ -17,12 +18,15 @@ import MoviePlot from './MoviePlot';
 import MovieDetailTitle from './MovieDetailTitle';
 import MovieGenres from './MovieGenres';
 import MovieDetailCast from './MovieDetailCast';
+import { Name } from '@/interfaces/movies.interfaces';
+import MovieNamePanel from './MovieNamePanel';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
 export default function MovieDetail() {
   const movieId = Route.useParams().movieId;
   const { data, isFetching } = useGetMovieDetail(movieId);
+  const [name, setName] = useState<Name | null>(null);
 
   if (isFetching) return <div>Loading...</div>; // TODO: loader
 
@@ -72,10 +76,12 @@ export default function MovieDetail() {
               directors={data.directors}
               writers={data.writers}
               casting={data.casting}
+              onSelectName={setName}
             />
           </div>
         </div>
       </div>
+      <MovieNamePanel name={name} setName={setName} />
     </div>
   );
 }

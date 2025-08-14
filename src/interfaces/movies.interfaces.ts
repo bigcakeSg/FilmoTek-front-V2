@@ -1,5 +1,5 @@
 export interface Name {
-  name: { id: string; text: string; picture?: string };
+  name: { _id: string; id: string; text: string; picture?: string };
   characters?: string[];
   attributes: string[];
 }

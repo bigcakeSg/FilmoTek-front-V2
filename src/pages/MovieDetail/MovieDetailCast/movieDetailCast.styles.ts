@@ -38,6 +38,12 @@ export const actorTile = cva({
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
       backgroundSize: 'cover'
+    },
+    _hover: {
+      '& .actor-picture': {
+        transform: 'scale(1.05)',
+        transition: 'transform 0.2s ease-in-out'
+      }
     }
   },
   variants: {
@@ -62,5 +68,11 @@ export const actorTile = cva({
         }
       }
     }
+  }
+});
+
+export const nameStyle = css({
+  _hover: {
+    textDecoration: 'dotted underline'
   }
 });

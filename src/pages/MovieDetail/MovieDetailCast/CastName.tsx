@@ -5,13 +5,18 @@ import noName from '@assets/noName.jpg';
 interface CastNameProps {
   actor: Name;
   type: 'principal' | 'extended';
+  onSelectName: (name: Name | null) => void;
 }
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
-export default function CastName({ actor, type }: Readonly<CastNameProps>) {
+export default function CastName({
+  actor,
+  type,
+  onSelectName
+}: Readonly<CastNameProps>) {
   return (
-    <button className={actorTile({ type })}>
+    <button onClick={() => onSelectName(actor)} className={actorTile({ type })}>
       <div
         className="actor-picture"
         style={{
