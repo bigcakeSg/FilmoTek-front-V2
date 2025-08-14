@@ -12,7 +12,7 @@ import {
   loginForm,
   loginFormContent
 } from './loginForm.styles';
-import CheckboxComponent from '@/components/ui/checkboxComponent';
+import CheckboxComponent from '@/components/ui/CheckboxComponent';
 import { GoAlertFill } from 'react-icons/go';
 import ButtonComponent from '@/components/ui/ButtonComponent';
 
