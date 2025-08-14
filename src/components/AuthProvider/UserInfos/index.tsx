@@ -1,3 +1,4 @@
+import ButtonComponent from '@/components/ui/ButtonComponent';
 import useUserStore from '@/stores/user.store';
 import {
   clearAllAuthData,
@@ -7,6 +8,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { clearAuthTokens } from 'axios-jwt';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/react/shallow';
+import { userInfos } from './userInfos.styles';
 
 export default function UserInfos() {
   const { t } = useTranslation();
@@ -18,6 +20,7 @@ export default function UserInfos() {
   const handleLogout = (e: React.FormEvent) => {
     e.preventDefault();
 
+    console.log('Logging out user:', user?.username);
     queryClient.removeQueries({ queryKey: ['login'] });
     queryClient.removeQueries({ queryKey: ['user'] });
     clearRememberMePreference();
@@ -27,12 +30,19 @@ export default function UserInfos() {
   };
 
   return (
-    <div>
+    <div className={userInfos}>
       <div>
-        {user?.firstname} {user?.lastname}
+        {t('welcome')}{' '}
+        <span className="name">
+          {user?.firstname} {user?.lastname}
+        </span>
       </div>
-      {/* <button onClick={handelTest}>CLICK</button> */}
-      <button onClick={handleLogout}>{t('user.logout')}</button>
+      <ButtonComponent
+        label={t('user.logout')}
+        type="submit"
+        version="principal"
+        onClick={handleLogout}
+      />
     </div>
   );
 }

@@ -1,95 +1,107 @@
-import { useEffect, useRef } from 'react';
-import { format } from 'date-fns';
-import { useGetMovieList } from '@/hooks/movies.hooks';
-import { axiosInstance } from '@/config/axiosInstance';
-import { Link } from '@tanstack/react-router';
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useGetMovieList } from '@/hooks/movies.hook';
+import { moviesContainer, moviesContent, moviesScroll } from './movies.styles';
+import MovieTile from './MovieTile';
+import { movieTile } from './MovieTile/movieTile.styles';
+import { useCollections } from '@/hooks/collections.hook';
+import MoviesPagination from '@/pages/Movies/MoviesPagination';
+import { useNavigation } from '@/hooks/navigation.hook';
+import useRouteStore from '@/stores/route.store';
+import { useLocation } from '@tanstack/react-router';
+import { Filter, FilterName } from '@/interfaces/filterSort.interface';
 
 export default function Movies() {
-  const loaderRef = useRef<HTMLDivElement>(null);
-  const { data: moviesData, fetchNextPage, isFetching } = useGetMovieList();
+  const { t } = useTranslation();
+  const { moviesQueries } = useNavigation();
+  const { setRoute } = useRouteStore();
 
-  const handleTest = async () => {
-    try {
-      const response = await axiosInstance.get('/auth/me');
-      alert(`Hello ${response.data.firstname} ${response.data.lastname}`);
-    } catch (error) {
-      console.log('Error fetching user data:', error);
-      alert('Error fetching user data');
-    }
-  };
+  const location = useLocation();
+  const { page, sortBy, direction, filter } = location.search;
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 0.1 }
-    );
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current);
-    }
-    return () => {
-      if (loaderRef.current) {
-        observer.unobserve(loaderRef.current);
-      }
-    };
-  }, [loaderRef]);
+    if (!location.searchStr) return;
 
-  const movieList = moviesData?.pages.flatMap((page) => page.data) || [];
+    let filters: Filter | Filter[] = [];
+    if (typeof filter === 'string') {
+      const [name, ...value] = filter.split('+');
+      filters = [{ name: name as FilterName, value: value.join() }];
+    } else if (Array.isArray(filter)) {
+      filters = filter?.map((f) => {
+        const [name, ...value] = f.split('+');
+        return { name: name as FilterName, value: value.join() };
+      });
+    }
+    setRoute({
+      ...(page ? { page: page ?? 1 } : {}),
+      ...(sortBy
+        ? {
+            sort: {
+              name: sortBy,
+              direction: direction ?? 'asc'
+            }
+          }
+        : {}),
+      ...(filters.length ? { filter: filters } : {})
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.searchStr]);
+
+  const { data: collections } = useCollections();
+  const { data: moviesData, isFetching } = useGetMovieList(moviesQueries);
+
+  const collectionWatchedId = collections.find(
+    (c) => c.name === 'collection.watched'
+  )?._id;
+  const collectionFavoriteId = collections.find(
+    (c) => c.name === 'collection.favorite'
+  )?._id;
+  const collectionPinnedId = collections.find(
+    (c) => c.name === 'collection.pinned'
+  )?._id;
 
   return (
-    <div>
-      <h3>Liste de films</h3>
-      <div>
-        Filtres - Tier par : date / titre original / titre français - Aller à :
-        décénnie / lettre
+    <div className={moviesContainer}>
+      <div className={moviesScroll}>
+        <div className={moviesContent}>
+          {/* TODO: loader : styles + afficher le bon nombre de tuiles */}
+          {isFetching ? (
+            Array.from({ length: 20 }).map((_, i) => (
+              <div key={i} className={movieTile}>
+                {t('loading')}
+              </div>
+            ))
+          ) : (
+            <>
+              {moviesData?.data.map((movie) => (
+                <MovieTile
+                  key={movie._id}
+                  {...movie}
+                  watched={
+                    collectionWatchedId
+                      ? movie.collections.includes(collectionWatchedId)
+                      : undefined
+                  }
+                  favorite={
+                    collectionFavoriteId
+                      ? movie.collections.includes(collectionFavoriteId)
+                      : undefined
+                  }
+                  pinned={
+                    collectionPinnedId
+                      ? movie.collections.includes(collectionPinnedId)
+                      : undefined
+                  }
+                />
+              ))}
+            </>
+          )}
+        </div>
       </div>
-      <button onClick={() => handleTest()}>Test</button>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          position: 'relative'
-        }}
-      >
-        {movieList.map((movie) => (
-          <Link
-            key={movie._id}
-            to="/movie/$movieId"
-            params={{ movieId: movie._id }}
-          >
-            <div
-              style={{
-                margin: '20px',
-                width: '200px',
-                height: '300px'
-              }}
-            >
-              <img
-                src={'http://localhost:5000/media/posters/' + movie.picture}
-                alt={movie.originalTitle}
-                width={100}
-              />
-              {movie.originalTitle} -{' '}
-              {format(new Date(movie.releaseDate), 'yyyy')}
-            </div>
-          </Link>
-        ))}
-        <div
-          ref={loaderRef}
-          style={{
-            height: '100vh',
-            width: '100px',
-            background: 'transparent',
-            position: 'absolute',
-            bottom: '0',
-            zIndex: -1
-          }}
-        ></div>
-      </div>
-      {isFetching && <div>Loading...</div>}
+      <MoviesPagination
+        count={moviesData?.filterCount}
+        page={moviesQueries.start / moviesQueries.limit + 1}
+      />
     </div>
   );
 }

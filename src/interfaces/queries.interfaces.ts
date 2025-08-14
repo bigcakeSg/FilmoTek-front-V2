@@ -1,7 +1,8 @@
 export interface ResultQuery<T> {
-  count: number;
   totalCount: number;
-  start?: number;
+  filterCount: number;
+  countToEnd: number;
+  start: number;
   limit?: number;
   data: T[];
 }

@@ -1,5 +1,26 @@
 {
   "loading": "Loading...",
+  "movies": "movies",
+  "movie": "movie",
+  "welcome": "Welcome",
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Movies per page"
+  },
+  "mainNav": {
+    "movieList": "Movie List",
+    "addMovie": "Add movie",
+    "stats": "Stats",
+    "movieListTooltip": "View the list of movies",
+    "addMovieTooltip": "Add a new movie to the list",
+    "statsTooltip": "View statistics about movies",
+    "openFilters": "Open filters",
+    "sortBy": "Sort by",
+    "releaseDate": "Release date",
+    "originalTitle": "Original title",
+    "frenchTitle": "French title"
+  },
   "user": {
     "username": "User name",
     "password": "Password",
@@ -10,5 +31,28 @@
     "checkAuth": "Checking authentication...",
     "userNameError": "Username must be at least 3 characters.",
     "passwordError": "Password must be at least 4 characters."
+  },
+  "tileTooltip": {
+    "watched": "Already watched",
+    "notWatched": "Not yet watched",
+    "favorite": "Added to favorites",
+    "notFavorite": "Not yet added to favorites",
+    "pinned": "Pinned",
+    "notPinned": "Not yet pinned"
+  },
+  "movieDetail": {
+    "director": "Director:",
+    "writer": "Writer:",
+    "directors": "Directors:",
+    "writers": "Writers:",
+    "casting": "Casting"
+  },
+  "filters": {
+    "search": "Search for a movie..."
+  },
+  "role": {
+    "director": "Director",
+    "writer": "Writer",
+    "actor": "Actor"
   }
 }

@@ -3,8 +3,18 @@ import { useTranslation } from 'react-i18next';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useLogin, useMe } from '@/hooks/auth.hooks';
+import { useLogin, useMe } from '@/hooks/auth.hook';
 import useUserStore from '@/stores/user.store';
+import TextfieldComponent from '@/components/ui/TextfieldComponent';
+import {
+  alertUserError,
+  loadingUser,
+  loginForm,
+  loginFormContent
+} from './loginForm.styles';
+import CheckboxComponent from '@/components/ui/checkboxComponent';
+import { GoAlertFill } from 'react-icons/go';
+import ButtonComponent from '@/components/ui/ButtonComponent';
 
 const formLoginSchema = z.object({
   username: z.string().min(3, {
@@ -58,79 +68,98 @@ export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
   useEffect(() => {
     const refetch = async () => {
       await fetchMe();
-      setUser(user || null);
+
       if (onSuccess && isMeSuccess) {
         onSuccess();
       }
     };
-    if (!isLoginFetching && isLoginSuccess) refetch();
+
+    if (!isLoginFetching && isLoginSuccess && !user) refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoginFetching, isLoginSuccess, user]);
+
+  useEffect(() => {
+    setUser(user || null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const handleSubmitLogin: SubmitHandler<FormLogin> = async () => {
     await fetchLogin();
   };
 
-  if (isLoginFetching || isMeFetching) return <div>{t('loading')}</div>;
+  const loading = isLoginFetching || isMeFetching;
 
   return (
-    <form onSubmit={handleSubmit(handleSubmitLogin)}>
-      <div>
+    <form onSubmit={handleSubmit(handleSubmitLogin)} className={loginForm}>
+      {(meError || loginError) && (
+        <div className={alertUserError}>
+          <GoAlertFill />
+          {t('user.unknownUser')}
+        </div>
+      )}
+      <div className={`${loginFormContent}${loading ? ' loading' : ''}`}>
         <Controller
           name="username"
           control={control}
           rules={{ required: true }}
           render={({ field }) => {
             return (
-              <>
-                <label htmlFor="username">{t('user.username')}</label>
-                <input {...field} id="username" type="text" required />
-                {errors.username?.message && (
-                  <div>{t(errors.username.message)}</div>
-                )}
-              </>
+              <TextfieldComponent
+                label={t('user.username')}
+                required
+                errorText={
+                  errors.username?.message && t(errors.username?.message)
+                }
+                {...field}
+              />
             );
           }}
         />
-      </div>
-      <div>
         <Controller
           name="password"
           control={control}
           rules={{ required: true }}
           render={({ field }) => {
             return (
-              <>
-                <label htmlFor="password">{t('user.password')}</label>
-                <input {...field} id="password" type="password" required />
-                {errors.password?.message && (
-                  <div>{t(errors.password?.message)}</div>
-                )}
-              </>
+              <TextfieldComponent
+                label={t('user.password')}
+                required
+                errorText={
+                  errors.password?.message && t(errors.password?.message)
+                }
+                type="password"
+                {...field}
+              />
             );
           }}
         />
-      </div>
-      <div className="flex items-center">
-        <Controller
-          name="rememberMe"
-          control={control}
-          render={({ field }) => {
-            return (
-              <>
-                <input
-                  id="rememberMe"
-                  type="checkbox"
-                  checked={field.value}
-                  onChange={(e) => field.onChange(e.target.checked)}
+        <div className="flex items-center">
+          <Controller
+            name="rememberMe"
+            control={control}
+            render={({ field }) => {
+              return (
+                <CheckboxComponent
+                  label={t('user.rememberMe')}
+                  checked={!!field.value}
+                  onChange={(checked) => field.onChange(checked)}
                 />
-                <label htmlFor="rememberMe">{t('user.rememberMe')}</label>
-              </>
-            );
-          }}
+              );
+            }}
+          />
+        </div>
+        <ButtonComponent
+          label={t('user.login')}
+          type="submit"
+          version="secondary"
         />
       </div>
-      {(meError || loginError) && <div>{t('user.unknownUser')}</div>}
-      <button type="submit">{t('user.login')}</button>
+      {loading && (
+        <div className={loadingUser}>
+          {/* TODO: loader */}
+          <div>{t('loading')}</div>
+        </div>
+      )}
     </form>
   );
 }

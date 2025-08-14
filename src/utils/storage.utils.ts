@@ -30,7 +30,7 @@ export const getDynamicStorage = (): Storage => {
 // Clear all authentication-related data from both storages
 export const clearAllAuthData = (): void => {
   const authKeys = ['auth-tokens-development', 'user-store'];
-
+  console.log('Clearing all auth data from local and session storage');
   authKeys.forEach((key) => {
     localStorage.removeItem(key);
     sessionStorage.removeItem(key);

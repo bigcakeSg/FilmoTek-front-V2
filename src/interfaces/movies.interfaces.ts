@@ -1,17 +1,18 @@
+export interface Name {
+  name: { _id: string; id: string; text: string; picture?: string };
+  characters?: string[];
+  attributes: string[];
+}
+
 export interface MovieLite {
   _id: string;
   imdbId: string;
   originalTitle: string;
   frenchTitle?: string;
+  englishTitle?: string;
   picture: string;
   releaseDate: string;
-  duration: number;
-  genres: {
-    id: string;
-    text: string;
-  }[];
-  supports: string[];
-  watched?: boolean;
+  collections: string[];
 }
 
 export interface Movie {
@@ -26,11 +27,18 @@ export interface Movie {
   picture: string;
   releaseDate: string;
   duration: number;
+  plot: string;
   genres: {
     id: string;
     text: string;
   }[];
-  supports: string[];
+  directors: Name[];
+  writers: Name[];
+  casting: {
+    principal: Name[];
+    extended: Name[];
+  };
+  supports: Array<'vhs' | 'ld' | 'dvd' | 'bd' | 'uhd'>;
   videos: string[];
-  watched?: boolean;
+  collections: string[];
 }

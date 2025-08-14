@@ -1,5 +1,26 @@
 {
   "loading": "Chargement...",
+  "movies": "films",
+  "movie": "film",
+  "welcome": "Bienvenue",
+  "pagination": {
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page": "Films par page"
+  },
+  "mainNav": {
+    "movieList": "Liste de films",
+    "addMovie": "Ajouter un film",
+    "stats": "Statistiques",
+    "movieListTooltip": "Voir la liste des films",
+    "addMovieTooltip": "Ajouter un nouveau film à la liste",
+    "statsTooltip": "Voir les statistiques sur les films",
+    "openFilters": "Ouvrir les filtres",
+    "sortBy": "Trier par",
+    "releaseDate": "Date de sortie",
+    "originalTitle": "Titre original",
+    "frenchTitle": "Titre français"
+  },
   "user": {
     "username": "Nom d'utilisateur",
     "password": "Mot de passe",
@@ -10,5 +31,28 @@
     "checkAuth": "Vérification de l'authentification...",
     "userNameError": "Le nom d'utilisateur doit comporter au moins 3 caractères.",
     "passwordError": "Le mot de passe doit comporter au moins 4 caractères."
+  },
+  "tileTooltip": {
+    "watched": "Déjà visionné",
+    "notWatched": "Pas encore visionné",
+    "favorite": "Ajouté aux favoris",
+    "notFavorite": "Pas encore ajouté aux favoris",
+    "pinned": "Épinglé",
+    "notPinned": "Pas encore épinglé"
+  },
+  "movieDetail": {
+    "director": "Réalisateur :",
+    "writer": "Scénariste :",
+    "directors": "Réalisateurs :",
+    "writers": "Scénaristes :",
+    "casting": "Distribution"
+  },
+  "filters": {
+    "search": "Rechercher un film..."
+  },
+  "role": {
+    "director": "Réalisateur",
+    "writer": "Scénariste",
+    "actor": "Acteur"
   }
 }
