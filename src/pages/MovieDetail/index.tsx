@@ -24,7 +24,7 @@ import MovieNamePanel from './MovieNamePanel';
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
 export default function MovieDetail() {
-  const movieId = Route.useParams().movieId;
+  const { movieId } = Route.useParams();
   const { data, isFetching } = useGetMovieDetail(movieId);
   const [name, setName] = useState<Name | null>(null);
 
@@ -57,7 +57,7 @@ export default function MovieDetail() {
             />
           </div>
           <div className={movieDetailInfos}>
-            <MovieSupports supports={data.supports} />
+            <MovieSupports movieId={movieId} supports={data.supports} />
             <MovieGenres genres={data.genres} />
           </div>
           <div className={movieDetailPlot}>

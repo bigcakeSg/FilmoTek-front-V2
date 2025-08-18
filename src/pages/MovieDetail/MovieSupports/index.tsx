@@ -4,16 +4,30 @@ import Dvd from '@assets/DVD_logo.svg?react';
 import Bd from '@assets/BD_logo.svg?react';
 import Uhd from '@assets/UHD_logo.svg?react';
 import { movieDetailSupport, supportLogo } from './movieSupports.styles';
+import { usePatchMovie } from '@/hooks/movies.hook';
+import { Supports } from '@/interfaces/movies.interfaces';
 
 interface MovieSupportsProps {
-  supports: Array<'vhs' | 'ld' | 'dvd' | 'bd' | 'uhd'>;
+  movieId: string;
+  supports: Supports[];
 }
 
 export default function MovieSupports({
+  movieId,
   supports
 }: Readonly<MovieSupportsProps>) {
-  const handleChangeVideoSupport = (support: string) => {
-    console.log('SUPPORT:', support);
+  const { mutate } = usePatchMovie(movieId);
+
+  const handleChangeVideoSupport = (support: Supports) => {
+    let newSupports = [...supports];
+
+    if (supports.includes(support)) {
+      newSupports = newSupports.filter((s) => s !== support);
+    } else {
+      newSupports.push(support);
+    }
+
+    mutate({ supports: newSupports });
   };
 
   return (

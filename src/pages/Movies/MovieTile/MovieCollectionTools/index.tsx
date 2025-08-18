@@ -79,7 +79,6 @@ export default function MovieCollectionTools({
     if (favorite && favoriteId !== undefined) movieCollections.push(favoriteId);
 
     mutate({ collections: movieCollections });
-    console.log(movieCollections);
   };
 
   const handleClickFavorite = (): void => {
@@ -90,7 +89,6 @@ export default function MovieCollectionTools({
       movieCollections.push(favoriteId);
 
     mutate({ collections: movieCollections });
-    console.log(movieCollections);
   };
 
   const handleClickPinned = (): void => {
@@ -100,7 +98,6 @@ export default function MovieCollectionTools({
     if (favorite && favoriteId !== undefined) movieCollections.push(favoriteId);
 
     mutate({ collections: movieCollections });
-    console.log(movieCollections);
   };
 
   return (

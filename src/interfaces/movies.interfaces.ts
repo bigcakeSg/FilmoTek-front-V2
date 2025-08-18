@@ -1,3 +1,5 @@
+export type Supports = 'vhs' | 'ld' | 'dvd' | 'bd' | 'uhd';
+
 export interface Name {
   name: { _id: string; id: string; text: string; picture?: string };
   characters?: string[];
@@ -38,7 +40,7 @@ export interface Movie {
     principal: Name[];
     extended: Name[];
   };
-  supports: Array<'vhs' | 'ld' | 'dvd' | 'bd' | 'uhd'>;
+  supports: Supports[];
   videos: string[];
   collections: string[];
 }
