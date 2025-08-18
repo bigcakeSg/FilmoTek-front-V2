@@ -1,6 +1,12 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getMovie, getMovieList, getMovieListByName } from '@api/movies.api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  getMovie,
+  getMovieList,
+  getMovieListByName,
+  patchMovie
+} from '@api/movies.api';
 import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
+import { Movie } from '@/interfaces/movies.interfaces';
 
 interface MoviesQuery {
   key: string;
@@ -23,7 +29,7 @@ export const useGetMovieList = ({
     queryKey: [key, start, limit, sortBy, direction, ...filter],
     queryFn: () => getMovieList({ start, limit, sortBy, direction, filter }),
     refetchOnWindowFocus: false,
-    staleTime: 1000 * 15 // 15s
+    staleTime: 1000 * 60 * 5 // 5 minutes
   });
 
   return {
@@ -49,7 +55,7 @@ export const usePrefetchMovies = () => {
     await queryClient.prefetchQuery({
       queryKey: [key, start, limit, sortBy, direction, ...filter],
       queryFn: () => getMovieList({ start, limit, sortBy, direction, filter }),
-      staleTime: 1000 * 15 // 15s
+      staleTime: 1000 * 60 * 5 // 5 minutes
     });
   };
 
@@ -61,7 +67,7 @@ export const useGetMovieDetail = (movieId: string) => {
     queryKey: ['movie', movieId],
     queryFn: () => getMovie({ movieId }),
     refetchOnWindowFocus: false,
-    staleTime: 1000 * 15 // 15s
+    staleTime: 1000 * 60 * 5 // 5 minutes
   });
 
   return {
@@ -79,7 +85,7 @@ export const useGetMovieListByName = (nameId: string) => {
     queryFn: () => getMovieListByName(nameId),
     refetchOnWindowFocus: false,
     enabled: false,
-    staleTime: 1000 * 15 // 15s
+    staleTime: 1000 * 60 * 5 // 5 minutes
   });
 
   return {
@@ -89,4 +95,28 @@ export const useGetMovieListByName = (nameId: string) => {
     isFetching,
     status
   };
+};
+
+export const usePatchMovie = (movieId: string) => {
+  const queryClient = useQueryClient();
+
+  const { data, mutate, error, isPending } = useMutation({
+    mutationFn: (movieData: Partial<Movie>) => patchMovie(movieId, movieData),
+    onMutate: () => {
+      // TODO: Optimistically update the movie list ???
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === 'movieList' ||
+          query.queryKey[0] === 'movieListByName' ||
+          (query.queryKey[0] === 'movie' && query.queryKey[1] === movieId)
+      });
+    },
+    onError: () => {
+      // TODO: toaster
+    }
+  });
+
+  return { data, mutate, error, isPending };
 };

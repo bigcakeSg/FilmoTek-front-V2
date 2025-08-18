@@ -45,6 +45,7 @@ export default function MovieTile(movie: Readonly<MovieTileProps>) {
             </div>
           </div>
           <MovieCollectionTools
+            movieId={movie._id}
             watched={movie.watched}
             favorite={movie.favorite}
             pinned={movie.pinned}

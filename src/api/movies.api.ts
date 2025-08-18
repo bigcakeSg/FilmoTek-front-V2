@@ -44,3 +44,14 @@ export const getMovieListByName = async (
   });
   return response.data;
 };
+
+export const patchMovie = async (
+  movieId: string,
+  movieData: Partial<Movie>
+): Promise<Movie> => {
+  const response = await axiosInstance.patch(
+    `/movies/title/${movieId}`,
+    movieData
+  );
+  return response.data;
+};

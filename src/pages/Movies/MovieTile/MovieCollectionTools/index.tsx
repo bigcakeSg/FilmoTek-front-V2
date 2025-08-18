@@ -5,6 +5,8 @@ import {
 } from './movieCollectionTools.styles';
 import TooltipComponent from '@/components/ui/TooltipComponent';
 import { useTranslation } from 'react-i18next';
+import { useCollections } from '@/hooks/collections.hook';
+import { usePatchMovie } from '@/hooks/movies.hook';
 
 interface ToolButtonProps {
   icon: React.ReactNode;
@@ -44,28 +46,61 @@ function ToolButton({
 }
 
 interface MovieCollectionToolsProps {
+  movieId: string;
   watched?: boolean;
   favorite?: boolean;
   pinned?: boolean;
 }
 
 export default function MovieCollectionTools({
+  movieId,
   watched,
   favorite,
   pinned
 }: Readonly<MovieCollectionToolsProps>) {
   const { t } = useTranslation();
+  const { data: collections } = useCollections();
+  const { mutate } = usePatchMovie(movieId);
+
+  const watchedId = collections.find(
+    (c) => c.name === 'collection.watched'
+  )?._id;
+
+  const pinnedId = collections.find((c) => c.name === 'collection.pinned')?._id;
+
+  const favoriteId = collections.find(
+    (c) => c.name === 'collection.favorite'
+  )?._id;
 
   const handleClickWatched = (): void => {
-    console.log('WATCHED CLICKED');
+    const movieCollections: string[] = [];
+    if (!watched && watchedId !== undefined) movieCollections.push(watchedId);
+    if (pinned && pinnedId !== undefined) movieCollections.push(pinnedId);
+    if (favorite && favoriteId !== undefined) movieCollections.push(favoriteId);
+
+    mutate({ collections: movieCollections });
+    console.log(movieCollections);
   };
 
   const handleClickFavorite = (): void => {
-    console.log('FAVORITE CLICKED');
+    const movieCollections: string[] = [];
+    if (watched && watchedId !== undefined) movieCollections.push(watchedId);
+    if (pinned && pinnedId !== undefined) movieCollections.push(pinnedId);
+    if (!favorite && favoriteId !== undefined)
+      movieCollections.push(favoriteId);
+
+    mutate({ collections: movieCollections });
+    console.log(movieCollections);
   };
 
   const handleClickPinned = (): void => {
-    console.log('PINNED CLICKED');
+    const movieCollections: string[] = [];
+    if (watched && watchedId !== undefined) movieCollections.push(watchedId);
+    if (!pinned && pinnedId !== undefined) movieCollections.push(pinnedId);
+    if (favorite && favoriteId !== undefined) movieCollections.push(favoriteId);
+
+    mutate({ collections: movieCollections });
+    console.log(movieCollections);
   };
 
   return (
