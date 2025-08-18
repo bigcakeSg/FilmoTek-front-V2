@@ -20,7 +20,7 @@ export const rightPanel = css({
   }
 });
 
-export const panelOverlay = css({
+export const rightPanelOverlay = css({
   position: 'fixed',
   top: 0,
   right: 0,
@@ -49,7 +49,6 @@ export const panelContent = css({
   width: '500px',
   maxWidth: '100vw',
   overflowY: 'auto',
-  // overflowX: 'hidden',
   '& > .content': {
     width: '100%',
     padding: '10px 30px 50px 30px'

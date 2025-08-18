@@ -17,7 +17,9 @@ export default function CheckboxComponent({
     <Checkbox.Root
       className={checkBox}
       checked={checked}
-      onChange={(e) => onChange((e.target as HTMLInputElement).checked)}
+      onCheckedChange={(e) => {
+        onChange(e.checked as boolean);
+      }}
     >
       <Checkbox.Control>
         <Checkbox.Indicator>

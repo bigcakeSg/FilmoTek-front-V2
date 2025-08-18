@@ -10,7 +10,7 @@ export const movieBanner = css({
   position: 'relative',
   width: '100%',
   height: '{sizes.banner}',
-  backgroundColor: '#873139',
+  backgroundColor: '{secondaryBackground}',
   '& .movie-banner__image': {
     width: '100%',
     height: '100%',

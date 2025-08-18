@@ -23,7 +23,7 @@ export const useGetMovieList = ({
     queryKey: [key, start, limit, sortBy, direction, ...filter],
     queryFn: () => getMovieList({ start, limit, sortBy, direction, filter }),
     refetchOnWindowFocus: false,
-    staleTime: 60000 * 5
+    staleTime: 1000 * 15 // 15s
   });
 
   return {
@@ -49,7 +49,7 @@ export const usePrefetchMovies = () => {
     await queryClient.prefetchQuery({
       queryKey: [key, start, limit, sortBy, direction, ...filter],
       queryFn: () => getMovieList({ start, limit, sortBy, direction, filter }),
-      staleTime: 60000 * 5
+      staleTime: 1000 * 15 // 15s
     });
   };
 
@@ -61,7 +61,7 @@ export const useGetMovieDetail = (movieId: string) => {
     queryKey: ['movie', movieId],
     queryFn: () => getMovie({ movieId }),
     refetchOnWindowFocus: false,
-    staleTime: 60000 * 5
+    staleTime: 1000 * 15 // 15s
   });
 
   return {
@@ -78,8 +78,8 @@ export const useGetMovieListByName = (nameId: string) => {
     queryKey: ['movieListByName', nameId],
     queryFn: () => getMovieListByName(nameId),
     refetchOnWindowFocus: false,
-    staleTime: 60000 * 5,
-    enabled: false
+    enabled: false,
+    staleTime: 1000 * 15 // 15s
   });
 
   return {

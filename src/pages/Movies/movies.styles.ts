@@ -3,7 +3,8 @@ import { css } from '@styled-system/css';
 export const moviesContainer = css({
   display: 'flex',
   flexDirection: 'column',
-  height: '100%'
+  height: '100%',
+  position: 'relative'
 });
 
 export const moviesScroll = css({

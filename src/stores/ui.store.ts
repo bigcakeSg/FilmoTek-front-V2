@@ -4,6 +4,7 @@ import { combine } from 'zustand/middleware';
 interface UiStore {
   modalOpen: boolean;
   rightPanelOpen: boolean;
+  topPanelOpen: boolean;
 }
 
 export interface UiActions {
@@ -11,11 +12,14 @@ export interface UiActions {
   closeModal: () => void;
   openRightPanel: () => void;
   closeRightPanel: () => void;
+  openTopPanel: () => void;
+  closeTopPanel: () => void;
 }
 
 const defaultUiContext: UiStore = {
   modalOpen: false,
-  rightPanelOpen: false
+  rightPanelOpen: false,
+  topPanelOpen: false
 };
 
 const useUiStore = create<UiStore & UiActions>()(
@@ -23,7 +27,10 @@ const useUiStore = create<UiStore & UiActions>()(
     openModal: () => set((state) => ({ ...state, modalOpen: true })),
     closeModal: () => set((state) => ({ ...state, modalOpen: false })),
     openRightPanel: () => set((state) => ({ ...state, rightPanelOpen: true })),
-    closeRightPanel: () => set((state) => ({ ...state, rightPanelOpen: false }))
+    closeRightPanel: () =>
+      set((state) => ({ ...state, rightPanelOpen: false })),
+    openTopPanel: () => set((state) => ({ ...state, topPanelOpen: true })),
+    closeTopPanel: () => set((state) => ({ ...state, topPanelOpen: false }))
   }))
 );
 

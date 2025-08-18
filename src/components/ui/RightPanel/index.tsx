@@ -3,7 +3,7 @@ import useUiStore from '@/stores/ui.store';
 import {
   closeIcon,
   panelContent,
-  panelOverlay,
+  rightPanelOverlay,
   rightPanel
 } from './rightPanel.styles';
 
@@ -28,13 +28,13 @@ export default function RightPanel({
       <div
         role="button"
         tabIndex={0}
-        onClick={() => closeRightPanel()}
+        onClick={() => handleClosePanel()}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
-            closeRightPanel();
+            handleClosePanel();
           }
         }}
-        className={`${panelOverlay} ${rightPanelOpen ? 'open' : 'closed'}`}
+        className={`${rightPanelOverlay} ${rightPanelOpen ? 'open' : 'closed'}`}
       ></div>
       <div className={`${rightPanel} ${rightPanelOpen ? 'open' : 'closed'}`}>
         <button className={closeIcon} onClick={handleClosePanel}>

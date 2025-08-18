@@ -8,7 +8,7 @@ export const useNavigation = () => {
 
   const searchFilters = Array.isArray(search.filter)
     ? search.filter
-    : [search.filter ? search.filter : ''];
+    : [search.filter ?? ''];
 
   const moviesQueries: {
     key: string;
