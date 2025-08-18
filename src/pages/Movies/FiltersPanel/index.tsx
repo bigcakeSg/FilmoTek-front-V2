@@ -54,7 +54,7 @@ export default function FiltersPanel({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search.filter]);
 
-  // TODO: start date, end date, name
+  // TODO: start date, end date, name, genre
   return (
     <div className={filtersPanel}>
       <div className={filters}>
