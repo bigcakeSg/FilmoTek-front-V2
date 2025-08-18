@@ -3,6 +3,7 @@
   "movies": "films",
   "movie": "film",
   "welcome": "Bienvenue",
+  "cancel": "Annuler",
   "pagination": {
     "previous": "Précédent",
     "next": "Suivant",
@@ -48,7 +49,11 @@
     "casting": "Distribution"
   },
   "filters": {
-    "search": "Rechercher un film..."
+    "collections": "Collections",
+    "supports": "Supports",
+    "search": "Rechercher un film...",
+    "filter": "Filtrer",
+    "removeFilters": "Effacer les filtres"
   },
   "role": {
     "director": "Réalisateur",

@@ -1,14 +1,16 @@
 import { css } from '@styled-system/css';
 
 export const topPanel = css({
+  display: 'flex',
+  flexDirection: 'column',
+  fontWeight: '400',
   position: 'absolute',
   top: 0,
   left: 0,
   right: 0,
-  backgroundColor: '{secondaryBackground}',
+  backgroundColor: '{background}',
   zIndex: 10000,
   overflow: 'hidden',
-  color: '#ffffff',
   padding: {
     base: '0 50px',
     xl: '0 150px',
@@ -19,7 +21,7 @@ export const topPanel = css({
   },
   '&.open': {
     transition: 'height 0.3s ease-in',
-    height: '300px'
+    height: '250px'
   },
   '&.closed': {
     transition: 'height 0.3s ease-out',

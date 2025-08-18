@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetMovieList } from '@/hooks/movies.hook';
 import { moviesContainer, moviesContent, moviesScroll } from './movies.styles';
@@ -11,6 +11,8 @@ import useRouteStore from '@/stores/route.store';
 import { useLocation } from '@tanstack/react-router';
 import { Filter, FilterName } from '@/interfaces/filterSort.interface';
 import TopPanel from '@/components/ui/TopPanel';
+import FiltersPanel from './FiltersPanel';
+import { filtersMap } from './FiltersPanel/filters.helpers';
 
 export default function Movies() {
   const { t } = useTranslation();
@@ -20,21 +22,24 @@ export default function Movies() {
   const location = useLocation();
   const { page, sortBy, direction, filter } = location.search;
 
+  const [dirtyFilters, setDirtyFilters] = useState<
+    Record<string, string[] | undefined>
+  >(filtersMap(location.search.filter || []));
+  const [searchFilters, setSearchFilters] = useState<
+    Record<string, string[] | undefined>
+  >(filtersMap(location.search.filter || []));
+
   useEffect(() => {
     if (!location.searchStr) return;
 
-    let filters: Filter | Filter[] = [];
-    if (typeof filter === 'string') {
-      const [name, ...value] = filter.split('+');
-      filters = [{ name: name as FilterName, value: value.join() }];
-    } else if (Array.isArray(filter)) {
-      filters = filter?.map((f) => {
+    const filters: Filter[] =
+      filter?.map((f) => {
         const [name, ...value] = f.split('+');
         return { name: name as FilterName, value: value.join() };
-      });
-    }
+      }) || [];
+
     setRoute({
-      ...(page ? { page: page ?? 1 } : {}),
+      ...(page ? { page } : {}),
       ...(sortBy
         ? {
             sort: {
@@ -43,7 +48,7 @@ export default function Movies() {
             }
           }
         : {}),
-      ...(filters.length ? { filter: filters } : {})
+      ...(filters ? { filter: filters } : {})
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.searchStr]);
@@ -103,8 +108,13 @@ export default function Movies() {
         count={moviesData?.filterCount}
         page={moviesQueries.start / moviesQueries.limit + 1}
       />
-      <TopPanel>
-        <></>
+      <TopPanel onClose={() => setDirtyFilters(searchFilters)}>
+        <FiltersPanel
+          dirtyFilters={dirtyFilters}
+          setDirtyFilters={setDirtyFilters}
+          searchFilters={searchFilters}
+          setSearchFilters={setSearchFilters}
+        />
       </TopPanel>
     </div>
   );

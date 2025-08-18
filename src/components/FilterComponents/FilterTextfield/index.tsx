@@ -14,13 +14,10 @@ export default function FilterTextfield() {
 
   const [isFieldChanged, setIsFieldChanged] = useState(false);
   const [fieldValue, setFieldValue] = useState(() => {
-    if (Array.isArray(search.filter)) {
-      const titleFilter =
-        search.filter.find((f) => f.startsWith('title+')) || '+';
-      return titleFilter.split('+')[1];
-    }
-
-    return '';
+    const titleFilter = search.filter
+      ? search.filter.find((f) => f.startsWith('title+')) || '+'
+      : '+';
+    return titleFilter.split('+')[1];
   });
   const [isFieldOpen, setIsFieldOpen] = useState(fieldValue !== '');
 
@@ -31,7 +28,10 @@ export default function FilterTextfield() {
       search: {
         ...search,
         page: isFieldChanged ? 1 : search.page,
-        filter: [`title+${searchValue}`]
+        filter: [
+          `title+${searchValue}`,
+          ...(search.filter?.filter((f) => !f.startsWith('title+')) || [])
+        ]
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

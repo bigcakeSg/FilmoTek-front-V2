@@ -3,6 +3,7 @@
   "movies": "movies",
   "movie": "movie",
   "welcome": "Welcome",
+  "cancel": "Cancel",
   "pagination": {
     "previous": "Previous",
     "next": "Next",
@@ -48,7 +49,11 @@
     "casting": "Casting"
   },
   "filters": {
-    "search": "Search for a movie..."
+    "collections": "Collections",
+    "supports": "Supports",
+    "search": "Search for a movie...",
+    "filter": "Filter",
+    "removeFilters": "Remove filters"
   },
   "role": {
     "director": "Director",
