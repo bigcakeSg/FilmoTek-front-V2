@@ -103,7 +103,7 @@ export const usePatchMovie = (movieId: string) => {
   const { data, mutate, error, isPending } = useMutation({
     mutationFn: (movieData: Partial<Movie>) => patchMovie(movieId, movieData),
     onMutate: () => {
-      // TODO: Optimistically update the movie list ???
+      // TODO: Optimistically update???
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

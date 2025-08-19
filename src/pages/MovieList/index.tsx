@@ -5,7 +5,7 @@ import { moviesContainer, moviesContent, moviesScroll } from './movies.styles';
 import MovieTile from './MovieTile';
 import { movieTile } from './MovieTile/movieTile.styles';
 import { useCollections } from '@/hooks/collections.hook';
-import MoviesPagination from '@/pages/Movies/MoviesPagination';
+import MoviesPagination from '@pages/MovieList/MoviesPagination';
 import { useNavigation } from '@/hooks/navigation.hook';
 import useRouteStore from '@/stores/route.store';
 import { useLocation } from '@tanstack/react-router';

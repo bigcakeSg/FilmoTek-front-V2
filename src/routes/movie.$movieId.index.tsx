@@ -1,4 +1,4 @@
-import MovieDetail from '@/pages/MovieDetail';
+import Movie from '@pages/Movie';
 import { createFileRoute } from '@tanstack/react-router';
 import { z } from 'zod';
 
@@ -7,9 +7,6 @@ const nameSearchSchema = z.object({
 });
 
 export const Route = createFileRoute('/movie/$movieId/')({
-  // loader: ({ context: { queryClient }, params: { movieId } }) => {
-  //   return queryClient.ensureQueryData(movieQuery(movieId));
-  // },
   validateSearch: nameSearchSchema,
-  component: MovieDetail
+  component: Movie
 });
