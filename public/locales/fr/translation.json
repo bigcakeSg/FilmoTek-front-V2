@@ -59,5 +59,9 @@
     "director": "Réalisateur",
     "writer": "Scénariste",
     "actor": "Acteur"
+  },
+  "edition": {
+    "editMovie": "Modifier le film",
+    "deleteMovie": "Supprimer le film"
   }
 }

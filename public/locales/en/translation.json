@@ -59,5 +59,9 @@
     "director": "Director",
     "writer": "Writer",
     "actor": "Actor"
+  },
+  "edition": {
+    "editMovie": "Edit movie",
+    "deleteMovie": "Delete movie"
   }
 }
