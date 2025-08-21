@@ -3,7 +3,7 @@ import { actorTile } from './movieDetailCast.styles';
 import noName from '@assets/noName.jpg';
 
 interface CastNameProps {
-  actor: Name;
+  actor: Name & { characters: string[] };
   type: 'principal' | 'extended';
   onSelectName: (name: Name | null) => void;
 }

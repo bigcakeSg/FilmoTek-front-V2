@@ -13,10 +13,8 @@ import useUiStore from '@/stores/ui.store';
 interface MovieDetailCastProps {
   directors: Name[];
   writers: Name[];
-  casting: {
-    principal: Name[];
-    extended: Name[];
-  };
+  casting: (Name & { characters: string[] })[];
+  crew: (Name & { job: string })[];
   onSelectName: (name: Name | null) => void;
 }
 
@@ -24,6 +22,7 @@ export default function MovieDetailCast({
   directors,
   writers,
   casting,
+  crew,
   onSelectName
 }: Readonly<MovieDetailCastProps>) {
   const { t } = useTranslation();
@@ -80,7 +79,7 @@ export default function MovieDetailCast({
       </div>
       <div>
         <div className={principalCast}>
-          {casting.principal.map((actor) => (
+          {casting.slice(0, 4).map((actor) => (
             <CastName
               key={actor.name.id}
               onSelectName={handleSelectName}
@@ -90,7 +89,7 @@ export default function MovieDetailCast({
           ))}
         </div>
         <div className={extendedCast}>
-          {casting.extended.map((actor) => (
+          {casting.slice(4).map((actor) => (
             <CastName
               key={actor.name._id}
               onSelectName={handleSelectName}
@@ -99,6 +98,29 @@ export default function MovieDetailCast({
             />
           ))}
         </div>
+      </div>
+      <div>
+        {crew.length > 0 ? (
+          <>
+            <h2>{t('movieDetail.crew')}</h2>
+            {/* TODO: styles + syntaxe fr/en */}
+            <div>
+              {crew.map((crew) => (
+                <div key={crew.name._id}>
+                  <button
+                    onClick={() => handleSelectName(crew)}
+                    className={nameStyle}
+                  >
+                    {crew.name.text}
+                  </button>{' '}
+                  ({t(`job.${crew.job}`)})
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <p>Aucun membre de l'équipe technique trouvé.</p>
+        )}
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import TooltipComponent from '@components/ui/TooltipComponent';
 import { navButton, navButtonLabel } from './navButtons.sttyles';
 
 interface NavButtonProps {
-  to: string;
+  to?: string;
   searchParams?: Record<string, unknown>;
   label: string;
   icon: React.ReactNode;
@@ -17,14 +17,24 @@ export default function NavButton({
   icon,
   tootltipMessage
 }: Readonly<NavButtonProps>) {
+  if (to)
+    return (
+      <TooltipComponent message={tootltipMessage}>
+        <Link to={to} search={searchParams}>
+          <div className={navButton}>
+            <div>{icon}</div>
+            <div className={navButtonLabel}>{label.toUpperCase()}</div>
+          </div>
+        </Link>
+      </TooltipComponent>
+    );
+
   return (
     <TooltipComponent message={tootltipMessage}>
-      <Link to={to} search={searchParams}>
-        <div className={navButton}>
-          <div>{icon}</div>
-          <div className={navButtonLabel}>{label.toUpperCase()}</div>
-        </div>
-      </Link>
+      <div className={navButton}>
+        <div>{icon}</div>
+        <div className={navButtonLabel}>{label.toUpperCase()}</div>
+      </div>
     </TooltipComponent>
   );
 }

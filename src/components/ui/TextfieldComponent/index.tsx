@@ -4,7 +4,7 @@ import { fieldText } from './textfieldComponent.styles';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 
 interface TextfieldComponentProps {
-  value?: string;
+  value?: string | number;
   label?: string;
   required?: boolean;
   helperText?: string;

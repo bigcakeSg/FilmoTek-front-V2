@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { useGetMovieDetail } from '@/hooks/movies.hook';
-import { Route } from '@/routes/movie.$movieId.index';
 import {
   movieBanner,
   movieDetail,
@@ -18,24 +16,30 @@ import MoviePlot from './MoviePlot';
 import MovieDetailTitle from './MovieDetailTitle';
 import MovieGenres from './MovieGenres';
 import MovieDetailCast from './MovieDetailCast';
-import { Name } from '@/interfaces/movies.interfaces';
+import { Movie, Name } from '@/interfaces/movies.interfaces';
 import MovieNamePanel from './MovieNamePanel';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
-export default function MovieDetail() {
-  const { movieId } = Route.useParams();
-  const { data, isFetching } = useGetMovieDetail(movieId);
+interface MovieDetailProps {
+  movieData: Movie | undefined;
+  isFetching: boolean;
+}
+
+export default function MovieDetail({
+  movieData,
+  isFetching
+}: Readonly<MovieDetailProps>) {
   const [name, setName] = useState<Name | null>(null);
 
   if (isFetching) return <div>Loading...</div>; // TODO: loader
 
-  if (!data) return <div>Movie not found</div>; // TODO: error page
+  if (!movieData) return <div>Movie not found</div>; // TODO: error page
 
   const backgroundImage =
-    isFetching || !data.picture
+    isFetching || !movieData.picture
       ? 'unset'
-      : `url(${BASE_URL}/media/posters/${data.picture})`;
+      : `url(${BASE_URL}/media/posters/${movieData.picture})`;
 
   return (
     <div className={movieDetail}>
@@ -52,30 +56,46 @@ export default function MovieDetail() {
         <div className={movieDetailContent}>
           <div className={movieDetailPicture}>
             <MoviePicture
-              picture={data.picture}
-              originalTitle={data.originalTitle}
+              picture={movieData.picture}
+              originalTitle={movieData.originalTitle}
             />
           </div>
           <div className={movieDetailInfos}>
-            <MovieSupports movieId={movieId} supports={data.supports} />
-            <MovieGenres genres={data.genres} />
+            <MovieSupports
+              movieId={movieData._id}
+              supports={movieData.supports}
+            />
+            <MovieGenres genres={movieData.genres} />
           </div>
           <div className={movieDetailPlot}>
-            <MoviePlot plot={data.plot} />
+            <MoviePlot plot={movieData.plot} />
           </div>
           <div className={movieDetailTitle}>
             <MovieDetailTitle
-              originalTitle={data.originalTitle}
-              frenchTitle={data.frenchTitle}
-              releaseDate={data.releaseDate}
-              duration={data.duration}
+              originalTitle={movieData.originalTitle}
+              frenchTitle={movieData.frenchTitle}
+              releaseDate={movieData.releaseDate}
+              duration={movieData.duration}
             />
           </div>
           <div className={movieDetailCast}>
             <MovieDetailCast
-              directors={data.directors}
-              writers={data.writers}
-              casting={data.casting}
+              directors={movieData.casting.filter(
+                (cast) => cast.job === 'director'
+              )}
+              writers={movieData.casting.filter(
+                (cast) => cast.job === 'writer'
+              )}
+              casting={movieData.casting.filter(
+                (cast) => cast.job === 'actor' || cast.job === 'actress'
+              )}
+              crew={movieData.casting.filter(
+                (cast) =>
+                  cast.job !== 'actor' &&
+                  cast.job !== 'actress' &&
+                  cast.job !== 'director' &&
+                  cast.job !== 'writer'
+              )}
               onSelectName={setName}
             />
           </div>

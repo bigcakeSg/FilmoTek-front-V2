@@ -4,7 +4,6 @@ import useUiStore from '@/stores/ui.store';
 import { Link } from '@tanstack/react-router';
 import { imageFrame, movieTilePanel } from './movieNamePanel.styles';
 import { useTranslation } from 'react-i18next';
-import { capitalizeFirstLetter } from '@/utils/helpers';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
@@ -19,17 +18,6 @@ export default function MovieTilePanel({
 }: Readonly<MovieTilePanelProps>) {
   const { t } = useTranslation();
   const { closeRightPanel } = useUiStore();
-
-  const roles = [];
-  if (movie?.directors.some((director) => director.name._id === nameId))
-    roles.push(t('role.director').toLowerCase());
-  if (movie?.writers.some((writer) => writer.name._id === nameId))
-    roles.push(t('role.writer').toLowerCase());
-  if (
-    movie?.casting.principal.some((actor) => actor.name._id === nameId) ||
-    movie?.casting.extended.some((actor) => actor.name._id === nameId)
-  )
-    roles.push(t('role.actor').toLowerCase());
 
   return (
     <Link
@@ -52,7 +40,12 @@ export default function MovieTilePanel({
           )}
         </div>
         <div>
-          <div className="role">{capitalizeFirstLetter(roles.join(', '))}</div>
+          <div className="role">
+            {movie.casting
+              .filter((cast) => cast.name._id === nameId)
+              .map((cast) => t(`job.${cast.job}`))
+              .join(', ')}
+          </div>
           <div className="release-date">
             {format(new Date(movie.releaseDate), 'yyyy')}
           </div>

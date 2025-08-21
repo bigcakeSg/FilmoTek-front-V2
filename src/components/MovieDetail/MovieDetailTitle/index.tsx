@@ -31,7 +31,7 @@ export default function MovieDetailTitle({
           {format(new Date(releaseDate), 'yyyy')}
         </div>
         <div className={durationStyles}>
-          {format(new Date(duration * 1000), "H'h'mm")}
+          {`${Math.floor(duration / 60)}h${String(Math.floor(duration % 60)).padStart(2, '0')}`}
         </div>
       </div>
     </>

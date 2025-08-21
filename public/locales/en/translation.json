@@ -46,7 +46,8 @@
     "writer": "Writer:",
     "directors": "Directors:",
     "writers": "Writers:",
-    "casting": "Casting"
+    "casting": "Casting",
+    "crew": "Crew"
   },
   "filters": {
     "collections": "Collections",
@@ -55,10 +56,17 @@
     "filter": "Filter",
     "removeFilters": "Remove filters"
   },
-  "role": {
+  "job": {
     "director": "Director",
     "writer": "Writer",
-    "actor": "Actor"
+    "actor": "Actor",
+    "actress": "Actress",
+    "producer": "Producer",
+    "cinematographer": "Cinematographer",
+    "editor": "Editor",
+    "composer": "Composer",
+    "casting_director": "Casting Director",
+    "production_designer": "Chef décorateur"
   },
   "edition": {
     "editMovie": "Edit movie",

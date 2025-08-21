@@ -4,6 +4,7 @@ import { BiSolidBarChartSquare } from 'react-icons/bi';
 import { navButtons } from './navButtons.sttyles';
 import NavButton from './NavButton';
 import useRouteStore from '@/stores/route.store';
+import PopoverComponent from '@/components/ui/PopoverComponent';
 
 export default function NavButtons() {
   const { t } = useTranslation();
@@ -23,12 +24,17 @@ export default function NavButtons() {
         icon={<MdMovie />}
         tootltipMessage={t('mainNav.movieListTooltip')}
       />
-      <NavButton
-        to="."
-        label={t('mainNav.addMovie')}
-        icon={<MdMovieEdit />}
-        tootltipMessage={t('mainNav.addMovieTooltip')}
-      />
+      <PopoverComponent
+        trigger={
+          <NavButton
+            label={t('mainNav.addMovie')}
+            icon={<MdMovieEdit />}
+            tootltipMessage={t('mainNav.addMovieTooltip')}
+          />
+        }
+      >
+        <div></div>
+      </PopoverComponent>
       <NavButton
         to="/statistics/genre"
         label={t('mainNav.stats')}
