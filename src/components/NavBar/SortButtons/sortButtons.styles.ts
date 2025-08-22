@@ -21,5 +21,5 @@ export const sortButton = css({
 });
 
 export const sortArrow = css({
-  // width: '20px'
+  //
 });
