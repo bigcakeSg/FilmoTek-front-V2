@@ -76,3 +76,39 @@ export const nameStyle = css({
     textDecoration: 'dotted underline'
   }
 });
+
+export const crewStyle = css({
+  '& [data-scope="collapsible"]': {
+    '&[data-part="trigger"]': {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'start',
+      flexDirection: 'row-reverse',
+      width: '150px',
+      '&[data-state="closed"] .less': {
+        display: 'none'
+      },
+      '&[data-state="open"] .more': {
+        display: 'none'
+      }
+    },
+    '&[data-part="indicator"]': {
+      marginTop: '4px',
+      '&[data-state="open"]': {
+        transform: 'rotate(180deg)'
+      }
+    },
+    '&[data-part="content"]': {
+      overflow: 'hidden',
+      marginLeft: '8px',
+      paddingLeft: '5px',
+      borderLeft: 'solid 1px',
+      '&[data-state="open"]': {
+        animation: 'slideDown 250ms'
+      },
+      '&[data-state="closed"]': {
+        animation: 'slideUp 250ms'
+      }
+    }
+  }
+});

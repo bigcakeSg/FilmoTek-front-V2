@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as StatisticsReleasedateRouteImport } from './routes/statistics/releasedate'
 import { Route as StatisticsGenreRouteImport } from './routes/statistics/genre'
 import { Route as MovieMovieIdIndexRouteImport } from './routes/movie.$movieId.index'
+import { Route as MovieMovieIdEditRouteImport } from './routes/movie_/$movieId/edit'
 
 const StatisticsRoute = StatisticsRouteImport.update({
   id: '/statistics',
@@ -40,12 +41,18 @@ const MovieMovieIdIndexRoute = MovieMovieIdIndexRouteImport.update({
   path: '/movie/$movieId/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MovieMovieIdEditRoute = MovieMovieIdEditRouteImport.update({
+  id: '/movie_/$movieId/edit',
+  path: '/movie/$movieId/edit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/statistics': typeof StatisticsRouteWithChildren
   '/statistics/genre': typeof StatisticsGenreRoute
   '/statistics/releasedate': typeof StatisticsReleasedateRoute
+  '/movie/$movieId/edit': typeof MovieMovieIdEditRoute
   '/movie/$movieId': typeof MovieMovieIdIndexRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/statistics': typeof StatisticsRouteWithChildren
   '/statistics/genre': typeof StatisticsGenreRoute
   '/statistics/releasedate': typeof StatisticsReleasedateRoute
+  '/movie/$movieId/edit': typeof MovieMovieIdEditRoute
   '/movie/$movieId': typeof MovieMovieIdIndexRoute
 }
 export interface FileRoutesById {
@@ -61,6 +69,7 @@ export interface FileRoutesById {
   '/statistics': typeof StatisticsRouteWithChildren
   '/statistics/genre': typeof StatisticsGenreRoute
   '/statistics/releasedate': typeof StatisticsReleasedateRoute
+  '/movie_/$movieId/edit': typeof MovieMovieIdEditRoute
   '/movie/$movieId/': typeof MovieMovieIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -70,6 +79,7 @@ export interface FileRouteTypes {
     | '/statistics'
     | '/statistics/genre'
     | '/statistics/releasedate'
+    | '/movie/$movieId/edit'
     | '/movie/$movieId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -77,6 +87,7 @@ export interface FileRouteTypes {
     | '/statistics'
     | '/statistics/genre'
     | '/statistics/releasedate'
+    | '/movie/$movieId/edit'
     | '/movie/$movieId'
   id:
     | '__root__'
@@ -84,12 +95,14 @@ export interface FileRouteTypes {
     | '/statistics'
     | '/statistics/genre'
     | '/statistics/releasedate'
+    | '/movie_/$movieId/edit'
     | '/movie/$movieId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   StatisticsRoute: typeof StatisticsRouteWithChildren
+  MovieMovieIdEditRoute: typeof MovieMovieIdEditRoute
   MovieMovieIdIndexRoute: typeof MovieMovieIdIndexRoute
 }
 
@@ -130,6 +143,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MovieMovieIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/movie_/$movieId/edit': {
+      id: '/movie_/$movieId/edit'
+      path: '/movie/$movieId/edit'
+      fullPath: '/movie/$movieId/edit'
+      preLoaderRoute: typeof MovieMovieIdEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -150,6 +170,7 @@ const StatisticsRouteWithChildren = StatisticsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   StatisticsRoute: StatisticsRouteWithChildren,
+  MovieMovieIdEditRoute: MovieMovieIdEditRoute,
   MovieMovieIdIndexRoute: MovieMovieIdIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,9 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   getMovie,
+  getMovieFromApi,
   getMovieList,
   getMovieListByName,
-  patchMovie
+  patchMovie,
+  postMovie
 } from '@api/movies.api';
 import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
 import { Movie } from '@/interfaces/movies.interfaces';
@@ -25,7 +27,7 @@ export const useGetMovieList = ({
   direction,
   filter
 }: MoviesQuery) => {
-  const { data, refetch, error, isFetching, status } = useQuery({
+  const { data, refetch, isSuccess, error, isFetching, status } = useQuery({
     queryKey: [key, start, limit, sortBy, direction, ...filter],
     queryFn: () => getMovieList({ start, limit, sortBy, direction, filter }),
     refetchOnWindowFocus: false,
@@ -35,6 +37,7 @@ export const useGetMovieList = ({
   return {
     data,
     refetch,
+    isSuccess,
     error,
     isFetching,
     status
@@ -62,17 +65,20 @@ export const usePrefetchMovies = () => {
   return { prefetchMovies };
 };
 
-export const useGetMovieDetail = (movieId: string) => {
-  const { data, refetch, error, isFetching, status } = useQuery({
+export const useGetMovieDetail = (movieId?: string) => {
+  const { data, refetch, isSuccess, error, isFetching, status } = useQuery({
     queryKey: ['movie', movieId],
-    queryFn: () => getMovie({ movieId }),
+    queryFn: () =>
+      movieId ? getMovie({ movieId }) : Promise.resolve(undefined),
     refetchOnWindowFocus: false,
+    enabled: !!movieId,
     staleTime: 1000 * 60 * 5 // 5 minutes
   });
 
   return {
     data,
     refetch,
+    isSuccess,
     error,
     isFetching,
     status
@@ -80,7 +86,7 @@ export const useGetMovieDetail = (movieId: string) => {
 };
 
 export const useGetMovieListByName = (nameId: string) => {
-  const { data, refetch, error, isFetching, status } = useQuery({
+  const { data, refetch, isSuccess, error, isFetching, status } = useQuery({
     queryKey: ['movieListByName', nameId],
     queryFn: () => getMovieListByName(nameId),
     refetchOnWindowFocus: false,
@@ -91,6 +97,7 @@ export const useGetMovieListByName = (nameId: string) => {
   return {
     data,
     refetch,
+    isSuccess,
     error,
     isFetching,
     status
@@ -100,7 +107,7 @@ export const useGetMovieListByName = (nameId: string) => {
 export const usePatchMovie = (movieId: string) => {
   const queryClient = useQueryClient();
 
-  const { data, mutate, error, isPending } = useMutation({
+  const { data, mutate, isSuccess, error, isPending } = useMutation({
     mutationFn: (movieData: Partial<Movie>) => patchMovie(movieId, movieData),
     onMutate: () => {
       // TODO: Optimistically update???
@@ -118,5 +125,48 @@ export const usePatchMovie = (movieId: string) => {
     }
   });
 
-  return { data, mutate, error, isPending };
+  return { data, mutate, isSuccess, error, isPending };
+};
+
+export const useMovieFromApi = (movieId?: string) => {
+  const { data, refetch, isSuccess, error, isFetching, status } = useQuery({
+    queryKey: ['movieFromApi', movieId],
+    queryFn: () =>
+      movieId ? getMovieFromApi(movieId) : Promise.resolve(undefined),
+    refetchOnWindowFocus: false,
+    enabled: false
+  });
+
+  return {
+    data,
+    refetch,
+    isSuccess,
+    error,
+    isFetching,
+    status
+  };
+};
+
+export const usePostMovie = () => {
+  const queryClient = useQueryClient();
+
+  const { data, mutate, isSuccess, error, isPending } = useMutation({
+    mutationFn: (movieData: Movie) => postMovie(movieData),
+    onMutate: () => {
+      // TODO: Optimistically update???
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === 'movieList' ||
+          query.queryKey[0] === 'movieListByName' ||
+          query.queryKey[0] === 'movieFromApi'
+      });
+    },
+    onError: () => {
+      // TODO: toaster
+    }
+  });
+
+  return { data, mutate, isSuccess, error, isPending };
 };

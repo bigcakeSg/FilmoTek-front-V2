@@ -6,6 +6,10 @@ export const moviePanelList = css({
 });
 
 export const nameMovies = css({
+  display: 'flex',
+  alignItems: 'flex-end',
+  gap: '10px',
+  marginBottom: '20px',
   fontWeight: '300',
   lineHeight: '1.8rem',
   fontSize: '1.8em',
@@ -16,6 +20,19 @@ export const nameMovies = css({
   },
   '& .count': {
     fontSize: '1.6rem'
+  }
+});
+
+export const namePicture = css({
+  width: '150px',
+  height: '180px',
+  borderTop: 'solid 1px',
+  borderLeft: 'solid 1px',
+  borderRight: 'solid 1px',
+  '& img': {
+    objectFit: 'cover',
+    width: '100%',
+    height: '100%'
   }
 });
 

@@ -1,6 +1,9 @@
 import { useTranslation } from 'react-i18next';
+import { Collapsible } from '@ark-ui/react/collapsible';
+import { GoTriangleDown } from 'react-icons/go';
 import {
   castLabel,
+  crewStyle,
   directorsWriters,
   extendedCast,
   nameStyle,
@@ -76,6 +79,30 @@ export default function MovieDetailCast({
             ))}
           </span>
         </div>
+        <div className={crewStyle}>
+          <Collapsible.Root>
+            <Collapsible.Trigger>
+              <div className="more">Show more</div>
+              <div className="less">Show less</div>
+              <Collapsible.Indicator>
+                <GoTriangleDown />
+              </Collapsible.Indicator>
+            </Collapsible.Trigger>
+            <Collapsible.Content>
+              {crew.map((crew) => (
+                <div key={crew.name._id}>
+                  <button
+                    onClick={() => handleSelectName(crew)}
+                    className={nameStyle}
+                  >
+                    {crew.name.text}
+                  </button>{' '}
+                  <span className={castLabel}>({t(`job.${crew.job}`)})</span>
+                </div>
+              ))}
+            </Collapsible.Content>
+          </Collapsible.Root>
+        </div>
       </div>
       <div>
         <div className={principalCast}>
@@ -98,29 +125,6 @@ export default function MovieDetailCast({
             />
           ))}
         </div>
-      </div>
-      <div>
-        {crew.length > 0 ? (
-          <>
-            <h2>{t('movieDetail.crew')}</h2>
-            {/* TODO: styles + syntaxe fr/en */}
-            <div>
-              {crew.map((crew) => (
-                <div key={crew.name._id}>
-                  <button
-                    onClick={() => handleSelectName(crew)}
-                    className={nameStyle}
-                  >
-                    {crew.name.text}
-                  </button>{' '}
-                  ({t(`job.${crew.job}`)})
-                </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          <p>Aucun membre de l'équipe technique trouvé.</p>
-        )}
       </div>
     </>
   );

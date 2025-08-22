@@ -55,3 +55,13 @@ export const patchMovie = async (
   );
   return response.data;
 };
+
+export const getMovieFromApi = async (movieId: string): Promise<Movie> => {
+  const response = await axiosInstance.get(`/movies/api-imdb/title/${movieId}`);
+  return response.data;
+};
+
+export const postMovie = async (movieData: Movie): Promise<string> => {
+  const response = await axiosInstance.post(`/movies/title`, movieData);
+  return response.data;
+};

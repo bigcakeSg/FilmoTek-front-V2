@@ -76,6 +76,8 @@ export default function MovieDetail({
               frenchTitle={movieData.frenchTitle}
               releaseDate={movieData.releaseDate}
               duration={movieData.duration}
+              countries={movieData.countriesOfOrigin}
+              companies={movieData.companies}
             />
           </div>
           <div className={movieDetailCast}>

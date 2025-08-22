@@ -37,5 +37,23 @@ export const durationStyles = css({
   fontWeight: 300,
   fontSize: '1.3rem',
   borderLeft: 'solid 1px #eee',
+  paddingLeft: '20px',
+  paddingRight: '20px',
+  '&.countries': {
+    borderRight: 'solid 1px #eee'
+  }
+});
+
+export const countriesStyles = css({
+  fontWeight: 300,
+  fontSize: '1rem',
   paddingLeft: '20px'
+});
+
+export const companiesStyles = css({
+  display: 'flex',
+  fontWeight: 300,
+  fontSize: '1rem',
+  textShadow: '1px 1px 2px #000',
+  fontStyle: 'italic'
 });

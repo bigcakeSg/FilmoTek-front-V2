@@ -5,6 +5,7 @@ import { navButtons } from './navButtons.sttyles';
 import NavButton from './NavButton';
 import useRouteStore from '@/stores/route.store';
 import PopoverComponent from '@/components/ui/PopoverComponent';
+import AddMovie from '@/components/AddMovie';
 
 export default function NavButtons() {
   const { t } = useTranslation();
@@ -33,7 +34,7 @@ export default function NavButtons() {
           />
         }
       >
-        <div></div>
+        <AddMovie />
       </PopoverComponent>
       <NavButton
         to="/statistics/genre"

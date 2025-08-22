@@ -46,8 +46,7 @@
     "writer": "Writer:",
     "directors": "Directors:",
     "writers": "Writers:",
-    "casting": "Casting",
-    "crew": "Crew"
+    "casting": "Casting"
   },
   "filters": {
     "collections": "Collections",
@@ -60,7 +59,7 @@
     "director": "Director",
     "writer": "Writer",
     "actor": "Actor",
-    "actress": "Actress",
+    "actress": "Actor",
     "producer": "Producer",
     "cinematographer": "Cinematographer",
     "editor": "Editor",
@@ -71,5 +70,11 @@
   "edition": {
     "editMovie": "Edit movie",
     "deleteMovie": "Delete movie"
+  },
+  "addMovie": {
+    "imdbId": "IMDb ID",
+    "imdbIdError": "IMDb ID is mandatory",
+    "unknownImdbId": "IMDb ID unknown",
+    "search": "Search for the movie"
   }
 }

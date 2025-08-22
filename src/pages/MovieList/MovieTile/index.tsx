@@ -39,7 +39,8 @@ export default function MovieTile(movie: Readonly<MovieTileProps>) {
           <div>
             <div className="movie-original_title">{movie.originalTitle}</div>
             <div className="movie-french_title">
-              {movie.originalTitle !== movie.frenchTitle
+              {movie.originalTitle.toLowerCase() !==
+              movie.frenchTitle?.toLowerCase()
                 ? movie.frenchTitle
                 : null}
             </div>
