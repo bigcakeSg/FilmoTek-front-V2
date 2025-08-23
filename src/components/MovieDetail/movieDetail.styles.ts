@@ -109,7 +109,7 @@ export const movieVideos = css({
   margin: '20px 20px 50px 20px',
   padding: '20px',
   gap: '20px',
-  backgroundColor: '#ffffff11',
+  backgroundColor: { base: '#00000011', _dark: '#ffffff11' },
   rounded: '10px',
   display: 'grid',
   gridTemplateColumns: {

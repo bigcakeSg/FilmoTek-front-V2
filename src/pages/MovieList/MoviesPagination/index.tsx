@@ -37,6 +37,34 @@ export default function MoviesPagination({
     setCurrentPage(page);
   }, [page]);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft' && currentPage > 1) {
+        const prevPage = currentPage - 1;
+        navigate({
+          search: { ...search, page: prevPage }
+        });
+        setCurrentPage(prevPage);
+      } else if (
+        event.key === 'ArrowRight' &&
+        newCount &&
+        currentPage < Math.ceil(newCount / limit)
+      ) {
+        const nextPage = currentPage + 1;
+        navigate({
+          search: { ...search, page: nextPage }
+        });
+        setCurrentPage(nextPage);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentPage, newCount, limit, search, navigate]);
+
   return (
     <div className={pagination}>
       <Pagination.Root
