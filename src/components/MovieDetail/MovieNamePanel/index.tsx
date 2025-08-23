@@ -30,7 +30,7 @@ export default function MovieNamePanel({
     if (name?.name._id) refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name?.name._id]);
-  console.log(name);
+
   return (
     <RightPanel onClose={() => setName(null)}>
       <div className={nameMovies}>

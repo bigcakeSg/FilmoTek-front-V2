@@ -8,7 +8,8 @@ import {
   movieDetailInfos,
   movieDetailPicture,
   movieDetailPlot,
-  movieDetailTitle
+  movieDetailTitle,
+  movieVideos
 } from './movieDetail.styles';
 import MoviePicture from './MoviePicture';
 import MovieSupports from './MovieSupports';
@@ -18,6 +19,7 @@ import MovieGenres from './MovieGenres';
 import MovieDetailCast from './MovieDetailCast';
 import { Movie, Name } from '@/interfaces/movies.interfaces';
 import MovieNamePanel from './MovieNamePanel';
+import MovieVideo from './MovieVideo';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
@@ -100,6 +102,13 @@ export default function MovieDetail({
               )}
               onSelectName={setName}
             />
+            {!!movieData.videos.filter((video) => video !== null).length && (
+              <div className={movieVideos}>
+                {movieData.videos.map((video) => (
+                  <MovieVideo key={video} video={video} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

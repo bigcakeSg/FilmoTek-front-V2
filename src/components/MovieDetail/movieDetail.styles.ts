@@ -104,3 +104,16 @@ export const movieDetailCast = css({
   gridRowEnd: { base: 'span end', sm: 'span end', ['2xl']: 'span end' },
   overflow: { base: 'hidden', sm: 'auto' }
 });
+
+export const movieVideos = css({
+  margin: '20px 20px 50px 20px',
+  padding: '20px',
+  gap: '20px',
+  backgroundColor: '#ffffff11',
+  rounded: '10px',
+  display: 'grid',
+  gridTemplateColumns: {
+    base: 'repeat(1, minmax(100px, 1fr))',
+    md: 'repeat(2, minmax(100px, 1fr))'
+  }
+});

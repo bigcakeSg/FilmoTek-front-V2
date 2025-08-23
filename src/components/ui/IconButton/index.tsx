@@ -15,15 +15,37 @@ export default function IconButton({
   if (tooltip)
     return (
       <TooltipComponent message={tooltip}>
-        <button className={iconButton} onClick={onClick}>
+        <div
+          role="button"
+          tabIndex={0}
+          className={iconButton}
+          onClick={onClick}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              onClick();
+            }
+          }}
+        >
           {icon}
-        </button>
+        </div>
       </TooltipComponent>
     );
 
   return (
-    <button className={iconButton} onClick={onClick}>
+    <div
+      role="button"
+      tabIndex={0}
+      className={iconButton}
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+    >
       {icon}
-    </button>
+    </div>
   );
 }

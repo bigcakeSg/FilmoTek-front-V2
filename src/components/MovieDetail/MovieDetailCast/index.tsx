@@ -89,8 +89,8 @@ export default function MovieDetailCast({
               </Collapsible.Indicator>
             </Collapsible.Trigger>
             <Collapsible.Content>
-              {crew.map((crew) => (
-                <div key={crew.name._id}>
+              {crew.map((crew, index) => (
+                <div key={`crew-${crew.name._id}-${index}`}>
                   <button
                     onClick={() => handleSelectName(crew)}
                     className={nameStyle}
