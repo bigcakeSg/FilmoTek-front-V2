@@ -5,7 +5,11 @@ export const movieApiForm = css({
 });
 
 export const alertMovieApiError = css({
-  // TODO:
+  fontWeight: 400,
+  color: 'red',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '5px'
 });
 
 export const movieApiFormContent = css({
@@ -14,4 +18,11 @@ export const movieApiFormContent = css({
 
 export const loadingMovieApi = css({
   // TODO:
+});
+
+export const buttonMovieApiForm = css({
+  marginTop: '30px',
+  '& button': {
+    width: '100%'
+  }
 });

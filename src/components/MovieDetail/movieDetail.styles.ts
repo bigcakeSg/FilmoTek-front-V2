@@ -113,7 +113,7 @@ export const movieVideos = css({
   rounded: '10px',
   display: 'grid',
   gridTemplateColumns: {
-    base: 'repeat(1, minmax(100px, 1fr))',
-    md: 'repeat(2, minmax(100px, 1fr))'
+    base: 'repeat(1, minmax(1fr, 1fr))',
+    md: 'repeat(2, minmax(1fr, 1fr))'
   }
 });

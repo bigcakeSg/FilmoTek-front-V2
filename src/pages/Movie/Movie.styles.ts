@@ -11,5 +11,5 @@ export const buttonsContainer = css({
   position: 'absolute',
   right: '15px',
   top: '15px',
-  zIndex: 10
+  zIndex: 1
 });

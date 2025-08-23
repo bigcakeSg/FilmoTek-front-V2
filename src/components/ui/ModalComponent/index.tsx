@@ -1,3 +1,4 @@
+import { IoClose } from 'react-icons/io5';
 import useUiStore from '@/stores/ui.store';
 import { Dialog } from '@ark-ui/react/dialog';
 import { Portal } from '@ark-ui/react/portal';
@@ -43,7 +44,9 @@ export default function ModalComponent() {
           <Dialog.Content>
             <Dialog.Title>{modalContent?.title}</Dialog.Title>
             <Dialog.Description>{modalContent?.content}</Dialog.Description>
-            <Dialog.CloseTrigger>Close</Dialog.CloseTrigger>
+            <Dialog.CloseTrigger>
+              <IoClose />
+            </Dialog.CloseTrigger>
           </Dialog.Content>
         </Dialog.Positioner>
       </Portal>

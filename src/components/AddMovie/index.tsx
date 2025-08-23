@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { useMovieFromApi } from '@/hooks/movies.hook';
 import {
   alertMovieApiError,
+  buttonMovieApiForm,
   loadingMovieApi,
   movieApiForm,
   movieApiFormContent
@@ -85,7 +86,9 @@ export default function AddMovie() {
             );
           }}
         />
-        <ButtonComponent label={t('addMovie.search')} type="submit" />
+        <div className={buttonMovieApiForm}>
+          <ButtonComponent label={t('addMovie.search')} type="submit" />
+        </div>
       </div>
       {loading && (
         <div className={loadingMovieApi}>

@@ -31,7 +31,16 @@ export default function NavButtons() {
         icon={<MdMovieEdit />}
         tootltipMessage={t('mainNav.addMovieTooltip')}
         onClick={() =>
-          openModal({ title: t('mainNav.addMovie'), content: <AddMovie /> })
+          openModal({
+            title: (
+              <div
+                style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+              >
+                <MdMovieEdit /> {t('mainNav.addMovie')}
+              </div>
+            ),
+            content: <AddMovie />
+          })
         }
       />
       <NavButton
