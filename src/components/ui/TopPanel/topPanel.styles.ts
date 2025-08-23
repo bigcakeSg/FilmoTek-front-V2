@@ -35,12 +35,13 @@ export const topPanelOverlay = css({
   right: 0,
   bottom: 0,
   left: 0,
-  backgroundColor: '#000000',
-  opacity: 0,
+  // backgroundColor: '#000000',
+  // opacity: 0,
   pointerEvents: 'none',
-  transition: 'opacity 0.3s ease',
+  // transition: 'opacity 0.3s ease',
   '&.open': {
-    opacity: 0.8,
+    // opacity: 0.8,
+    backdropFilter: 'blur(10px) brightness(20%)',
     pointerEvents: 'all'
   }
 });

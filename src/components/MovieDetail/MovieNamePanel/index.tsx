@@ -1,7 +1,8 @@
+import { Dispatch, SetStateAction, useEffect } from 'react';
+import noName from '@assets/noName.jpg';
 import RightPanel from '@/components/ui/RightPanel';
 import { useGetMovieListByName } from '@/hooks/movies.hook';
 import { Name } from '@/interfaces/movies.interfaces';
-import { Dispatch, SetStateAction, useEffect } from 'react';
 import MovieTilePanel from './MovieTilePanel';
 import {
   moviePanelList,
@@ -35,7 +36,11 @@ export default function MovieNamePanel({
       <div className={nameMovies}>
         <div className={namePicture}>
           <img
-            src={`${BASE_URL}/media/portraits/${name?.name.picture}`}
+            src={
+              name?.name.picture
+                ? `${BASE_URL}/media/portraits/${name?.name.picture}`
+                : noName
+            }
             alt={name?.name.text}
           />
         </div>

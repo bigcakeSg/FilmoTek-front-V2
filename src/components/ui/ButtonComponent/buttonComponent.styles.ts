@@ -9,15 +9,15 @@ export const loginButton = cva({
   },
   variants: {
     type: {
-      principal: {
-        color: '{foreground}',
-        backgroundColor: { base: '#00000011', _dark: '#ffffff11' },
-        _hover: { backgroundColor: { base: '#00000022', _dark: '#ffffff22' } }
-      },
-      secondary: {
+      primary: {
         color: '{background}',
         backgroundColor: { base: '#00000099', _dark: '#ffffff99' },
         _hover: { backgroundColor: { base: '#000000bb', _dark: '#ffffffbb' } }
+      },
+      secondary: {
+        color: '{foreground}',
+        backgroundColor: { base: '#00000011', _dark: '#ffffff11' },
+        _hover: { backgroundColor: { base: '#00000022', _dark: '#ffffff22' } }
       }
     }
   }

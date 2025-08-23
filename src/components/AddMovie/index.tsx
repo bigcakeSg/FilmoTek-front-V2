@@ -13,6 +13,7 @@ import TextfieldComponent from '@/components/ui/TextfieldComponent';
 import ButtonComponent from '@/components/ui/ButtonComponent';
 import { GoAlertFill } from 'react-icons/go';
 import { useNavigate } from '@tanstack/react-router';
+import useUiStore from '@/stores/ui.store';
 
 const formAddMovieSchema = z.object({
   imdbId: z.string().min(1, {
@@ -25,6 +26,7 @@ type FormAddMovie = z.infer<typeof formAddMovieSchema>;
 export default function AddMovie() {
   const { t } = useTranslation();
   const navigate = useNavigate({ from: '/movie/$movieId/edit' });
+  const { closeModal } = useUiStore();
 
   const {
     control,
@@ -48,6 +50,7 @@ export default function AddMovie() {
     const { data } = await fetchMovieApi();
 
     if (data?.imdbId) {
+      closeModal();
       navigate({
         to: '/movie/$movieId/edit',
         params: { movieId: data.imdbId },

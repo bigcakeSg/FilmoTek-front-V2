@@ -266,6 +266,7 @@ export default function FiltersPanel({
       <div className={filtersButtons}>
         <ButtonComponent
           label={t('cancel')}
+          version="secondary"
           onClick={() => {
             // TODO: rénitialiser les filtres (dirty state)
             setSearchFilters(dirtyFilters);
