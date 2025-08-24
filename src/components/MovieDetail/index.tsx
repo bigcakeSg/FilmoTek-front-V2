@@ -17,7 +17,7 @@ import MoviePlot from './MoviePlot';
 import MovieDetailTitle from './MovieDetailTitle';
 import MovieGenres from './MovieGenres';
 import MovieDetailCast from './MovieDetailCast';
-import { Movie, Name } from '@/interfaces/movies.interfaces';
+import { Genre, Movie, Name } from '@/interfaces/movies.interfaces';
 import MovieNamePanel from './MovieNamePanel';
 import MovieVideo from './MovieVideo';
 
@@ -33,6 +33,7 @@ export default function MovieDetail({
   isFetching
 }: Readonly<MovieDetailProps>) {
   const [name, setName] = useState<Name | null>(null);
+  const [genre, setGenre] = useState<Genre | null>(null);
 
   if (isFetching) return <div>Loading...</div>; // TODO: loader
 
@@ -67,7 +68,7 @@ export default function MovieDetail({
               movieId={movieData._id}
               supports={movieData.supports}
             />
-            <MovieGenres genres={movieData.genres} />
+            <MovieGenres genres={movieData.genres} setGenre={setGenre} />
           </div>
           <div className={movieDetailPlot}>
             <MoviePlot plot={movieData.plot} />
@@ -112,7 +113,12 @@ export default function MovieDetail({
           </div>
         </div>
       </div>
-      <MovieNamePanel name={name} setName={setName} />
+      <MovieNamePanel
+        name={name}
+        setName={setName}
+        genre={genre}
+        setGenre={setGenre}
+      />
     </div>
   );
 }

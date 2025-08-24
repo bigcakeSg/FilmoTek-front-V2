@@ -12,7 +12,7 @@ export default function Movie() {
   const navigate = useNavigate({ from: '/movie/$movieId/edit' });
   const { movieId } = Route.useParams();
   const { data, isFetching } = useGetMovieDetail(movieId);
-  const { mutate: deleteMovie } = useDeleteMovie(movieId); // TODO: loader
+  const { mutate: deleteMovie } = useDeleteMovie(movieId); // TODO: loader + modal
 
   return (
     <div className={movieContainer}>

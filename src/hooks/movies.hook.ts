@@ -4,6 +4,7 @@ import {
   getMovie,
   getMovieFromApi,
   getMovieList,
+  getMovieListByGenre,
   getMovieListByName,
   patchMovie,
   postMovie
@@ -92,6 +93,25 @@ export const useGetMovieListByName = (nameId: string) => {
   const { data, refetch, isSuccess, error, isFetching, status } = useQuery({
     queryKey: ['movieListByName', nameId],
     queryFn: () => getMovieListByName(nameId),
+    refetchOnWindowFocus: false,
+    enabled: false,
+    staleTime: 1000 * 60 * 5 // 5 minutes
+  });
+
+  return {
+    data,
+    refetch,
+    isSuccess,
+    error,
+    isFetching,
+    status
+  };
+};
+
+export const useGetMovieListByGenre = (genreId: string) => {
+  const { data, refetch, isSuccess, error, isFetching, status } = useQuery({
+    queryKey: ['movieListByGenre', genreId],
+    queryFn: () => getMovieListByGenre(genreId),
     refetchOnWindowFocus: false,
     enabled: false,
     staleTime: 1000 * 60 * 5 // 5 minutes

@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Collapsible } from '@ark-ui/react/collapsible';
 import { GoTriangleDown } from 'react-icons/go';
@@ -18,7 +19,7 @@ interface MovieDetailCastProps {
   writers: Name[];
   casting: (Name & { characters: string[] })[];
   crew: (Name & { job: string })[];
-  onSelectName: (name: Name | null) => void;
+  onSelectName: Dispatch<SetStateAction<Name | null>>;
 }
 
 export default function MovieDetailCast({

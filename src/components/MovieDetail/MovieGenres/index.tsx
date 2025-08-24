@@ -1,19 +1,37 @@
+import { Dispatch, SetStateAction } from 'react';
 import { genreTag, movieDetailGenres } from './movieGenres.styles';
+import { Genre } from '@/interfaces/movies.interfaces';
+import useUiStore from '@/stores/ui.store';
 
 interface MovieGenresProps {
   genres: Array<{
     id: string;
     text: string;
   }>;
+  setGenre: Dispatch<SetStateAction<Genre | null>>;
 }
 
-export default function MovieGenres({ genres }: Readonly<MovieGenresProps>) {
+export default function MovieGenres({
+  genres,
+  setGenre
+}: Readonly<MovieGenresProps>) {
+  const { openRightPanel } = useUiStore();
+
+  const handleSelectGenre = (genre: Genre | null) => {
+    setGenre(genre);
+    openRightPanel();
+  };
+
   return (
     <div className={movieDetailGenres}>
       {genres.map((genre) => (
-        <div key={genre.id} className={genreTag}>
+        <button
+          key={genre.id}
+          className={genreTag}
+          onClick={() => handleSelectGenre(genre)}
+        >
           {genre.text}
-        </div>
+        </button>
       ))}
     </div>
   );

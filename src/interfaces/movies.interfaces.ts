@@ -4,6 +4,12 @@ export interface Name {
   name: { _id: string; id: string; text: string; picture?: string };
 }
 
+export interface Genre {
+  _id: string;
+  id: string;
+  text: string;
+}
+
 export interface MovieLite {
   _id: string;
   imdbId: string;
@@ -28,10 +34,7 @@ export interface Movie {
   countriesOfOrigin: string[];
   spokenLanguages: string[];
   companies: { id: string; name: string }[];
-  genres: {
-    id: string;
-    text: string;
-  }[];
+  genres: Genre[];
   casting: (Name & { characters: string[]; job: string })[];
   supports: Supports[];
   videos: string[];

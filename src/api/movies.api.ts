@@ -45,6 +45,20 @@ export const getMovieListByName = async (
   return response.data;
 };
 
+export const getMovieListByGenre = async (
+  genreId: string
+): Promise<ResultQuery<Movie>> => {
+  const response = await axiosInstance.get(`/movies`, {
+    params: {
+      sortby: 'releaseDate',
+      direction: 'asc',
+      filter: `genre+${genreId}`,
+      format: 'full'
+    }
+  });
+  return response.data;
+};
+
 export const patchMovie = async (
   movieId: string,
   movieData: Partial<Movie>

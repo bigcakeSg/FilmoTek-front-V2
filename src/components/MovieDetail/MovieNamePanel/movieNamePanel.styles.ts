@@ -5,7 +5,7 @@ export const moviePanelList = css({
   flexDirection: 'column'
 });
 
-export const nameMovies = css({
+export const nameContainer = css({
   display: 'flex',
   alignItems: 'flex-end',
   gap: '10px',
