@@ -9,6 +9,7 @@ import {
 } from '@api/movies.api';
 import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
 import { Movie } from '@/interfaces/movies.interfaces';
+import { useNavigate } from '@tanstack/react-router';
 
 interface MoviesQuery {
   key: string;
@@ -104,21 +105,35 @@ export const useGetMovieListByName = (nameId: string) => {
   };
 };
 
-export const usePatchMovie = (movieId: string) => {
+export const usePatchMovie = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate({ from: '/movie/$movieId' });
 
   const { data, mutate, isSuccess, error, isPending } = useMutation({
-    mutationFn: (movieData: Partial<Movie>) => patchMovie(movieId, movieData),
+    mutationFn: ({
+      movieId,
+      movieData
+    }: {
+      movieId: string;
+      movieData: Partial<Movie>;
+      redirect?: boolean;
+    }) => patchMovie(movieId, movieData),
     onMutate: () => {
       // TODO: Optimistically update???
     },
-    onSuccess: () => {
+    onSuccess: (data, params) => {
       queryClient.invalidateQueries({
         predicate: (query) =>
           query.queryKey[0] === 'movieList' ||
           query.queryKey[0] === 'movieListByName' ||
-          (query.queryKey[0] === 'movie' && query.queryKey[1] === movieId)
+          (query.queryKey[0] === 'movie' && query.queryKey[1] === data._id)
       });
+
+      if (params.redirect)
+        navigate({
+          to: '/movie/$movieId',
+          params: { movieId: data._id }
+        });
     },
     onError: () => {
       // TODO: toaster
@@ -149,18 +164,23 @@ export const useMovieFromApi = (movieId?: string) => {
 
 export const usePostMovie = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate({ from: '/movie/$movieId' });
 
   const { data, mutate, isSuccess, error, isPending } = useMutation({
     mutationFn: (movieData: Movie) => postMovie(movieData),
     onMutate: () => {
       // TODO: Optimistically update???
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({
         predicate: (query) =>
           query.queryKey[0] === 'movieList' ||
           query.queryKey[0] === 'movieListByName' ||
           query.queryKey[0] === 'movieFromApi'
+      });
+      navigate({
+        to: '/movie/$movieId',
+        params: { movieId: data }
       });
     },
     onError: () => {

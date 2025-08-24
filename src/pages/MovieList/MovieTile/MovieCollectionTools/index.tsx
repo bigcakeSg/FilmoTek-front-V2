@@ -60,7 +60,7 @@ export default function MovieCollectionTools({
 }: Readonly<MovieCollectionToolsProps>) {
   const { t } = useTranslation();
   const { data: collections } = useCollections();
-  const { mutate } = usePatchMovie(movieId);
+  const { mutate } = usePatchMovie();
 
   const watchedId = collections.find(
     (c) => c.name === 'collection.watched'
@@ -78,7 +78,7 @@ export default function MovieCollectionTools({
     if (pinned && pinnedId !== undefined) movieCollections.push(pinnedId);
     if (favorite && favoriteId !== undefined) movieCollections.push(favoriteId);
 
-    mutate({ collections: movieCollections });
+    mutate({ movieId, movieData: { collections: movieCollections } });
   };
 
   const handleClickFavorite = (): void => {
@@ -88,7 +88,7 @@ export default function MovieCollectionTools({
     if (!favorite && favoriteId !== undefined)
       movieCollections.push(favoriteId);
 
-    mutate({ collections: movieCollections });
+    mutate({ movieId, movieData: { collections: movieCollections } });
   };
 
   const handleClickPinned = (): void => {
@@ -97,7 +97,7 @@ export default function MovieCollectionTools({
     if (!pinned && pinnedId !== undefined) movieCollections.push(pinnedId);
     if (favorite && favoriteId !== undefined) movieCollections.push(favoriteId);
 
-    mutate({ collections: movieCollections });
+    mutate({ movieId, movieData: { collections: movieCollections } });
   };
 
   return (
