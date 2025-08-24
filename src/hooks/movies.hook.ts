@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
+  deleteMovie,
   getMovie,
   getMovieFromApi,
   getMovieList,
@@ -10,6 +11,7 @@ import {
 import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
 import { Movie } from '@/interfaces/movies.interfaces';
 import { useNavigate } from '@tanstack/react-router';
+import useRouteStore from '@/stores/route.store';
 
 interface MoviesQuery {
   key: string;
@@ -121,19 +123,19 @@ export const usePatchMovie = () => {
     onMutate: () => {
       // TODO: Optimistically update???
     },
-    onSuccess: (data, params) => {
+    onSuccess: async (data, params) => {
+      if (params.redirect)
+        await navigate({
+          to: '/movie/$movieId',
+          params: { movieId: data._id }
+        });
+
       queryClient.invalidateQueries({
         predicate: (query) =>
           query.queryKey[0] === 'movieList' ||
           query.queryKey[0] === 'movieListByName' ||
           (query.queryKey[0] === 'movie' && query.queryKey[1] === data._id)
       });
-
-      if (params.redirect)
-        navigate({
-          to: '/movie/$movieId',
-          params: { movieId: data._id }
-        });
     },
     onError: () => {
       // TODO: toaster
@@ -171,16 +173,51 @@ export const usePostMovie = () => {
     onMutate: () => {
       // TODO: Optimistically update???
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
+      await navigate({
+        to: '/movie/$movieId',
+        params: { movieId: data }
+      });
       queryClient.invalidateQueries({
         predicate: (query) =>
           query.queryKey[0] === 'movieList' ||
           query.queryKey[0] === 'movieListByName' ||
           query.queryKey[0] === 'movieFromApi'
       });
-      navigate({
-        to: '/movie/$movieId',
-        params: { movieId: data }
+    },
+    onError: () => {
+      // TODO: toaster
+    }
+  });
+
+  return { data, mutate, isSuccess, error, isPending };
+};
+
+export const useDeleteMovie = (movieId: string) => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate({ from: '/' });
+  const { sort, filter } = useRouteStore();
+
+  const { data, mutate, isSuccess, error, isPending } = useMutation({
+    mutationFn: () => deleteMovie(movieId),
+    onMutate: () => {
+      // TODO: Optimistically update???
+    },
+    onSuccess: async () => {
+      await navigate({
+        to: '/',
+        search: {
+          page: 1,
+          sortBy: sort.name,
+          direction: sort.direction,
+          filter: filter.map((f) => `${f.name}+${f.value}`)
+        }
+      });
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          query.queryKey[0] === 'movieList' ||
+          query.queryKey[0] === 'movieListByName' ||
+          (query.queryKey[0] === 'movie' && query.queryKey[1] === movieId)
       });
     },
     onError: () => {

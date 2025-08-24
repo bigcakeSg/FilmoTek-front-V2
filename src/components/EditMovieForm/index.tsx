@@ -57,12 +57,14 @@ export default function EditMovieForm({
 }: Readonly<EditMovieProps>) {
   const { t } = useTranslation();
 
-  const { data: movieUpdateData, isFetching: isMovieUpdateDataFetching } =
-    useGetMovieDetail(type === 'update' ? movieId : undefined);
+  const {
+    data: movieUpdateData
+    // isFetching: isMovieUpdateDataFetching
+  } = useGetMovieDetail(type === 'update' ? movieId : undefined);
 
   const {
     data: movieApiData,
-    isFetching: isMovieDataApiFetching,
+    // isFetching: isMovieDataApiFetching,
     refetch
   } = useMovieFromApi(type === 'create' ? movieId : undefined);
 
@@ -80,7 +82,7 @@ export default function EditMovieForm({
   const {
     control,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors }
   } = useForm<FormEditMovie>({
     resolver: zodResolver(formEditMovieSchema),

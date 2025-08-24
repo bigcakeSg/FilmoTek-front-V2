@@ -16,7 +16,7 @@ export default function MovieSupports({
   movieId,
   supports
 }: Readonly<MovieSupportsProps>) {
-  const { mutate } = usePatchMovie(movieId);
+  const { mutate } = usePatchMovie();
 
   const handleChangeVideoSupport = (support: Supports) => {
     let newSupports = [...supports];
@@ -27,7 +27,7 @@ export default function MovieSupports({
       newSupports.push(support);
     }
 
-    mutate({ supports: newSupports });
+    mutate({ movieId, movieData: { supports: newSupports } });
   };
 
   return (

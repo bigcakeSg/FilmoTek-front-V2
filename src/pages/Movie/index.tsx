@@ -4,7 +4,7 @@ import { MdEdit, MdDeleteForever } from 'react-icons/md';
 import IconButton from '@/components/ui/IconButton';
 import { buttonsContainer, movieContainer } from './Movie.styles';
 import { useTranslation } from 'react-i18next';
-import { useGetMovieDetail } from '@/hooks/movies.hook';
+import { useDeleteMovie, useGetMovieDetail } from '@/hooks/movies.hook';
 import { useNavigate } from '@tanstack/react-router';
 
 export default function Movie() {
@@ -12,6 +12,7 @@ export default function Movie() {
   const navigate = useNavigate({ from: '/movie/$movieId/edit' });
   const { movieId } = Route.useParams();
   const { data, isFetching } = useGetMovieDetail(movieId);
+  const { mutate: deleteMovie } = useDeleteMovie(movieId); // TODO: loader
 
   return (
     <div className={movieContainer}>
@@ -29,7 +30,7 @@ export default function Movie() {
         />
         <IconButton
           icon={<MdDeleteForever />}
-          onClick={() => {}}
+          onClick={deleteMovie}
           tooltip={t('edition.deleteMovie')}
         />
       </div>

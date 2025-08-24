@@ -65,3 +65,8 @@ export const postMovie = async (movieData: Movie): Promise<string> => {
   const response = await axiosInstance.post(`/movies/title`, movieData);
   return response.data;
 };
+
+export const deleteMovie = async (movieId: string): Promise<void> => {
+  const response = await axiosInstance.delete(`/movies/title/${movieId}`);
+  return response.data;
+};
