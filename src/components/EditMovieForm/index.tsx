@@ -41,7 +41,8 @@ const formEditMovieSchema = z.object({
   }),
   plot: z.string().min(1, {
     message: 'Champ obligatoire' // TODO: texte d'erreur
-  })
+  }),
+  videos: z.array(z.string()).optional()
 });
 
 type FormEditMovie = z.infer<typeof formEditMovieSchema>;
@@ -82,7 +83,7 @@ export default function EditMovieForm({
   const {
     control,
     handleSubmit,
-    // watch,
+    watch,
     formState: { errors }
   } = useForm<FormEditMovie>({
     resolver: zodResolver(formEditMovieSchema),
@@ -93,7 +94,8 @@ export default function EditMovieForm({
       picture: movieData?.picture || '',
       releaseDate: movieData?.releaseDate || '',
       duration: movieData?.duration || 0,
-      plot: movieData?.plot || ''
+      plot: movieData?.plot || '',
+      videos: movieData?.videos || []
     }
   });
 
@@ -213,6 +215,64 @@ export default function EditMovieForm({
               errorText={errors.plot?.message && t(errors.plot?.message)}
               {...field}
             />
+          );
+        }}
+      />
+      <Controller
+        name="videos"
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => {
+          return (
+            <>
+              <label>{t('movie.videos')}</label>
+              <button
+                type="button"
+                onClick={() => {
+                  const newVideos = ['', ...(field.value || [])];
+                  field.onChange(newVideos);
+                }}
+              >
+                (+)
+              </button>
+              {field.value?.map((video, index) => (
+                <div key={`video-${index}`}>
+                  <TextfieldComponent
+                    required
+                    errorText={
+                      errors.videos?.[index]?.message &&
+                      t(errors.videos?.[index]?.message)
+                    }
+                    value={video}
+                    onChange={(value) => {
+                      const newVideos = [...(field.value || [])];
+                      newVideos[index] = value;
+                      field.onChange(newVideos);
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newVideos = [...(field.value || [])];
+                      newVideos.splice(index, 1);
+                      field.onChange(newVideos);
+                    }}
+                  >
+                    (-)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newVideos = [...(field.value || [])];
+                      newVideos.splice(index + 1, 0, '');
+                      field.onChange(newVideos);
+                    }}
+                  >
+                    (+)
+                  </button>
+                </div>
+              ))}
+            </>
           );
         }}
       />

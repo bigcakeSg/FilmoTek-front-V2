@@ -20,7 +20,7 @@ export default function Movies() {
   const { setRoute } = useRouteStore();
 
   const location = useLocation();
-  const { page, sortBy, direction, filter } = location.search;
+  const { page, limit, sortBy, direction, filter } = location.search;
 
   const [dirtyFilters, setDirtyFilters] = useState<
     Record<string, string[] | undefined>
@@ -40,6 +40,7 @@ export default function Movies() {
 
     setRoute({
       ...(page ? { page } : {}),
+      ...(limit ? { limit } : {}),
       ...(sortBy
         ? {
             sort: {
