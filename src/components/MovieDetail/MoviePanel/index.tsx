@@ -13,6 +13,7 @@ import {
   namePicture
 } from './movieNamePanel.styles';
 import { t } from 'i18next';
+import MovieImdbLink from '../MovieImdbLink';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
@@ -23,7 +24,7 @@ interface MovieNamePanelProps {
   setGenre: Dispatch<SetStateAction<Genre | null>>;
 }
 
-export default function MovieNamePanel({
+export default function MoviePanel({
   name,
   setName,
   genre,
@@ -75,6 +76,11 @@ export default function MovieNamePanel({
             {name?.name.text}
             {genre?.text}
             <br />
+            {name && (
+              <MovieImdbLink
+                imdbIdLink={`https://www.imdb.com/fr/name/${name?.name.id}/?ref_=tt_ov_1_1`}
+              />
+            )}
           </span>
           {name && (
             <>

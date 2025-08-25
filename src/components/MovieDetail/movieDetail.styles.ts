@@ -102,11 +102,15 @@ export const movieDetailCast = css({
   gridColumnEnd: { base: 'span end', sm: 'span end', ['2xl']: 'span end' },
   gridRowStart: { base: 'row5', sm: 'row4', ['2xl']: 'row2' },
   gridRowEnd: { base: 'span end', sm: 'span end', ['2xl']: 'span end' },
-  overflow: { base: 'hidden', sm: 'auto' }
+  overflow: { base: 'hidden', sm: 'auto' },
+  paddingBottom: '50px',
+  '& .imdb-movie-link': {
+    marginLeft: { base: '0px', ['2xl']: '20px' }
+  }
 });
 
 export const movieVideos = css({
-  margin: '20px 20px 50px 20px',
+  margin: '20px 20px 20px 20px',
   padding: '20px',
   gap: '20px',
   backgroundColor: { base: '#00000011', _dark: '#ffffff11' },

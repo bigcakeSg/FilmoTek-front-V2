@@ -4,6 +4,7 @@
   "movie": "movie",
   "welcome": "Welcome",
   "cancel": "Cancel",
+  "goImdb": "Go to IMDb page",
   "pagination": {
     "previous": "Previous",
     "next": "Next",

@@ -18,8 +18,9 @@ import MovieDetailTitle from './MovieDetailTitle';
 import MovieGenres from './MovieGenres';
 import MovieDetailCast from './MovieDetailCast';
 import { Genre, Movie, Name } from '@/interfaces/movies.interfaces';
-import MovieNamePanel from './MovieNamePanel';
+import MoviePanel from './MoviePanel';
 import MovieVideo from './MovieVideo';
+import MovieImdbLink from './MovieImdbLink';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
@@ -84,6 +85,11 @@ export default function MovieDetail({
             />
           </div>
           <div className={movieDetailCast}>
+            <div className="imdb-movie-link">
+              <MovieImdbLink
+                imdbIdLink={`https://www.imdb.com/fr/title/${movieData.imdbId}/?ref_=hm_tpten_i_1`}
+              />
+            </div>
             <MovieDetailCast
               directors={movieData.casting.filter(
                 (cast) => cast.job === 'director'
@@ -113,7 +119,7 @@ export default function MovieDetail({
           </div>
         </div>
       </div>
-      <MovieNamePanel
+      <MoviePanel
         name={name}
         setName={setName}
         genre={genre}

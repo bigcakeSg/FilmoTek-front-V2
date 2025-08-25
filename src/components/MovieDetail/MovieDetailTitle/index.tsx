@@ -54,7 +54,7 @@ export default function MovieDetailTitle({
         )}
       </div>
       <div className={companiesStyles}>
-        {companies.map((company) => company.name).join(', ')}
+        {companies.map((company) => company.name).join(' - ')}
       </div>
     </>
   );
