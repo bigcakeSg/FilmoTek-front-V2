@@ -1,4 +1,6 @@
-import { moviePoster } from './moviePicture.styles';
+import { Dialog } from '@ark-ui/react/dialog';
+import { moviePoster, moviePosterLarge } from './moviePicture.styles';
+import { Portal } from '@ark-ui/react/portal';
 
 interface MoviePictureProps {
   picture: string;
@@ -12,10 +14,28 @@ export default function MoviePicture({
   originalTitle
 }: Readonly<MoviePictureProps>) {
   return (
-    <img
-      src={`${BASE_URL}/media/posters/${picture}`}
-      alt={originalTitle}
-      className={moviePoster}
-    />
+    <Dialog.Root>
+      <Dialog.Trigger>
+        <img
+          src={`${BASE_URL}/media/posters/${picture}`}
+          alt={originalTitle}
+          className={moviePoster}
+        />
+      </Dialog.Trigger>
+      <Portal>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            <Dialog.Description>
+              <img
+                className={moviePosterLarge}
+                src={`${BASE_URL}/media/posters/${picture}`}
+                alt={originalTitle}
+              />
+            </Dialog.Description>
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Portal>
+    </Dialog.Root>
   );
 }
