@@ -105,7 +105,8 @@ export const movieDetailCast = css({
   overflow: { base: 'hidden', sm: 'auto' },
   paddingBottom: '50px',
   '& .imdb-movie-link': {
-    marginLeft: { base: '0px', ['2xl']: '20px' }
+    marginLeft: { base: '0px', ['2xl']: '20px' },
+    display: 'inline-block'
   }
 });
 

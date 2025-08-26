@@ -6,6 +6,7 @@ import { buttonsContainer, movieContainer } from './Movie.styles';
 import { useTranslation } from 'react-i18next';
 import { useDeleteMovie, useGetMovieDetail } from '@/hooks/movies.hook';
 import { useNavigate } from '@tanstack/react-router';
+import { useRole } from '@/hooks/auth.hook';
 
 export default function Movie() {
   const { t } = useTranslation();
@@ -13,27 +14,30 @@ export default function Movie() {
   const { movieId } = Route.useParams();
   const { data, isFetching } = useGetMovieDetail(movieId);
   const { mutate: deleteMovie } = useDeleteMovie(movieId); // TODO: loader + modal
+  const { isAdmin } = useRole();
 
   return (
     <div className={movieContainer}>
-      <div className={buttonsContainer}>
-        <IconButton
-          icon={<MdEdit />}
-          onClick={() =>
-            navigate({
-              to: '/movie/$movieId/edit',
-              params: { movieId },
-              search: { type: 'update' }
-            })
-          }
-          tooltip={t('edition.editMovie')}
-        />
-        <IconButton
-          icon={<MdDeleteForever />}
-          onClick={deleteMovie}
-          tooltip={t('edition.deleteMovie')}
-        />
-      </div>
+      {isAdmin && (
+        <div className={buttonsContainer}>
+          <IconButton
+            icon={<MdEdit />}
+            onClick={() =>
+              navigate({
+                to: '/movie/$movieId/edit',
+                params: { movieId },
+                search: { type: 'update' }
+              })
+            }
+            tooltip={t('edition.editMovie')}
+          />
+          <IconButton
+            icon={<MdDeleteForever />}
+            onClick={deleteMovie}
+            tooltip={t('edition.deleteMovie')}
+          />
+        </div>
+      )}
       <MovieDetail movieData={data} isFetching={isFetching} />
     </div>
   );

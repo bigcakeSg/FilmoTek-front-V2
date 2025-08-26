@@ -19,15 +19,7 @@ export const movieCollectionTools = css({
 
 export const toolButton = cva({
   base: {
-    transition: 'color 0.2s',
-    cursor: 'pointer',
-    _hover: {
-      color: {
-        base: 'lightGold',
-        _dark: 'darkGold'
-      },
-      opacity: '1'
-    }
+    transition: 'color 0.2s'
   },
   variants: {
     status: {
@@ -38,6 +30,20 @@ export const toolButton = cva({
       inactive: {
         color: '{background}',
         opacity: '0.2'
+      }
+    },
+    role: {
+      admin: {
+        _hover: {
+          color: {
+            base: 'lightGold',
+            _dark: 'darkGold'
+          },
+          opacity: '1'
+        }
+      },
+      user: {
+        //
       }
     }
   }

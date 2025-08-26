@@ -6,11 +6,13 @@ import NavButton from './NavButton';
 import useRouteStore from '@/stores/route.store';
 import AddMovie from '@/components/AddMovie';
 import useUiStore from '@/stores/ui.store';
+import { useRole } from '@/hooks/auth.hook';
 
 export default function NavButtons() {
   const { t } = useTranslation();
   const { page, sort, filter } = useRouteStore();
   const { openModal } = useUiStore();
+  const { isAdmin } = useRole();
 
   return (
     <div className={navButtons}>
@@ -26,23 +28,25 @@ export default function NavButtons() {
         icon={<MdMovie />}
         tootltipMessage={t('mainNav.movieListTooltip')}
       />
-      <NavButton
-        label={t('mainNav.addMovie')}
-        icon={<MdMovieEdit />}
-        tootltipMessage={t('mainNav.addMovieTooltip')}
-        onClick={() =>
-          openModal({
-            title: (
-              <div
-                style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
-              >
-                <MdMovieEdit /> {t('mainNav.addMovie')}
-              </div>
-            ),
-            content: <AddMovie />
-          })
-        }
-      />
+      {isAdmin && (
+        <NavButton
+          label={t('mainNav.addMovie')}
+          icon={<MdMovieEdit />}
+          tootltipMessage={t('mainNav.addMovieTooltip')}
+          onClick={() =>
+            openModal({
+              title: (
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+                >
+                  <MdMovieEdit /> {t('mainNav.addMovie')}
+                </div>
+              ),
+              content: <AddMovie />
+            })
+          }
+        />
+      )}
       <NavButton
         to="/statistics/genre"
         label={t('mainNav.stats')}

@@ -16,6 +16,10 @@ export const supportLogo = cva({
     status: {
       active: { opacity: 1 },
       inactive: { opacity: 0.2 }
+    },
+    role: {
+      admin: { cursor: 'pointer' },
+      user: { cursor: 'default' }
     }
   }
 });

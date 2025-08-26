@@ -6,6 +6,7 @@ import Uhd from '@assets/UHD_logo.svg?react';
 import { movieDetailSupport, supportLogo } from './movieSupports.styles';
 import { usePatchMovie } from '@/hooks/movies.hook';
 import { Supports } from '@/interfaces/movies.interfaces';
+import { useRole } from '@/hooks/auth.hook';
 
 interface MovieSupportsProps {
   movieId: string;
@@ -17,8 +18,11 @@ export default function MovieSupports({
   supports
 }: Readonly<MovieSupportsProps>) {
   const { mutate } = usePatchMovie();
+  const { isAdmin } = useRole();
 
   const handleChangeVideoSupport = (support: Supports) => {
+    if (!isAdmin) return;
+
     let newSupports = [...supports];
 
     if (supports.includes(support)) {
@@ -33,54 +37,49 @@ export default function MovieSupports({
   return (
     <div className={movieDetailSupport}>
       <button
-        className={`support__video`}
+        className={supportLogo({
+          status: supports.includes('vhs') ? 'active' : 'inactive',
+          role: isAdmin ? 'admin' : 'user'
+        })}
         onClick={() => handleChangeVideoSupport('vhs')}
       >
-        <Vhs
-          className={supportLogo({
-            status: supports.includes('vhs') ? 'active' : 'inactive'
-          })}
-        />
+        <Vhs />
       </button>
       <button
-        className={`support__video`}
+        className={supportLogo({
+          status: supports.includes('ld') ? 'active' : 'inactive',
+          role: isAdmin ? 'admin' : 'user'
+        })}
         onClick={() => handleChangeVideoSupport('ld')}
       >
-        <Ld
-          className={supportLogo({
-            status: supports.includes('ld') ? 'active' : 'inactive'
-          })}
-        />
+        <Ld />
       </button>
       <button
-        className={`support__video`}
+        className={supportLogo({
+          status: supports.includes('dvd') ? 'active' : 'inactive',
+          role: isAdmin ? 'admin' : 'user'
+        })}
         onClick={() => handleChangeVideoSupport('dvd')}
       >
-        <Dvd
-          className={supportLogo({
-            status: supports.includes('dvd') ? 'active' : 'inactive'
-          })}
-        />
+        <Dvd />
       </button>
       <button
-        className={`support__video`}
+        className={supportLogo({
+          status: supports.includes('bd') ? 'active' : 'inactive',
+          role: isAdmin ? 'admin' : 'user'
+        })}
         onClick={() => handleChangeVideoSupport('bd')}
       >
-        <Bd
-          className={supportLogo({
-            status: supports.includes('bd') ? 'active' : 'inactive'
-          })}
-        />
+        <Bd />
       </button>
       <button
-        className={`support__video`}
+        className={supportLogo({
+          status: supports.includes('uhd') ? 'active' : 'inactive',
+          role: isAdmin ? 'admin' : 'user'
+        })}
         onClick={() => handleChangeVideoSupport('uhd')}
       >
-        <Uhd
-          className={supportLogo({
-            status: supports.includes('uhd') ? 'active' : 'inactive'
-          })}
-        />
+        <Uhd />
       </button>
     </div>
   );
