@@ -28,26 +28,6 @@ export const useColorMode = () => {
     }
   }, [colorMode]);
 
-  // TODO:
-  // Écouter les changements de préférence système *si* l'utilisateur n'a pas forcé (optionnel)
-  // useEffect(() => {
-  //   const stored = localStorage.getItem(STORAGE_KEY);
-  //   if (stored) return; // l'utilisateur a choisi, ne pas override
-
-  //   const mq = window.matchMedia('(prefers-color-scheme: dark)');
-  //   const listener = (e: MediaQueryListEvent) => {
-  //     applyColorMode(e.matches ? 'dark' : 'light');
-  //   };
-  //   mq.addEventListener
-  //     ? mq.addEventListener('change', listener)
-  //     : mq.addListener(listener);
-  //   return () => {
-  //     mq.removeEventListener
-  //       ? mq.removeEventListener('change', listener)
-  //       : mq.removeListener(listener);
-  //   };
-  // }, []);
-
   const toggleColorMode = () => {
     applyColorMode(colorMode === 'dark' ? 'light' : 'dark');
   };

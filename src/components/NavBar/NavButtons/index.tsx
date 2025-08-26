@@ -4,10 +4,13 @@ import { BiSolidBarChartSquare } from 'react-icons/bi';
 import { navButtons } from './navButtons.sttyles';
 import NavButton from './NavButton';
 import useRouteStore from '@/stores/route.store';
+import AddMovie from '@/components/AddMovie';
+import useUiStore from '@/stores/ui.store';
 
 export default function NavButtons() {
   const { t } = useTranslation();
   const { page, sort, filter } = useRouteStore();
+  const { openModal } = useUiStore();
 
   return (
     <div className={navButtons}>
@@ -24,10 +27,21 @@ export default function NavButtons() {
         tootltipMessage={t('mainNav.movieListTooltip')}
       />
       <NavButton
-        to="."
         label={t('mainNav.addMovie')}
         icon={<MdMovieEdit />}
         tootltipMessage={t('mainNav.addMovieTooltip')}
+        onClick={() =>
+          openModal({
+            title: (
+              <div
+                style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+              >
+                <MdMovieEdit /> {t('mainNav.addMovie')}
+              </div>
+            ),
+            content: <AddMovie />
+          })
+        }
       />
       <NavButton
         to="/statistics/genre"

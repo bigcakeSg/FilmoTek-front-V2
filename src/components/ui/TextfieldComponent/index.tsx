@@ -4,11 +4,11 @@ import { fieldText } from './textfieldComponent.styles';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 
 interface TextfieldComponentProps {
-  value?: string;
+  value?: string | number;
   label?: string;
   required?: boolean;
   helperText?: string;
-  errorText?: string;
+  errorText?: React.ReactNode | string;
   onChange?: (value: string) => void;
   onBlur?: () => void;
   ref?: React.Ref<HTMLInputElement>;
@@ -76,7 +76,7 @@ export default function TextfieldComponent({
         </PasswordInput.Root>
       )}
       {helperText && <Field.HelperText>{helperText}</Field.HelperText>}
-      {errorText && <Field.ErrorText>{errorText}</Field.ErrorText>}
+      <Field.ErrorText>{errorText}</Field.ErrorText>
     </Field.Root>
   );
 }

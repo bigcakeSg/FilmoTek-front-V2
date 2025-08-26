@@ -148,11 +148,7 @@ export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
             }}
           />
         </div>
-        <ButtonComponent
-          label={t('user.login')}
-          type="submit"
-          version="secondary"
-        />
+        <ButtonComponent label={t('user.login')} type="submit" />
       </div>
       {loading && (
         <div className={loadingUser}>

@@ -44,3 +44,43 @@ export const getMovieListByName = async (
   });
   return response.data;
 };
+
+export const getMovieListByGenre = async (
+  genreId: string
+): Promise<ResultQuery<Movie>> => {
+  const response = await axiosInstance.get(`/movies`, {
+    params: {
+      sortby: 'releaseDate',
+      direction: 'asc',
+      filter: `genre+${genreId}`,
+      format: 'full'
+    }
+  });
+  return response.data;
+};
+
+export const patchMovie = async (
+  movieId: string,
+  movieData: Partial<Movie>
+): Promise<Movie> => {
+  const response = await axiosInstance.patch(
+    `/movies/title/${movieId}`,
+    movieData
+  );
+  return response.data;
+};
+
+export const getMovieFromApi = async (movieId: string): Promise<Movie> => {
+  const response = await axiosInstance.get(`/movies/api-imdb/title/${movieId}`);
+  return response.data;
+};
+
+export const postMovie = async (movieData: Movie): Promise<string> => {
+  const response = await axiosInstance.post(`/movies/title`, movieData);
+  return response.data;
+};
+
+export const deleteMovie = async (movieId: string): Promise<void> => {
+  const response = await axiosInstance.delete(`/movies/title/${movieId}`);
+  return response.data;
+};

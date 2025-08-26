@@ -3,14 +3,14 @@ import { loginButton } from './buttonComponent.styles';
 interface ButtonComponentProps {
   label: string;
   type?: 'submit' | 'reset' | 'button';
-  version?: 'principal' | 'secondary';
+  version?: 'primary' | 'secondary';
   onClick?: (e: React.FormEvent) => void;
 }
 
 export default function ButtonComponent({
   label,
   type,
-  version = 'principal',
+  version = 'primary',
   onClick
 }: Readonly<ButtonComponentProps>) {
   return (

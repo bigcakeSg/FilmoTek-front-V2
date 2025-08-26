@@ -3,6 +3,7 @@ import { Outlet } from '@tanstack/react-router';
 import { useCollections } from '@/hooks/collections.hook';
 import NavBar from '@components/NavBar';
 import { rootContent, rootFooter, rootTemplate } from './rootTemplate.styles';
+import ModalComponent from '../ui/ModalComponent';
 
 export default function RootTemplate() {
   useCollections();
@@ -18,6 +19,7 @@ export default function RootTemplate() {
       <footer>
         <div className={rootFooter}>FilmoTek v2.0 - © 2025</div>
       </footer>
+      <ModalComponent />
       {/* <TanStackRouterDevtools /> */}
     </div>
   );

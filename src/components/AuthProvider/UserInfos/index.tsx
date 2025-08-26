@@ -40,7 +40,7 @@ export default function UserInfos() {
       <ButtonComponent
         label={t('user.logout')}
         type="submit"
-        version="principal"
+        version="primary"
         onClick={handleLogout}
       />
     </div>

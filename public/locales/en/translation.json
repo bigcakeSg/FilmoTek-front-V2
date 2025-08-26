@@ -4,6 +4,7 @@
   "movie": "movie",
   "welcome": "Welcome",
   "cancel": "Cancel",
+  "goImdb": "Go to IMDb page",
   "pagination": {
     "previous": "Previous",
     "next": "Next",
@@ -55,9 +56,26 @@
     "filter": "Filter",
     "removeFilters": "Remove filters"
   },
-  "role": {
+  "job": {
     "director": "Director",
     "writer": "Writer",
-    "actor": "Actor"
+    "actor": "Actor",
+    "actress": "Actor",
+    "producer": "Producer",
+    "cinematographer": "Cinematographer",
+    "editor": "Editor",
+    "composer": "Composer",
+    "casting_director": "Casting Director",
+    "production_designer": "Chef décorateur"
+  },
+  "edition": {
+    "editMovie": "Edit movie",
+    "deleteMovie": "Delete movie"
+  },
+  "addMovie": {
+    "imdbId": "IMDb ID",
+    "imdbIdError": "IMDb ID is mandatory",
+    "unknownImdbId": "IMDb ID unknown",
+    "search": "Search for the movie"
   }
 }

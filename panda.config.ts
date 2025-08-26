@@ -53,6 +53,14 @@ export default defineConfig({
         closed: {
           '0%': { width: '100%', opacity: '1' },
           '100%': { width: '0', opacity: '0' }
+        },
+        slideDown: {
+          '0%': { height: '0' },
+          '100%': { height: 'var(--height)' }
+        },
+        slideUp: {
+          '0%': { height: 'var(--height)' },
+          '100%': { height: '0' }
         }
       },
       tokens: {
