@@ -38,12 +38,12 @@
     "passwordError": "Password must be at least 4 characters."
   },
   "tileTooltip": {
-    "watched": "Already watched",
+    "watched": "Watched",
     "notWatched": "Not yet watched",
-    "favorite": "Added to favorites",
-    "notFavorite": "Not yet added to favorites",
+    "favorite": "Favorite",
+    "notFavorite": "Not in favorites",
     "pinned": "Pinned",
-    "notPinned": "Not yet pinned"
+    "notPinned": "Not pinned"
   },
   "movieDetail": {
     "director": "Director:",

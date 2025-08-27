@@ -38,12 +38,12 @@
     "passwordError": "Le mot de passe doit comporter au moins 4 caractères."
   },
   "tileTooltip": {
-    "watched": "Déjà visionné",
-    "notWatched": "Pas encore visionné",
-    "favorite": "Ajouté aux favoris",
-    "notFavorite": "Pas encore ajouté aux favoris",
+    "watched": "Visionné",
+    "notWatched": "Non visionné",
+    "favorite": "Favoris",
+    "notFavorite": "Pas dans les favoris",
     "pinned": "Épinglé",
-    "notPinned": "Pas encore épinglé"
+    "notPinned": "Pas épinglé"
   },
   "movieDetail": {
     "director": "Réalisateur :",

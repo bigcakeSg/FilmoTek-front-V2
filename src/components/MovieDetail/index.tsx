@@ -56,6 +56,7 @@ export default function MovieDetail({
           }}
         ></div>
         <div className="movie-banner__overlay"></div>
+        <div className="movie-banner__gradient"></div>
       </div>
       <div className={movieDetailContainer}>
         <div className={movieDetailContent}>

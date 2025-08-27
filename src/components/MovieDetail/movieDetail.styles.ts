@@ -7,7 +7,6 @@ export const movieDetail = css({
 });
 
 export const movieBanner = css({
-  position: 'relative',
   width: '100%',
   height: '{sizes.banner}',
   backgroundColor: '{secondaryBackground}',
@@ -24,7 +23,15 @@ export const movieBanner = css({
     left: 0,
     width: '100%',
     height: '100%',
-    backdropFilter: 'blur(100px) brightness(70%)'
+    backdropFilter: 'blur(100px)  brightness(100%)'
+  },
+  '& .movie-banner__gradient': {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '50%',
+    backgroundImage: 'linear-gradient(to bottom, #00000066 20%, #00000000 100%)'
   }
 });
 

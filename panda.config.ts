@@ -61,6 +61,10 @@ export default defineConfig({
         slideUp: {
           '0%': { height: 'var(--height)' },
           '100%': { height: '0' }
+        },
+        skeleton: {
+          '0%': { backgroundColor: 'hsl(200, 20%, 50%)' },
+          '100%': { backgroundColor: 'hsl(200, 20%, 30%)' }
         }
       },
       tokens: {

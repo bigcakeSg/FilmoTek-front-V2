@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useGetMovieList } from '@hooks/movies.hook';
 import { moviesContainer, moviesContent, moviesScroll } from './movies.styles';
 import MovieTile from '@components/MovieTile';
-import { movieTile } from '@components/MovieTile/movieTile.styles';
+import { tileSketeton } from '@components/MovieTile/movieTile.styles';
 import { useCollections } from '@hooks/collections.hook';
 import MoviesPagination from '@components/MoviesPagination';
 import { useNavigation } from '@hooks/navigation.hook';
@@ -13,6 +13,7 @@ import { Filter, FilterName } from '@interfaces/filterSort.interface';
 import TopPanel from '@components/ui/TopPanel';
 import FiltersPanel from '@components/FiltersPanel';
 import { filtersMap } from '@components/FiltersPanel/filters.helpers';
+import { RiMovie2Fill } from 'react-icons/ri';
 
 export default function Movies() {
   const { t } = useTranslation();
@@ -71,11 +72,11 @@ export default function Movies() {
     <div className={moviesContainer}>
       <div className={moviesScroll}>
         <div className={moviesContent}>
-          {/* TODO: loader : styles + afficher le bon nombre de tuiles */}
           {isFetching ? (
             Array.from({ length: 20 }).map((_, i) => (
-              <div key={i} className={movieTile}>
-                {t('loading')}
+              <div key={i} className={tileSketeton}>
+                <RiMovie2Fill className="skeleton-icon" />
+                <div className="skeleton-text">{t('loading')}</div>
               </div>
             ))
           ) : (
