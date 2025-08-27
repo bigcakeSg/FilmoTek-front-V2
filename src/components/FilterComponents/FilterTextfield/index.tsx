@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { filterTextField } from './filterTextField.styles';
-import { useDebounce } from 'use-debounce';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from '@tanstack/react-router';
+import { useDebounce } from 'use-debounce';
+import { Field } from '@ark-ui/react/field';
+import { filterTextField } from './filterTextField.styles';
 import { HiSearch } from 'react-icons/hi';
 import { IoClose } from 'react-icons/io5';
-import { Field } from '@ark-ui/react/field';
-import { useTranslation } from 'react-i18next';
 
 export default function FilterTextfield() {
   const { t } = useTranslation();

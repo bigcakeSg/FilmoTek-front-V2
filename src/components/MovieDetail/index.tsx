@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Genre, Movie, Name } from '@interfaces/movies.interfaces';
 import {
   movieBanner,
   movieDetail,
@@ -17,10 +18,10 @@ import MoviePlot from './MoviePlot';
 import MovieDetailTitle from './MovieDetailTitle';
 import MovieGenres from './MovieGenres';
 import MovieDetailCast from './MovieDetailCast';
-import { Genre, Movie, Name } from '@/interfaces/movies.interfaces';
 import MoviePanel from './MoviePanel';
 import MovieVideo from './MovieVideo';
 import MovieImdbLink from './MovieImdbLink';
+import NotFound from '@/pages/NotFound';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
@@ -38,7 +39,7 @@ export default function MovieDetail({
 
   if (isFetching) return <div>Loading...</div>; // TODO: loader
 
-  if (!movieData) return <div>Movie not found</div>; // TODO: error page
+  if (!movieData) return <NotFound />;
 
   const backgroundImage =
     isFetching || !movieData.picture

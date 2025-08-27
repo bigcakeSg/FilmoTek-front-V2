@@ -1,5 +1,5 @@
 import { Avatar } from '@ark-ui/react/avatar';
-import useUserStore from '@/stores/user.store';
+import useUserStore from '@stores/user.store';
 import noName from '@assets/noName.jpg';
 import { avatar } from './avatar.styles';
 

@@ -4,9 +4,9 @@ import Dvd from '@assets/DVD_logo.svg?react';
 import Bd from '@assets/BD_logo.svg?react';
 import Uhd from '@assets/UHD_logo.svg?react';
 import { movieDetailSupport, supportLogo } from './movieSupports.styles';
-import { usePatchMovie } from '@/hooks/movies.hook';
-import { Supports } from '@/interfaces/movies.interfaces';
-import { useRole } from '@/hooks/auth.hook';
+import { usePatchMovie } from '@hooks/movies.hook';
+import { Supports } from '@interfaces/movies.interfaces';
+import { useRole } from '@hooks/auth.hook';
 
 interface MovieSupportsProps {
   movieId: string;

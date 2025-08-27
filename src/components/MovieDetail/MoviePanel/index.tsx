@@ -1,18 +1,18 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
+import { t } from 'i18next';
 import noName from '@assets/noName.jpg';
-import RightPanel from '@/components/ui/RightPanel';
+import RightPanel from '@components/ui/RightPanel';
 import {
   useGetMovieListByGenre,
   useGetMovieListByName
-} from '@/hooks/movies.hook';
-import { Genre, Name } from '@/interfaces/movies.interfaces';
+} from '@hooks/movies.hook';
+import { Genre, Name } from '@interfaces/movies.interfaces';
 import MovieTilePanel from './MovieTilePanel';
 import {
   moviePanelList,
   nameContainer,
   namePicture
 } from './movieNamePanel.styles';
-import { t } from 'i18next';
 import MovieImdbLink from '../MovieImdbLink';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;

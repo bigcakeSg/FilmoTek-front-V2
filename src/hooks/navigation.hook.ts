@@ -1,5 +1,5 @@
-import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
-import useRouteStore from '@/stores/route.store';
+import { SortDirection, SortName } from '@interfaces/filterSort.interface';
+import useRouteStore from '@stores/route.store';
 import { useLocation } from '@tanstack/react-router';
 
 export const useNavigation = () => {

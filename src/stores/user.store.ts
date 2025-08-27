@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { combine, persist } from 'zustand/middleware';
-import { User } from '@/interfaces/user.interfaces';
+import { User } from '@interfaces/user.interfaces';
 
 export interface UserActions {
   setUser: (user: User | null) => void;

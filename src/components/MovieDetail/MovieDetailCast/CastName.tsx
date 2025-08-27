@@ -1,4 +1,4 @@
-import { Name } from '@/interfaces/movies.interfaces';
+import { Name } from '@interfaces/movies.interfaces';
 import { actorTile } from './movieDetailCast.styles';
 import noName from '@assets/noName.jpg';
 

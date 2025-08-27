@@ -1,13 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import { FaEye, FaMapPin, FaStar } from 'react-icons/fa6';
 import {
   movieCollectionTools,
   toolButton
 } from './movieCollectionTools.styles';
-import TooltipComponent from '@/components/ui/TooltipComponent';
-import { useTranslation } from 'react-i18next';
-import { useCollections } from '@/hooks/collections.hook';
-import { usePatchMovie } from '@/hooks/movies.hook';
-import { useRole } from '@/hooks/auth.hook';
+import TooltipComponent from '@components/ui/TooltipComponent';
+import { useCollections } from '@hooks/collections.hook';
+import { usePatchMovie } from '@hooks/movies.hook';
+import { useRole } from '@hooks/auth.hook';
 
 interface ToolButtonProps {
   icon: React.ReactNode;

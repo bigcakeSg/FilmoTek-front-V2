@@ -9,10 +9,10 @@ import {
   patchMovie,
   postMovie
 } from '@api/movies.api';
-import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
-import { Movie } from '@/interfaces/movies.interfaces';
+import { SortDirection, SortName } from '@interfaces/filterSort.interface';
+import { Movie } from '@interfaces/movies.interfaces';
 import { useNavigate } from '@tanstack/react-router';
-import useRouteStore from '@/stores/route.store';
+import useRouteStore from '@stores/route.store';
 
 interface MoviesQuery {
   key: string;

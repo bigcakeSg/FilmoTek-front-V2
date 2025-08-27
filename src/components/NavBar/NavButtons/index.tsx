@@ -3,10 +3,10 @@ import { MdMovie, MdMovieEdit } from 'react-icons/md';
 import { BiSolidBarChartSquare } from 'react-icons/bi';
 import { navButtons } from './navButtons.sttyles';
 import NavButton from './NavButton';
-import useRouteStore from '@/stores/route.store';
-import AddMovie from '@/components/AddMovie';
-import useUiStore from '@/stores/ui.store';
-import { useRole } from '@/hooks/auth.hook';
+import useRouteStore from '@stores/route.store';
+import AddMovie from '@components/AddMovie';
+import useUiStore from '@stores/ui.store';
+import { useRole } from '@hooks/auth.hook';
 
 export default function NavButtons() {
   const { t } = useTranslation();

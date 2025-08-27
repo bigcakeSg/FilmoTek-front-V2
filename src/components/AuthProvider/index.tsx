@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import useUserStore from '@/stores/user.store';
 import { useShallow } from 'zustand/react/shallow';
+import useUserStore from '@stores/user.store';
 import {
   clearAllAuthData,
   getRememberMePreference
-} from '@/utils/storage.utils';
+} from '@utils/storage.utils';
 import LoginForm from './LoginForm';
 import { useTranslation } from 'react-i18next';
 

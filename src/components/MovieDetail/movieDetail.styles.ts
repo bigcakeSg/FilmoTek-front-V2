@@ -31,7 +31,7 @@ export const movieBanner = css({
 export const movieDetailContainer = css({
   position: 'absolute',
   top: 0,
-  bottom: '{sizes.footer}',
+  bottom: 0,
   right: 0,
   left: 0,
   display: 'flex',
@@ -103,7 +103,7 @@ export const movieDetailCast = css({
   gridRowStart: { base: 'row5', sm: 'row4', ['2xl']: 'row2' },
   gridRowEnd: { base: 'span end', sm: 'span end', ['2xl']: 'span end' },
   overflow: { base: 'hidden', sm: 'auto' },
-  paddingBottom: '50px',
+  paddingBottom: '30px',
   '& .imdb-movie-link': {
     marginLeft: { base: '0px', ['2xl']: '20px' },
     display: 'inline-block'

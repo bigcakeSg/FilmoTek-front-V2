@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
 import { IoClose } from 'react-icons/io5';
-import useUiStore from '@/stores/ui.store';
+import useUiStore from '@stores/ui.store';
 import { Dialog } from '@ark-ui/react/dialog';
 import { Portal } from '@ark-ui/react/portal';
-import { useEffect } from 'react';
 import { modalGlobalStyles } from './modalComponent.styles';
 
 export default function ModalComponent() {

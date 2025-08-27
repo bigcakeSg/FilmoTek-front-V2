@@ -1,12 +1,12 @@
-import { Route } from '@/routes/movie.$movieId.index';
+import { useTranslation } from 'react-i18next';
+import { Route } from '@routes/movie.$movieId.index';
 import MovieDetail from '@components/MovieDetail';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
-import IconButton from '@/components/ui/IconButton';
+import IconButton from '@components/ui/IconButton';
 import { buttonsContainer, movieContainer } from './Movie.styles';
-import { useTranslation } from 'react-i18next';
-import { useDeleteMovie, useGetMovieDetail } from '@/hooks/movies.hook';
+import { useDeleteMovie, useGetMovieDetail } from '@hooks/movies.hook';
 import { useNavigate } from '@tanstack/react-router';
-import { useRole } from '@/hooks/auth.hook';
+import { useRole } from '@hooks/auth.hook';
 
 export default function Movie() {
   const { t } = useTranslation();

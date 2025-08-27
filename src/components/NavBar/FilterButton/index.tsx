@@ -1,12 +1,12 @@
-import { useGetMovieList } from '@/hooks/movies.hook';
-import { useNavigation } from '@/hooks/navigation.hook';
 import { useTranslation } from 'react-i18next';
+import { useGetMovieList } from '@hooks/movies.hook';
+import { useNavigation } from '@hooks/navigation.hook';
 import {
   filterButton,
   filterButtonContainer,
   movieCount
 } from './filterButton.styles';
-import useUiStore from '@/stores/ui.store';
+import useUiStore from '@stores/ui.store';
 
 export default function FilterButton() {
   const { t } = useTranslation();

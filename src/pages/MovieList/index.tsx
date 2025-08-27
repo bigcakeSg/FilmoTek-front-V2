@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGetMovieList } from '@/hooks/movies.hook';
+import { useGetMovieList } from '@hooks/movies.hook';
 import { moviesContainer, moviesContent, moviesScroll } from './movies.styles';
-import MovieTile from './MovieTile';
-import { movieTile } from './MovieTile/movieTile.styles';
-import { useCollections } from '@/hooks/collections.hook';
-import MoviesPagination from '@pages/MovieList/MoviesPagination';
-import { useNavigation } from '@/hooks/navigation.hook';
-import useRouteStore from '@/stores/route.store';
+import MovieTile from '@components/MovieTile';
+import { movieTile } from '@components/MovieTile/movieTile.styles';
+import { useCollections } from '@hooks/collections.hook';
+import MoviesPagination from '@components/MoviesPagination';
+import { useNavigation } from '@hooks/navigation.hook';
+import useRouteStore from '@stores/route.store';
 import { useLocation } from '@tanstack/react-router';
-import { Filter, FilterName } from '@/interfaces/filterSort.interface';
-import TopPanel from '@/components/ui/TopPanel';
-import FiltersPanel from './FiltersPanel';
-import { filtersMap } from './FiltersPanel/filters.helpers';
+import { Filter, FilterName } from '@interfaces/filterSort.interface';
+import TopPanel from '@components/ui/TopPanel';
+import FiltersPanel from '@components/FiltersPanel';
+import { filtersMap } from '@components/FiltersPanel/filters.helpers';
 
 export default function Movies() {
   const { t } = useTranslation();

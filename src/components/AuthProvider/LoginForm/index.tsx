@@ -3,18 +3,18 @@ import { useTranslation } from 'react-i18next';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useLogin, useMe } from '@/hooks/auth.hook';
-import useUserStore from '@/stores/user.store';
-import TextfieldComponent from '@/components/ui/TextfieldComponent';
+import { useLogin, useMe } from '@hooks/auth.hook';
+import useUserStore from '@stores/user.store';
+import TextfieldComponent from '@components/ui/TextfieldComponent';
 import {
   alertUserError,
   loadingUser,
   loginForm,
   loginFormContent
 } from './loginForm.styles';
-import CheckboxComponent from '@/components/ui/CheckboxComponent';
+import CheckboxComponent from '@components/ui/CheckboxComponent';
 import { GoAlertFill } from 'react-icons/go';
-import ButtonComponent from '@/components/ui/ButtonComponent';
+import ButtonComponent from '@components/ui/ButtonComponent';
 
 const formLoginSchema = z.object({
   username: z.string().min(3, {

@@ -1,6 +1,6 @@
-import { getMe, login } from '@/api/login.api';
-import useUserStore from '@/stores/user.store';
 import { useQuery } from '@tanstack/react-query';
+import { getMe, login } from '@api/login.api';
+import useUserStore from '@stores/user.store';
 
 export const useLogin = (params: {
   username: string;

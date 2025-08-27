@@ -10,7 +10,7 @@ import NavButtons from './NavButtons';
 import FilterButton from './FilterButton';
 import SortButtons from './SortButtons';
 import { Link, useLocation } from '@tanstack/react-router';
-import useRouteStore from '@/stores/route.store';
+import useRouteStore from '@stores/route.store';
 
 export default function NavBar() {
   const location = useLocation();

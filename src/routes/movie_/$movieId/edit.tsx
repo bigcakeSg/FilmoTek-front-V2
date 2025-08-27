@@ -1,6 +1,6 @@
-import { useRole } from '@/hooks/auth.hook';
-import EditMovie from '@/pages/EditMovie';
-import NotFound from '@/pages/NotFound';
+import { useRole } from '@hooks/auth.hook';
+import EditMovie from '@pages/EditMovie';
+import NotFound from '@pages/NotFound';
 import { createFileRoute } from '@tanstack/react-router';
 import z from 'zod';
 

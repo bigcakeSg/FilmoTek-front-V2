@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from '@tanstack/react-router';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useMovieFromApi } from '@/hooks/movies.hook';
+import { useMovieFromApi } from '@hooks/movies.hook';
 import {
   alertMovieApiError,
   buttonMovieApiForm,
@@ -10,11 +11,10 @@ import {
   movieApiForm,
   movieApiFormContent
 } from './addMovie.styles';
-import TextfieldComponent from '@/components/ui/TextfieldComponent';
-import ButtonComponent from '@/components/ui/ButtonComponent';
+import TextfieldComponent from '@components/ui/TextfieldComponent';
+import ButtonComponent from '@components/ui/ButtonComponent';
 import { GoAlertFill } from 'react-icons/go';
-import { useNavigate } from '@tanstack/react-router';
-import useUiStore from '@/stores/ui.store';
+import useUiStore from '@stores/ui.store';
 
 const formAddMovieSchema = z.object({
   imdbId: z.string().min(1, {

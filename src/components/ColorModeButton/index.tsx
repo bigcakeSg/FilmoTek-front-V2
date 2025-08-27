@@ -1,4 +1,4 @@
-import { useColorMode } from '@/hooks/colorMode.hook';
+import { useColorMode } from '@hooks/colorMode.hook';
 import { HiMoon, HiSun } from 'react-icons/hi';
 import { colorModeButton } from './colorModeButton.styles';
 

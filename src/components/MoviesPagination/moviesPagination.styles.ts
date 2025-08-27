@@ -1,7 +1,6 @@
 import { css } from '@styled-system/css';
 
 export const pagination = css({
-  marginBottom: '{sizes.footer}',
   display: 'flex',
   justifyContent: 'center',
   gap: { base: 0, sm: '40px' },

@@ -10,9 +10,9 @@ import {
   nameStyle,
   principalCast
 } from './movieDetailCast.styles';
-import { Name } from '@/interfaces/movies.interfaces';
+import { Name } from '@interfaces/movies.interfaces';
 import CastName from './CastName';
-import useUiStore from '@/stores/ui.store';
+import useUiStore from '@stores/ui.store';
 
 interface MovieDetailCastProps {
   directors: Name[];

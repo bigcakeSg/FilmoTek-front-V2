@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Item } from '@/interfaces/ui.interface';
+import { Item } from '@interfaces/ui.interface';
 import { Portal } from '@ark-ui/react/portal';
 import { Select, createListCollection } from '@ark-ui/react/select';
 import { LuChevronDown } from 'react-icons/lu';
