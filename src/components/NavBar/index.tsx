@@ -14,7 +14,7 @@ import useRouteStore from '@stores/route.store';
 
 export default function NavBar() {
   const location = useLocation();
-  const { page, sort, filter } = useRouteStore();
+  const { page, limit, sort, filter } = useRouteStore();
 
   return (
     <nav className={navBar}>
@@ -24,6 +24,7 @@ export default function NavBar() {
           to="/"
           search={{
             page,
+            limit,
             sortBy: sort.name,
             direction: sort.direction,
             filter: filter.map((f) => `${f.name}+${f.value}`)

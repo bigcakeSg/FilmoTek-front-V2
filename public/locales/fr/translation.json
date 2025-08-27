@@ -13,9 +13,12 @@
   "mainNav": {
     "movieList": "Liste de films",
     "addMovie": "Ajouter un film",
+    "randomMovie": "Film aléatoire",
     "stats": "Statistiques",
     "movieListTooltip": "Voir la liste des films",
     "addMovieTooltip": "Ajouter un nouveau film à la liste",
+    "randomMovieTooltip": "Voir un film aléatoire",
+    "filters": "(tiens compte des filtres)",
     "statsTooltip": "Voir les statistiques sur les films",
     "openFilters": "Ouvrir les filtres",
     "sortBy": "Trier par",

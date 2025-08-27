@@ -1,18 +1,26 @@
 import { useTranslation } from 'react-i18next';
 import { MdMovie, MdMovieEdit } from 'react-icons/md';
 import { BiSolidBarChartSquare } from 'react-icons/bi';
+import { FaDice } from 'react-icons/fa';
 import { navButtons } from './navButtons.sttyles';
 import NavButton from './NavButton';
 import useRouteStore from '@stores/route.store';
 import AddMovie from '@components/AddMovie';
 import useUiStore from '@stores/ui.store';
 import { useRole } from '@hooks/auth.hook';
+import { css } from '@styled-system/css';
+import { useGetRandomMovie } from '@/hooks/movies.hook';
+import { useNavigate } from '@tanstack/react-router';
 
 export default function NavButtons() {
   const { t } = useTranslation();
-  const { page, sort, filter } = useRouteStore();
+  const navigate = useNavigate({ from: '/movie/$movieId' });
+  const { page, limit, sort, filter } = useRouteStore();
   const { openModal } = useUiStore();
   const { isAdmin } = useRole();
+  const { refetch: fetchRandomMovie } = useGetRandomMovie(
+    filter.map((f) => `${f.name}+${f.value}`)
+  );
 
   return (
     <div className={navButtons}>
@@ -20,6 +28,7 @@ export default function NavButtons() {
         to="/"
         searchParams={{
           page,
+          limit,
           sortBy: sort.name,
           direction: sort.direction,
           filter: filter.map((f) => `${f.name}+${f.value}`)
@@ -37,7 +46,11 @@ export default function NavButtons() {
             openModal({
               title: (
                 <div
-                  style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+                  className={css({
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '5px'
+                  })}
                 >
                   <MdMovieEdit /> {t('mainNav.addMovie')}
                 </div>
@@ -47,6 +60,26 @@ export default function NavButtons() {
           }
         />
       )}
+      <NavButton
+        onClick={async () => {
+          fetchRandomMovie().then((randomMovie) => {
+            if (randomMovie.isSuccess && randomMovie.data)
+              navigate({
+                to: '/movie/$movieId',
+                params: { movieId: randomMovie.data }
+              });
+          });
+        }}
+        label={t('mainNav.randomMovie')}
+        icon={<FaDice />}
+        tootltipMessage={
+          <>
+            {t('mainNav.randomMovieTooltip')}
+            <br />
+            {t('mainNav.filters')}
+          </>
+        }
+      />
       <NavButton
         to="/statistics/genre"
         label={t('mainNav.stats')}

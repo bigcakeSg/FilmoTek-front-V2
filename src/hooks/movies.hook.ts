@@ -6,6 +6,7 @@ import {
   getMovieList,
   getMovieListByGenre,
   getMovieListByName,
+  getRandomMovie,
   patchMovie,
   postMovie
 } from '@api/movies.api';
@@ -77,6 +78,24 @@ export const useGetMovieDetail = (movieId?: string) => {
     refetchOnWindowFocus: false,
     enabled: !!movieId,
     staleTime: 1000 * 60 * 5 // 5 minutes
+  });
+
+  return {
+    data,
+    refetch,
+    isSuccess,
+    error,
+    isFetching,
+    status
+  };
+};
+
+export const useGetRandomMovie = (filter: string[] = []) => {
+  const { data, refetch, isSuccess, error, isFetching, status } = useQuery({
+    queryKey: ['randomMovie', ...filter],
+    queryFn: () => getRandomMovie(filter),
+    enabled: false,
+    refetchOnWindowFocus: false
   });
 
   return {

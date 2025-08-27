@@ -13,9 +13,12 @@
   "mainNav": {
     "movieList": "Movie List",
     "addMovie": "Add movie",
+    "randomMovie": "Random movie",
     "stats": "Stats",
     "movieListTooltip": "View the list of movies",
     "addMovieTooltip": "Add a new movie to the list",
+    "randomMovieTooltip": "View a random movie",
+    "filters": "(take filters into account)",
     "statsTooltip": "View statistics about movies",
     "openFilters": "Open filters",
     "sortBy": "Sort by",
