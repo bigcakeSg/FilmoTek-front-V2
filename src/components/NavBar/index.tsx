@@ -11,6 +11,7 @@ import FilterButton from './FilterButton';
 import SortButtons from './SortButtons';
 import { Link, useLocation } from '@tanstack/react-router';
 import useRouteStore from '@stores/route.store';
+import Logo from '@assets/filmotek.svg?react';
 
 export default function NavBar() {
   const location = useLocation();
@@ -30,6 +31,9 @@ export default function NavBar() {
             filter: filter.map((f) => `${f.name}+${f.value}`)
           }}
         >
+          <span>
+            <Logo height="25px" />
+          </span>
           <span className="filmo">Filmo</span>
           <span className="tek">TEK</span>
         </Link>
