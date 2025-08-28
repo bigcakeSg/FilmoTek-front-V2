@@ -14,6 +14,7 @@ import {
   namePicture
 } from './movieNamePanel.styles';
 import MovieImdbLink from '../MovieImdbLink';
+import Loader from '@/components/ui/Loader';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
@@ -104,9 +105,8 @@ export default function MoviePanel({
           )}
         </div>
       </div>
-      {/* TODO: loading */}
       {isNameMoviesFetching || isGenreMoviesFetching ? (
-        <div>Loading...</div>
+        <Loader label={t('loading')} />
       ) : (
         <div className={moviePanelList}>
           {nameMovies

@@ -1,5 +1,7 @@
 {
   "loading": "Loading...",
+  "saving": "Saving...",
+  "deleting": "Deleting...",
   "movies": "movies",
   "movie": "movie",
   "welcome": "Welcome",
@@ -72,13 +74,18 @@
     "production_designer": "Chef décorateur"
   },
   "edition": {
-    "editMovie": "Edit movie",
-    "deleteMovie": "Delete movie"
+    "editMovie": "Edit movie"
   },
   "addMovie": {
     "imdbId": "IMDb ID",
     "imdbIdError": "IMDb ID is mandatory",
     "unknownImdbId": "IMDb ID unknown",
     "search": "Search for the movie"
+  },
+  "delete": {
+    "movie": "Delete movie",
+    "sure": "Are you sure you want to delete \"{{movie}}\"?",
+    "deleted": "The movie \"{{movie}}\" has been deleted.",
+    "confirm": "Delete"
   }
 }

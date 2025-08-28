@@ -19,7 +19,8 @@ export const modalGlobalStyles = css({
       backgroundColor: '{background}',
       padding: '20px',
       rounded: '10px',
-      fontSize: '0.9rem'
+      fontSize: '0.9rem',
+      fontWeight: '400'
     },
     '&[data-part="title"]': {
       fontSize: '1.2rem',

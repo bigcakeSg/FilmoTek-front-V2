@@ -26,25 +26,16 @@ import NotFound from '@/pages/NotFound';
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
 interface MovieDetailProps {
-  movieData: Movie | undefined;
-  isFetching: boolean;
+  movieData?: Movie;
 }
 
-export default function MovieDetail({
-  movieData,
-  isFetching
-}: Readonly<MovieDetailProps>) {
+export default function MovieDetail({ movieData }: Readonly<MovieDetailProps>) {
   const [name, setName] = useState<Name | null>(null);
   const [genre, setGenre] = useState<Genre | null>(null);
 
-  if (isFetching) return <div>Loading...</div>; // TODO: loader
-
   if (!movieData) return <NotFound />;
 
-  const backgroundImage =
-    isFetching || !movieData.picture
-      ? 'unset'
-      : `url(${BASE_URL}/media/posters/${movieData.picture})`;
+  const backgroundImage = `url(${BASE_URL}/media/posters/${movieData.picture})`;
 
   return (
     <div className={movieDetail}>

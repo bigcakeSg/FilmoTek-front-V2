@@ -4,7 +4,7 @@ export const loginButton = cva({
   base: {
     border: 'solid 1px',
     rounded: '5px',
-    padding: '3px',
+    padding: '7px 15px',
     fontWeight: '500'
   },
   variants: {

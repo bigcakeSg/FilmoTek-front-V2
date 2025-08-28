@@ -1,5 +1,7 @@
 {
   "loading": "Chargement...",
+  "saving": "Enregistrement...",
+  "deleting": "Suppression...",
   "movies": "films",
   "movie": "film",
   "welcome": "Bienvenue",
@@ -72,13 +74,18 @@
     "production_designer": "Directeur de la production"
   },
   "edition": {
-    "editMovie": "Modifier le film",
-    "deleteMovie": "Supprimer le film"
+    "editMovie": "Modifier le film"
   },
   "addMovie": {
     "imdbId": "IMDb ID",
     "imdbIdError": "IMDb ID est obligatoire",
     "unknownImdbId": "IMDb ID inconnu",
     "search": "Rechercher le film"
+  },
+  "delete": {
+    "movie": "Supprimer le film",
+    "sure": "Êtes-vous sûr de vouloir supprimer \"{{movie}}\" ?",
+    "deleted": "Le film \"{{movie}}\" a été supprimé.",
+    "confirm": "Supprimer"
   }
 }

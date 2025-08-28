@@ -15,6 +15,7 @@ import {
 import CheckboxComponent from '@components/ui/CheckboxComponent';
 import { GoAlertFill } from 'react-icons/go';
 import ButtonComponent from '@components/ui/ButtonComponent';
+import Loader from '@/components/ui/Loader';
 
 const formLoginSchema = z.object({
   username: z.string().min(3, {
@@ -152,8 +153,9 @@ export default function LoginForm({ onSuccess }: Readonly<LoginFormProps>) {
       </div>
       {loading && (
         <div className={loadingUser}>
-          {/* TODO: loader */}
-          <div>{t('loading')}</div>
+          <div>
+            <Loader label={t('loading')} />
+          </div>
         </div>
       )}
     </form>

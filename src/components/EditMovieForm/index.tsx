@@ -12,7 +12,8 @@ import {
   usePatchMovie,
   usePostMovie
 } from '@/hooks/movies.hook';
-import { formContainer } from './editMovieForm.styles';
+import { formContainer, loaderContainer } from './editMovieForm.styles';
+import Loader from '../ui/Loader';
 
 const formEditMovieSchema = z.object({
   originalTitle: z.string().min(1, {
@@ -71,7 +72,7 @@ export default function EditMovieForm({
   } = useMovieFromApi(type === 'create' ? movieId : undefined);
 
   const { mutate: createMovie } = usePostMovie();
-  const { mutate: updateMovie } = usePatchMovie();
+  const { mutate: updateMovie, isPending: isPatchingMovie } = usePatchMovie();
 
   useEffect(() => {
     refetch();
@@ -115,6 +116,13 @@ export default function EditMovieForm({
       });
     }
   };
+
+  if (isPatchingMovie)
+    return (
+      <div className={loaderContainer}>
+        <Loader label={t('saving')} />
+      </div>
+    );
 
   return (
     <form

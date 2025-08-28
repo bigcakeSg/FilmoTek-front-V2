@@ -7,14 +7,14 @@ import { useMovieFromApi } from '@hooks/movies.hook';
 import {
   alertMovieApiError,
   buttonMovieApiForm,
-  loadingMovieApi,
-  movieApiForm,
-  movieApiFormContent
+  loaderContainer,
+  movieApiForm
 } from './addMovie.styles';
 import TextfieldComponent from '@components/ui/TextfieldComponent';
 import ButtonComponent from '@components/ui/ButtonComponent';
 import { GoAlertFill } from 'react-icons/go';
 import useUiStore from '@stores/ui.store';
+import Loader from '../ui/Loader';
 
 const formAddMovieSchema = z.object({
   imdbId: z.string().min(1, {
@@ -63,39 +63,45 @@ export default function AddMovie() {
   const loading = isMovieApiFetching;
 
   return (
-    <form onSubmit={handleSubmit(handleSubmitMovieId)} className={movieApiForm}>
-      {movieApiError && (
-        <div className={alertMovieApiError}>
-          <GoAlertFill />
-          {t('addMovie.unknownImdbId')}
+    <>
+      <form
+        onSubmit={handleSubmit(handleSubmitMovieId)}
+        className={`${movieApiForm}${loading ? ' loading' : ''}`}
+      >
+        {movieApiError && (
+          <div className={alertMovieApiError}>
+            <GoAlertFill />
+            {t('addMovie.unknownImdbId')}
+          </div>
+        )}
+        <div>
+          <Controller
+            name="imdbId"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => {
+              return (
+                <TextfieldComponent
+                  label={t('addMovie.imdbId')}
+                  required
+                  errorText={
+                    errors.imdbId?.message && t(errors.imdbId?.message)
+                  }
+                  {...field}
+                />
+              );
+            }}
+          />
+          <div className={buttonMovieApiForm}>
+            <ButtonComponent label={t('addMovie.search')} type="submit" />
+          </div>
         </div>
-      )}
-      <div className={`${movieApiFormContent}${loading ? ' loading' : ''}`}>
-        <Controller
-          name="imdbId"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => {
-            return (
-              <TextfieldComponent
-                label={t('addMovie.imdbId')}
-                required
-                errorText={errors.imdbId?.message && t(errors.imdbId?.message)}
-                {...field}
-              />
-            );
-          }}
-        />
-        <div className={buttonMovieApiForm}>
-          <ButtonComponent label={t('addMovie.search')} type="submit" />
-        </div>
-      </div>
+      </form>
       {loading && (
-        <div className={loadingMovieApi}>
-          {/* TODO: loader */}
-          <div>{t('loading')}</div>
+        <div className={loaderContainer}>
+          <Loader label={t('loading')} />
         </div>
       )}
-    </form>
+    </>
   );
 }

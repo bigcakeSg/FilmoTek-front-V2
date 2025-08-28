@@ -1,7 +1,23 @@
 import { css } from '@styled-system/css';
 
+export const loaderContainer = css({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0
+});
+
 export const movieApiForm = css({
-  // TODO:
+  width: '300px',
+  '&.loading': {
+    opacity: 0,
+    position: 'relative'
+  }
 });
 
 export const alertMovieApiError = css({
@@ -10,14 +26,6 @@ export const alertMovieApiError = css({
   display: 'flex',
   alignItems: 'center',
   gap: '5px'
-});
-
-export const movieApiFormContent = css({
-  // TODO:
-});
-
-export const loadingMovieApi = css({
-  // TODO:
 });
 
 export const buttonMovieApiForm = css({

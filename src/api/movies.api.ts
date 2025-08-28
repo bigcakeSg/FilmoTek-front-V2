@@ -24,7 +24,7 @@ export const getMovieList = async (pageParam: {
 
 export const getMovie = async (pageParam: {
   movieId: string;
-}): Promise<string> => {
+}): Promise<Movie> => {
   const response = await axiosInstance.get(
     `/movies/title/${pageParam.movieId}`
   );

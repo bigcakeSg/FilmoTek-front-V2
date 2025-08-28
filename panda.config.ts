@@ -65,6 +65,22 @@ export default defineConfig({
         skeleton: {
           '0%': { backgroundColor: 'hsl(200, 20%, 50%)' },
           '100%': { backgroundColor: 'hsl(200, 20%, 30%)' }
+        },
+        rotation: {
+          '0%': {
+            transform: 'rotate(0deg)'
+          },
+          '100%': {
+            transform: 'rotate(360deg)'
+          }
+        },
+        rotationReverse: {
+          '0%': {
+            transform: 'rotate(360deg)'
+          },
+          '100%': {
+            transform: 'rotate(0deg)'
+          }
         }
       },
       tokens: {

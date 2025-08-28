@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useGetMovieList } from '@hooks/movies.hook';
 import { moviesContainer, moviesContent, moviesScroll } from './movies.styles';
 import MovieTile from '@components/MovieTile';
-import { tileSketeton } from '@components/MovieTile/movieTile.styles';
 import { useCollections } from '@hooks/collections.hook';
 import MoviesPagination from '@components/MoviesPagination';
 import { useNavigation } from '@hooks/navigation.hook';
@@ -13,10 +11,8 @@ import { Filter, FilterName } from '@interfaces/filterSort.interface';
 import TopPanel from '@components/ui/TopPanel';
 import FiltersPanel from '@components/FiltersPanel';
 import { filtersMap } from '@components/FiltersPanel/filters.helpers';
-import { RiMovie2Fill } from 'react-icons/ri';
 
 export default function Movies() {
-  const { t } = useTranslation();
   const { moviesQueries } = useNavigation();
   const { setRoute } = useRouteStore();
 
@@ -73,33 +69,27 @@ export default function Movies() {
       <div className={moviesScroll}>
         <div className={moviesContent}>
           {isFetching ? (
-            Array.from({ length: 20 }).map((_, i) => (
-              <div key={i} className={tileSketeton}>
-                <RiMovie2Fill className="skeleton-icon" />
-                <div className="skeleton-text">{t('loading')}</div>
-              </div>
+            Array.from({ length: limit || 30 }).map((_, i) => (
+              <MovieTile key={i} isFetching={true} />
             ))
           ) : (
             <>
               {moviesData?.data.map((movie) => (
                 <MovieTile
                   key={movie._id}
-                  {...movie}
-                  watched={
-                    collectionWatchedId
+                  movie={{
+                    ...movie,
+                    watched: collectionWatchedId
                       ? movie.collections.includes(collectionWatchedId)
-                      : undefined
-                  }
-                  favorite={
-                    collectionFavoriteId
+                      : undefined,
+                    favorite: collectionFavoriteId
                       ? movie.collections.includes(collectionFavoriteId)
-                      : undefined
-                  }
-                  pinned={
-                    collectionPinnedId
+                      : undefined,
+                    pinned: collectionPinnedId
                       ? movie.collections.includes(collectionPinnedId)
                       : undefined
-                  }
+                  }}
+                  isFetching={false}
                 />
               ))}
             </>
