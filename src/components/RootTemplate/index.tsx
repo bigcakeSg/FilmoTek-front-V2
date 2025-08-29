@@ -4,6 +4,7 @@ import { useCollections } from '@hooks/collections.hook';
 import NavBar from '@components/NavBar';
 import { rootContent, rootFooter, rootTemplate } from './rootTemplate.styles';
 import ModalComponent from '@components/ui/ModalComponent';
+import ToasterComponent from '../ui/ToasterComponent';
 
 export default function RootTemplate() {
   useCollections();
@@ -20,6 +21,7 @@ export default function RootTemplate() {
         <div>FilmoTek v2.0 - © 2025</div>
       </footer>
       <ModalComponent />
+      <ToasterComponent />
       {/* <TanStackRouterDevtools /> */}
     </div>
   );

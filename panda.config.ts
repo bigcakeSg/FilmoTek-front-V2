@@ -1,4 +1,6 @@
 import { defineConfig } from '@pandacss/dev';
+import { modalGlobalStyles } from './src/components/ui/ModalComponent/modalComponent.styles';
+import { selectGlobalStyles } from './src/components/ui/SelectComponent/selectComponentGlobal.styles';
 
 export default defineConfig({
   // Whether to use css reset
@@ -81,6 +83,14 @@ export default defineConfig({
           '100%': {
             transform: 'rotate(0deg)'
           }
+        },
+        shrink: {
+          '0%': {
+            transform: 'scaleX(1)'
+          },
+          '100%': {
+            transform: 'scaleX(0)'
+          }
         }
       },
       tokens: {
@@ -162,7 +172,9 @@ export default defineConfig({
       fontWeight: '100',
       fontSize: '20px',
       lineHeight: '1.5',
-      margin: '0'
+      margin: '0',
+      ...selectGlobalStyles,
+      ...modalGlobalStyles
     },
     button: {
       cursor: 'pointer'

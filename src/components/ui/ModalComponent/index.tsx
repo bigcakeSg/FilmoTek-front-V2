@@ -1,9 +1,7 @@
-import { useEffect } from 'react';
 import { IoClose } from 'react-icons/io5';
 import useUiStore from '@stores/ui.store';
 import { Dialog } from '@ark-ui/react/dialog';
 import { Portal } from '@ark-ui/react/portal';
-import { modalGlobalStyles } from './modalComponent.styles';
 
 export default function ModalComponent() {
   const { modalOpen, openModal, closeModal, modalContent } = useUiStore();
@@ -15,17 +13,6 @@ export default function ModalComponent() {
   const handleCloseModal = () => {
     closeModal();
   };
-
-  useEffect(() => {
-    document.body.className += ` ${modalGlobalStyles}`;
-
-    return () => {
-      document.body.className = document.body.className.replace(
-        ` ${modalGlobalStyles}`,
-        ''
-      );
-    };
-  }, []);
 
   return (
     <Dialog.Root

@@ -36,7 +36,7 @@ export const filmotekTitle = css({
   fontSize: '1.5rem',
   border: 'solid 1px',
   borderColor: '#ffffff',
-  rounded: '10px',
+  rounded: '5px',
   padding: '0px 10px',
   marginLeft: '0px',
   '& .filmo': {

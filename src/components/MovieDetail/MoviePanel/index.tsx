@@ -54,6 +54,9 @@ export default function MoviePanel({
 
   return (
     <RightPanel
+      // TODO: mettre un typeOfPanel (name | genre) dans les props
+      // ne pas effacer les données lors de la fermeture
+      // afficher en fonction du type
       onClose={() => {
         setName(null);
         setGenre(null);

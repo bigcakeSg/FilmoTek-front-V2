@@ -88,5 +88,21 @@
     "sure": "Êtes-vous sûr de vouloir supprimer \"{{movie}}\" ?",
     "deleted": "Le film \"{{movie}}\" a été supprimé.",
     "confirm": "Supprimer"
+  },
+  "toaster": {
+    "success": {
+      "title": "Succès !",
+      "created": "Le film a été créé avec succès.",
+      "updated": "Le film a été mis à jour avec succès.",
+      "deleted": "Le film a été supprimé avec succès."
+    },
+    "error": {
+      "title": "Erreur !",
+      "created": "Une erreur s'est produite pendant la création.",
+      "updated": "Une erreur s'est produite pendant la mise à jour.",
+      "deleted": "Une erreur s'est produite pendant la suppression."
+    },
+    "info": { "title": "Info !" },
+    "warning": { "title": "Avertissement !" }
   }
 }

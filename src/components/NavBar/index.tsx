@@ -31,11 +31,13 @@ export default function NavBar() {
             filter: filter.map((f) => `${f.name}+${f.value}`)
           }}
         >
-          <span>
+          <div>
             <Logo height="25px" />
-          </span>
-          <span className="filmo">Filmo</span>
-          <span className="tek">TEK</span>
+          </div>
+          <div>
+            <span className="filmo">Filmo</span>
+            <span className="tek">TEK</span>
+          </div>
         </Link>
         <NavButtons />
       </div>

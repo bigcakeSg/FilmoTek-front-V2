@@ -14,6 +14,8 @@ import { SortDirection, SortName } from '@interfaces/filterSort.interface';
 import { Movie } from '@interfaces/movies.interfaces';
 import { useNavigate } from '@tanstack/react-router';
 import useRouteStore from '@stores/route.store';
+import { toaster } from '@/components/ui/ToasterComponent/toaster';
+import { useTranslation } from 'react-i18next';
 
 interface MoviesQuery {
   key: string;
@@ -147,6 +149,7 @@ export const useGetMovieListByGenre = (genreId: string) => {
 };
 
 export const usePatchMovie = () => {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const navigate = useNavigate({ from: '/movie/$movieId' });
 
@@ -163,6 +166,11 @@ export const usePatchMovie = () => {
       // TODO: Optimistically update???
     },
     onSuccess: async (data, params) => {
+      toaster.success({
+        title: t('toaster.success.title'),
+        description: t('toaster.success.updated')
+      });
+
       if (params.redirect)
         await navigate({
           to: '/movie/$movieId',
@@ -177,7 +185,11 @@ export const usePatchMovie = () => {
       });
     },
     onError: () => {
-      // TODO: toaster
+      toaster.error({
+        title: t('toaster.error.title'),
+        description: t('toaster.error.updated'),
+        duration: Infinity
+      });
     }
   });
 
@@ -204,6 +216,7 @@ export const useMovieFromApi = (movieId?: string) => {
 };
 
 export const usePostMovie = () => {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const navigate = useNavigate({ from: '/movie/$movieId' });
 
@@ -213,6 +226,11 @@ export const usePostMovie = () => {
       // TODO: Optimistically update???
     },
     onSuccess: async (data) => {
+      toaster.success({
+        title: t('toaster.success.title'),
+        description: t('toaster.success.created')
+      });
+
       await navigate({
         to: '/movie/$movieId',
         params: { movieId: data }
@@ -225,7 +243,11 @@ export const usePostMovie = () => {
       });
     },
     onError: () => {
-      // TODO: toaster
+      toaster.error({
+        title: t('toaster.error.title'),
+        description: t('toaster.error.created'),
+        duration: Infinity
+      });
     }
   });
 
@@ -233,6 +255,7 @@ export const usePostMovie = () => {
 };
 
 export const useDeleteMovie = (movieId: string) => {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const navigate = useNavigate({ from: '/' });
   const { sort, filter } = useRouteStore();
@@ -243,6 +266,11 @@ export const useDeleteMovie = (movieId: string) => {
       // TODO: Optimistically update???
     },
     onSuccess: async () => {
+      toaster.success({
+        title: t('toaster.success.title'),
+        description: t('toaster.success.deleted')
+      });
+
       await navigate({
         to: '/',
         search: {
@@ -260,7 +288,11 @@ export const useDeleteMovie = (movieId: string) => {
       });
     },
     onError: () => {
-      // TODO: toaster
+      toaster.error({
+        title: t('toaster.error.title'),
+        description: t('toaster.error.deleted'),
+        duration: Infinity
+      });
     }
   });
 

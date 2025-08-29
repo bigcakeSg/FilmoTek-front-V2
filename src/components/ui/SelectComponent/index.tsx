@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
 import { Item } from '@interfaces/ui.interface';
 import { Portal } from '@ark-ui/react/portal';
 import { Select, createListCollection } from '@ark-ui/react/select';
 import { LuChevronDown } from 'react-icons/lu';
 import { IoClose } from 'react-icons/io5';
-import { selectComponent, selectGlobalStyles } from './selectComponent.styles';
+import { selectComponent } from './selectComponent.styles';
 import { FaCheck } from 'react-icons/fa';
 
 interface SelectComponentProps {
@@ -27,17 +26,6 @@ export default function SelectComponent({
   const collection = createListCollection<Item>({
     items: options
   });
-
-  useEffect(() => {
-    document.body.className += ` ${selectGlobalStyles}`;
-
-    return () => {
-      document.body.className = document.body.className.replace(
-        ` ${selectGlobalStyles}`,
-        ''
-      );
-    };
-  }, []);
 
   return (
     <div className={selectComponent}>

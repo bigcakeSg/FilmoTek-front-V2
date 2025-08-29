@@ -11,6 +11,8 @@ import { useRole } from '@hooks/auth.hook';
 import { css } from '@styled-system/css';
 import { useGetRandomMovie } from '@/hooks/movies.hook';
 import { useNavigate } from '@tanstack/react-router';
+import { toaster } from '@/components/ui/ToasterComponent/toaster';
+// import { useToaster } from '@/hooks/toaster.hook';
 
 export default function NavButtons() {
   const { t } = useTranslation();
@@ -86,6 +88,27 @@ export default function NavButtons() {
         icon={<BiSolidBarChartSquare />}
         tootltipMessage={t('mainNav.statsTooltip')}
       />
+      <button
+        onClick={() => {
+          toaster.success({
+            title: 'Success!',
+            description: 'Your changes have been saved.'
+          });
+        }}
+      >
+        Success
+      </button>
+      <button
+        onClick={() => {
+          toaster.error({
+            title: 'Success!',
+            description: 'Your changes have been saved.',
+            duration: Infinity
+          });
+        }}
+      >
+        Error
+      </button>
     </div>
   );
 }
