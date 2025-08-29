@@ -54,12 +54,12 @@ export const movieDetailContent = css({
   height: { base: 'fit-content', sm: 'auto' },
   gridTemplateColumns: {
     base: '[start col1] 1fr [end]',
-    sm: '[start col1] 200px [col2] 1fr [end]',
+    sm: '[start col1] 180px [col2] 1fr [end]',
     ['2xl']: '[start col1] 300px [col2] 1fr [end]'
   },
   gridTemplateRows: {
     base: `[start row1] calc({sizes.banner} + 20px) [row2] auto [row3] auto [row4] auto [row5] 1fr [end]`,
-    sm: `[start row1] {sizes.banner} [row2] auto [row3] auto [row4] 1fr [end]`
+    sm: `[start row1] {sizes.banner - 20px} [row2] auto [row3] auto [row4] 1fr [end]`
   }
 });
 
@@ -67,7 +67,7 @@ export const movieDetailPicture = css({
   gridColumnStart: { base: 'start' },
   gridColumnEnd: { base: 'span end', sm: 'span col2' },
   gridRowStart: { base: 'start' },
-  gridRowEnd: { base: 'span row2', sm: 'span row3' },
+  gridRowEnd: { base: 'span row2', sm: 'span row4' },
   justifySelf: 'center',
   paddingTop: { base: '10px', ['2xl']: '20px' },
   position: 'relative'
@@ -79,8 +79,8 @@ export const movieDetailInfos = css({
   gridRowStart: { base: 'row3', sm: 'row2', ['2xl']: 'row3' },
   gridRowEnd: { base: 'span row4', sm: 'span row3', ['2xl']: 'span row4' },
   display: 'flex',
-  flexDirection: 'column',
-  marginTop: { base: '0px', sm: '-50px', '2xl': 0 },
+  flexDirection: { base: 'column-reverse', '2xl': 'column' },
+  marginTop: { base: '0px', sm: '-85px', '2xl': 0 },
   marginLeft: { base: '0px', sm: '20px', '2xl': 0 }
 });
 
@@ -118,7 +118,7 @@ export const movieDetailCast = css({
 });
 
 export const movieVideos = css({
-  margin: '20px 20px 20px 20px',
+  margin: { base: '20px 0', '2xl': '20px' },
   padding: '20px',
   gap: '20px',
   backgroundColor: { base: '#00000011', _dark: '#ffffff11' },
@@ -126,6 +126,9 @@ export const movieVideos = css({
   display: 'grid',
   gridTemplateColumns: {
     base: 'repeat(1, minmax(1fr, 1fr))',
-    md: 'repeat(2, minmax(50%, 1fr))'
+    // sm: 'repeat(4, minmax(10%, 10%))',
+    md: 'repeat(2, minmax(25%, 1fr))',
+    xl: 'repeat(3, minmax(25%, 1fr))',
+    '2xl': 'repeat(2, minmax(25%, 1fr))'
   }
 });
