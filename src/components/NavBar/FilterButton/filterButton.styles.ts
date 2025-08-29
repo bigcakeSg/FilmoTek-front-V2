@@ -17,6 +17,9 @@ export const filterButton = css({
 });
 
 export const movieCount = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '10px',
   color: {
     base: 'contrast.secondaryLight',
     _dark: '#ffffff'
@@ -28,5 +31,17 @@ export const movieCount = css({
   fontWeight: '400',
   '& .filteredCount': {
     fontWeight: '700'
+  }
+});
+
+export const resetFilters = css({
+  color: '#ffffff',
+  backgroundColor: '{secondaryBackground}',
+  fontSize: '1.1rem',
+  rounded: '5px',
+  cursor: 'pointer',
+  _hover: {
+    backgroundColor: '#00000022',
+    color: '#000000'
   }
 });

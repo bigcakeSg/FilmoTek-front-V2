@@ -59,7 +59,8 @@
     "supports": "Supports",
     "search": "Rechercher un film...",
     "filter": "Filtrer",
-    "removeFilters": "Effacer les filtres"
+    "removeFilters": "Effacer les filtres",
+    "resetFilters": "Réinitialiser tous les filtres"
   },
   "job": {
     "director": "Réalisateur",

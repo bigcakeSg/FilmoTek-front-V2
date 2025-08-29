@@ -59,7 +59,8 @@
     "supports": "Supports",
     "search": "Search for a movie...",
     "filter": "Filter",
-    "removeFilters": "Remove filters"
+    "removeFilters": "Remove filters",
+    "resetFilters": "Reset all filters"
   },
   "job": {
     "director": "Director",
