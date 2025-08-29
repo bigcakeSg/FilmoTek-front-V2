@@ -42,6 +42,6 @@ export const resetFilters = css({
   cursor: 'pointer',
   _hover: {
     backgroundColor: '#00000022',
-    color: '#000000'
+    color: { base: '#000000', _dark: '#ffffff' }
   }
 });

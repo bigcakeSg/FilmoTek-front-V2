@@ -88,5 +88,25 @@
     "sure": "Are you sure you want to delete \"{{movie}}\"?",
     "deleted": "The movie \"{{movie}}\" has been deleted.",
     "confirm": "Delete"
+  },
+  "toaster": {
+    "success": {
+      "title": "Success!",
+      "created": "The movie has been created successfully.",
+      "updated": "The movie has been updated successfully.",
+      "deleted": "The movie has been deleted successfully."
+    },
+    "error": {
+      "title": "Error!",
+      "created": "An error occurred during creation.",
+      "updated": "An error occurred during update.",
+      "deleted": "An error occurred during deletion.",
+      "unknown": "The movie with the IMDb ID \"{{id}}\" does not exist."
+    },
+    "info": { "title": "Info !" },
+    "warning": {
+      "title": "Warning!",
+      "alreadyExists": "The movie with the IMDb ID \"{{id}}\" already exists."
+    }
   }
 }

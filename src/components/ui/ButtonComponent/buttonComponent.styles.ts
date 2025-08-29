@@ -12,12 +12,23 @@ export const loginButton = cva({
       primary: {
         color: '{background}',
         backgroundColor: { base: '#00000099', _dark: '#ffffff99' },
-        _hover: { backgroundColor: { base: '#000000bb', _dark: '#ffffffbb' } }
+        '&[disabled]': {
+          opacity: 0.3
+        },
+        _hover: {
+          '&:not(:disabled)': {
+            backgroundColor: { base: '#000000bb', _dark: '#ffffffbb' }
+          }
+        }
       },
       secondary: {
         color: '{foreground}',
         backgroundColor: { base: '#00000011', _dark: '#ffffff11' },
-        _hover: { backgroundColor: { base: '#00000022', _dark: '#ffffff22' } }
+        _hover: {
+          '&:not(:disabled)': {
+            backgroundColor: { base: '#00000022', _dark: '#ffffff22' }
+          }
+        }
       }
     }
   }

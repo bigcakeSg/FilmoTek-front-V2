@@ -15,6 +15,7 @@ import ButtonComponent from '@components/ui/ButtonComponent';
 import { GoAlertFill } from 'react-icons/go';
 import useUiStore from '@stores/ui.store';
 import Loader from '../ui/Loader';
+import { toaster } from '../ui/ToasterComponent/toaster';
 
 const formAddMovieSchema = z.object({
   imdbId: z.string().min(1, {
@@ -48,7 +49,24 @@ export default function AddMovie() {
   } = useMovieFromApi(watch('imdbId'));
 
   const handleSubmitMovieId: SubmitHandler<FormAddMovie> = async () => {
-    const { data } = await fetchMovieApi();
+    const { data, error } = await fetchMovieApi();
+    console.log('movieApiError', error);
+    if (error?.status === 500) {
+      toaster.error({
+        title: t('toaster.error.title'),
+        description: t('toaster.error.unknown', { id: watch('imdbId') }),
+        duration: Infinity
+      });
+    }
+
+    if (error?.status === 409) {
+      toaster.warning({
+        title: t('toaster.warning.title'),
+        description: t('toaster.warning.alreadyExists', {
+          id: watch('imdbId')
+        })
+      });
+    }
 
     if (data?.imdbId) {
       closeModal();
@@ -68,7 +86,7 @@ export default function AddMovie() {
         onSubmit={handleSubmit(handleSubmitMovieId)}
         className={`${movieApiForm}${loading ? ' loading' : ''}`}
       >
-        {movieApiError && (
+        {movieApiError?.status === 500 && (
           <div className={alertMovieApiError}>
             <GoAlertFill />
             {t('addMovie.unknownImdbId')}
@@ -93,7 +111,11 @@ export default function AddMovie() {
             }}
           />
           <div className={buttonMovieApiForm}>
-            <ButtonComponent label={t('addMovie.search')} type="submit" />
+            <ButtonComponent
+              disabled={!watch('imdbId')}
+              label={t('addMovie.search')}
+              type="submit"
+            />
           </div>
         </div>
       </form>

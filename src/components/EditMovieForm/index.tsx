@@ -71,7 +71,7 @@ export default function EditMovieForm({
     refetch
   } = useMovieFromApi(type === 'create' ? movieId : undefined);
 
-  const { mutate: createMovie } = usePostMovie();
+  const { mutate: createMovie, isPending: isCreatingMovie } = usePostMovie();
   const { mutate: updateMovie, isPending: isPatchingMovie } = usePatchMovie();
 
   useEffect(() => {
@@ -118,6 +118,13 @@ export default function EditMovieForm({
   };
 
   if (isPatchingMovie)
+    return (
+      <div className={loaderContainer}>
+        <Loader label={t('saving')} />
+      </div>
+    );
+
+  if (isCreatingMovie)
     return (
       <div className={loaderContainer}>
         <Loader label={t('saving')} />

@@ -100,9 +100,13 @@
       "title": "Erreur !",
       "created": "Une erreur s'est produite pendant la création.",
       "updated": "Une erreur s'est produite pendant la mise à jour.",
-      "deleted": "Une erreur s'est produite pendant la suppression."
+      "deleted": "Une erreur s'est produite pendant la suppression.",
+      "unknown": "Le film avec l'ID IMDb \"{{id}}\" n'existe pas."
     },
     "info": { "title": "Info !" },
-    "warning": { "title": "Avertissement !" }
+    "warning": {
+      "title": "Avertissement !",
+      "alreadyExists": "Le film avec l'ID IMDb \"{{id}}\" existe déjà."
+    }
   }
 }

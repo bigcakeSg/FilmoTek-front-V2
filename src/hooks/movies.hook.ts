@@ -16,6 +16,7 @@ import { useNavigate } from '@tanstack/react-router';
 import useRouteStore from '@stores/route.store';
 import { toaster } from '@/components/ui/ToasterComponent/toaster';
 import { useTranslation } from 'react-i18next';
+import { AxiosError } from 'axios';
 
 interface MoviesQuery {
   key: string;
@@ -197,12 +198,16 @@ export const usePatchMovie = () => {
 };
 
 export const useMovieFromApi = (movieId?: string) => {
-  const { data, refetch, isSuccess, error, isFetching, status } = useQuery({
+  const { data, refetch, isSuccess, error, isFetching, status } = useQuery<
+    Movie | undefined,
+    AxiosError
+  >({
     queryKey: ['movieFromApi', movieId],
     queryFn: () =>
       movieId ? getMovieFromApi(movieId) : Promise.resolve(undefined),
     refetchOnWindowFocus: false,
-    enabled: false
+    enabled: false,
+    retry: false
   });
 
   return {
