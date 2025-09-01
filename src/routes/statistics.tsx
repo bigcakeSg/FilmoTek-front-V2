@@ -1,16 +1,6 @@
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
+import Statistics from '@/pages/Statistics';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/statistics')({
-  component: RouteComponent
+  component: Statistics
 });
-
-function RouteComponent() {
-  return (
-    <>
-      <h1>Statistics</h1>
-      <Link to="/statistics/genre">Genres</Link>{' '}
-      <Link to="/statistics/releasedate">Release Dates</Link>
-      <Outlet />
-    </>
-  );
-}
