@@ -1,13 +1,13 @@
-import ButtonComponent from '@/components/ui/ButtonComponent';
-import useUserStore from '@/stores/user.store';
-import {
-  clearAllAuthData,
-  clearRememberMePreference
-} from '@/utils/storage.utils';
 import { useQueryClient } from '@tanstack/react-query';
 import { clearAuthTokens } from 'axios-jwt';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/react/shallow';
+import ButtonComponent from '@components/ui/ButtonComponent';
+import useUserStore from '@stores/user.store';
+import {
+  clearAllAuthData,
+  clearRememberMePreference
+} from '@utils/storage.utils';
 import { userInfos } from './userInfos.styles';
 
 export default function UserInfos() {

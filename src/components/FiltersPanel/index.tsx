@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
-import ButtonComponent from '@/components/ui/ButtonComponent';
-import CheckboxComponent from '@/components/ui/CheckboxComponent';
-import { useCollections } from '@/hooks/collections.hook';
-import useUiStore from '@/stores/ui.store';
 import { useLocation, useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
+import ButtonComponent from '@components/ui/ButtonComponent';
+import CheckboxComponent from '@components/ui/CheckboxComponent';
+import { useCollections } from '@hooks/collections.hook';
+import useUiStore from '@stores/ui.store';
 import {
   groupFilters,
   collectionsForm,

@@ -14,11 +14,8 @@ export const navButton = css({
   borderRadius: '5px',
   padding: '5px 10px',
   _hover: {
-    color: {
-      base: 'contrast.secondaryLight',
-      _dark: '#ffffff'
-    },
-    backgroundColor: 'background'
+    color: '{secondaryBackground}',
+    backgroundColor: '#ffffff'
   },
   fontSize: { base: '2rem', xl: '1.3rem' }
 });

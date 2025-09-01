@@ -20,7 +20,6 @@ export const rootFooter = css({
   fontWeight: '500',
   backgroundColor: '{secondaryBackground}',
   color: '#ffffff',
-  position: 'absolute',
   bottom: 0,
   width: '100%'
 });

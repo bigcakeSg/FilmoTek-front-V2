@@ -31,6 +31,15 @@ export const getMovie = async (pageParam: {
   return response.data;
 };
 
+export const getRandomMovie = async (filter?: string[]): Promise<string> => {
+  const response = await axiosInstance.get(`/movies/title/random`, {
+    params: {
+      filter
+    }
+  });
+  return response.data;
+};
+
 export const getMovieListByName = async (
   nameId: string
 ): Promise<ResultQuery<Movie>> => {

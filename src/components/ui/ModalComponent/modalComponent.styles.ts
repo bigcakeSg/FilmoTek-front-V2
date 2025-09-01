@@ -1,6 +1,4 @@
-import { css } from '@styled-system/css';
-
-export const modalGlobalStyles = css({
+export const modalGlobalStyles = {
   '& [data-scope="dialog"]': {
     '&[data-part="positioner"]': {
       display: 'flex',
@@ -19,7 +17,8 @@ export const modalGlobalStyles = css({
       backgroundColor: '{background}',
       padding: '20px',
       rounded: '10px',
-      fontSize: '0.9rem'
+      fontSize: '0.9rem',
+      fontWeight: '400'
     },
     '&[data-part="title"]': {
       fontSize: '1.2rem',
@@ -44,4 +43,4 @@ export const modalGlobalStyles = css({
       fontSize: '1.3rem'
     }
   }
-});
+};

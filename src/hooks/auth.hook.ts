@@ -1,5 +1,6 @@
-import { getMe, login } from '@/api/login.api';
 import { useQuery } from '@tanstack/react-query';
+import { getMe, login } from '@api/login.api';
+import useUserStore from '@stores/user.store';
 
 export const useLogin = (params: {
   username: string;
@@ -23,4 +24,10 @@ export const useMe = () => {
   });
 
   return { data, error, isFetching, refetch, isError, isSuccess };
+};
+
+export const useRole = () => {
+  const { user } = useUserStore();
+
+  return { isAdmin: user?.role === 'admin' };
 };

@@ -1,5 +1,5 @@
 import { IoClose } from 'react-icons/io5';
-import useUiStore from '@/stores/ui.store';
+import useUiStore from '@stores/ui.store';
 import {
   closeIcon,
   panelContent,

@@ -1,15 +1,6 @@
 import { css } from '@styled-system/css';
 
-export const movieTile = css({
-  position: 'relative',
-  boxShadow: {
-    base: 'rgba(0, 0, 0, 0.5) 2px 2px 7px 1px',
-    _dark: 'rgba(0, 0, 0, 1) 1px 1px 15px 2px'
-  },
-  transitionDuration: '0.5s',
-  aspectRatio: 0.68,
-  // TODO: afficher sous forme de liste quand on est sur petit écran
-  width: { base: '100%', sm: '250px', md: '180px', xl: '180px' },
+export const tile = css({
   '& .movie': {
     '&-picture': {
       position: 'absolute',
@@ -39,29 +30,9 @@ export const movieTile = css({
       padding: '15px',
       flexDirection: 'column',
       justifyContent: 'space-between'
-    },
-    '&-original_title': {
-      fontSize: '1.2rem',
-      lineHeight: '1.4rem',
-      fontWeight: 700,
-      marginBottom: '5px',
-      textShadow: '#000 1px 1px'
-    },
-    '&-french_title': {
-      fontSize: '1.1rem',
-      lineHeight: '1.2rem',
-      fontWeight: 300,
-      textShadow: '#000 1px 1px'
-    },
-    '&-release_date': {
-      fontSize: '1.1rem',
-      position: 'absolute',
-      textAlign: 'right',
-      bottom: '45px',
-      right: '10px'
     }
   },
-  '&:hover': {
+  _hover: {
     boxShadow: '2px 2px 7px 1px rgba(0, 0, 0, 0)',
     color: '#263238',
     borderColor: '#263238',
@@ -77,4 +48,27 @@ export const movieTile = css({
       }
     }
   }
+});
+
+export const originalTitle = css({
+  fontSize: '1.2rem',
+  lineHeight: '1.4rem',
+  fontWeight: 700,
+  marginBottom: '5px',
+  textShadow: '#000 1px 1px'
+});
+
+export const frenchTitle = css({
+  fontSize: '1.1rem',
+  lineHeight: '1.2rem',
+  fontWeight: 300,
+  textShadow: '#000 1px 1px'
+});
+
+export const releaseDate = css({
+  fontSize: '1.1rem',
+  position: 'absolute',
+  textAlign: 'right',
+  bottom: '45px',
+  right: '10px'
 });

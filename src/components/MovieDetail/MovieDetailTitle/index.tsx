@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { format } from 'date-fns';
 import {
   companiesStyles,
@@ -8,8 +9,7 @@ import {
   releaseInfoStyles,
   relesaeDateStyles
 } from './movieDetailTitle.styles';
-import { useTranslation } from 'react-i18next';
-import { code2country } from '@/utils/countries';
+import { code2country } from '@utils/countries';
 
 interface MovieDetailTitleProps {
   originalTitle: string;

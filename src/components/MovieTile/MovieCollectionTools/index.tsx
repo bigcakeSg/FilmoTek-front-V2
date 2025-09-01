@@ -1,12 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import { FaEye, FaMapPin, FaStar } from 'react-icons/fa6';
 import {
   movieCollectionTools,
   toolButton
 } from './movieCollectionTools.styles';
-import TooltipComponent from '@/components/ui/TooltipComponent';
-import { useTranslation } from 'react-i18next';
-import { useCollections } from '@/hooks/collections.hook';
-import { usePatchMovie } from '@/hooks/movies.hook';
+import TooltipComponent from '@components/ui/TooltipComponent';
+import { useCollections } from '@hooks/collections.hook';
+import { usePatchMovie } from '@hooks/movies.hook';
+import { useRole } from '@hooks/auth.hook';
 
 interface ToolButtonProps {
   icon: React.ReactNode;
@@ -21,21 +22,30 @@ function ToolButton({
   tooltipMessage,
   onClick
 }: Readonly<ToolButtonProps>) {
+  const { isAdmin } = useRole();
+
   return (
     <TooltipComponent message={tooltipMessage}>
       <div
         role="button"
         tabIndex={0}
-        className={toolButton({ status: isActive ? 'active' : 'inactive' })}
+        className={toolButton({
+          status: isActive ? 'active' : 'inactive',
+          role: isAdmin ? 'admin' : 'user'
+        })}
         aria-pressed={isActive}
         onClick={(e) => {
-          e.preventDefault();
-          onClick();
+          if (isAdmin) {
+            e.preventDefault();
+            onClick();
+          }
         }}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            onClick();
+            if (isAdmin) {
+              e.preventDefault();
+              onClick();
+            }
           }
         }}
       >

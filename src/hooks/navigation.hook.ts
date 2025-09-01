@@ -1,5 +1,5 @@
-import { SortDirection, SortName } from '@/interfaces/filterSort.interface';
-import useRouteStore from '@/stores/route.store';
+import { SortDirection, SortName } from '@interfaces/filterSort.interface';
+import useRouteStore from '@stores/route.store';
 import { useLocation } from '@tanstack/react-router';
 
 export const useNavigation = () => {
@@ -26,7 +26,11 @@ export const useNavigation = () => {
     filter: search.filter ? searchFilters : []
   };
 
+  const isMovieFilter =
+    moviesQueries.filter.length > 1 || moviesQueries.filter[0] !== 'title+';
+
   return {
+    isMovieFilter,
     moviesQueries,
     moviesQueryKey: [
       moviesQueries.key,

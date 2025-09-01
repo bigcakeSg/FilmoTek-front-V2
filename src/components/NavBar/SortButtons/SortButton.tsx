@@ -1,4 +1,4 @@
-import { SortName } from '@/interfaces/filterSort.interface';
+import { SortName } from '@interfaces/filterSort.interface';
 import { useLocation, useNavigate } from '@tanstack/react-router';
 import { sortArrow, sortButton } from './sortButtons.styles';
 import { IoIosArrowRoundUp, IoIosArrowRoundDown } from 'react-icons/io';

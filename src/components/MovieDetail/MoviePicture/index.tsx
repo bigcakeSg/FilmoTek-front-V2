@@ -1,6 +1,6 @@
 import { Dialog } from '@ark-ui/react/dialog';
-import { moviePoster, moviePosterLarge } from './moviePicture.styles';
 import { Portal } from '@ark-ui/react/portal';
+import { moviePoster, moviePosterLarge } from './moviePicture.styles';
 
 interface MoviePictureProps {
   picture: string;

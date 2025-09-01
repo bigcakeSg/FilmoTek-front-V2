@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Genre, Movie, Name } from '@interfaces/movies.interfaces';
 import {
   movieBanner,
   movieDetail,
@@ -17,33 +18,24 @@ import MoviePlot from './MoviePlot';
 import MovieDetailTitle from './MovieDetailTitle';
 import MovieGenres from './MovieGenres';
 import MovieDetailCast from './MovieDetailCast';
-import { Genre, Movie, Name } from '@/interfaces/movies.interfaces';
 import MoviePanel from './MoviePanel';
 import MovieVideo from './MovieVideo';
 import MovieImdbLink from './MovieImdbLink';
+import NotFound from '@/pages/NotFound';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
 interface MovieDetailProps {
-  movieData: Movie | undefined;
-  isFetching: boolean;
+  movieData?: Movie;
 }
 
-export default function MovieDetail({
-  movieData,
-  isFetching
-}: Readonly<MovieDetailProps>) {
+export default function MovieDetail({ movieData }: Readonly<MovieDetailProps>) {
   const [name, setName] = useState<Name | null>(null);
   const [genre, setGenre] = useState<Genre | null>(null);
 
-  if (isFetching) return <div>Loading...</div>; // TODO: loader
+  if (!movieData) return <NotFound />;
 
-  if (!movieData) return <div>Movie not found</div>; // TODO: error page
-
-  const backgroundImage =
-    isFetching || !movieData.picture
-      ? 'unset'
-      : `url(${BASE_URL}/media/posters/${movieData.picture})`;
+  const backgroundImage = `url(${BASE_URL}/media/posters/${movieData.picture})`;
 
   return (
     <div className={movieDetail}>
@@ -55,6 +47,7 @@ export default function MovieDetail({
           }}
         ></div>
         <div className="movie-banner__overlay"></div>
+        <div className="movie-banner__gradient"></div>
       </div>
       <div className={movieDetailContainer}>
         <div className={movieDetailContent}>

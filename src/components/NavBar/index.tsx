@@ -10,11 +10,12 @@ import NavButtons from './NavButtons';
 import FilterButton from './FilterButton';
 import SortButtons from './SortButtons';
 import { Link, useLocation } from '@tanstack/react-router';
-import useRouteStore from '@/stores/route.store';
+import useRouteStore from '@stores/route.store';
+import Logo from '@assets/filmotek.svg?react';
 
 export default function NavBar() {
   const location = useLocation();
-  const { page, sort, filter } = useRouteStore();
+  const { page, limit, sort, filter } = useRouteStore();
 
   return (
     <nav className={navBar}>
@@ -24,13 +25,19 @@ export default function NavBar() {
           to="/"
           search={{
             page,
+            limit,
             sortBy: sort.name,
             direction: sort.direction,
             filter: filter.map((f) => `${f.name}+${f.value}`)
           }}
         >
-          <span className="filmo">Filmo</span>
-          <span className="tek">TEK</span>
+          <div>
+            <Logo height="25px" />
+          </div>
+          <div>
+            <span className="filmo">Filmo</span>
+            <span className="tek">TEK</span>
+          </div>
         </Link>
         <NavButtons />
       </div>

@@ -20,7 +20,7 @@ export const extendedCast = css({
   display: 'flex',
   flexWrap: 'wrap',
   gap: '20px',
-  margin: '40px 0 20px 20px'
+  margin: { base: '40px 0 20px0px', '2xl': '40px 0 20px 20px' }
 });
 
 export const actorTile = cva({
@@ -50,20 +50,20 @@ export const actorTile = cva({
     type: {
       principal: {
         flexDirection: 'column',
-        width: '200px',
+        width: { base: '150px', '2xl': '200px' },
         '& .actor-picture': {
-          width: '200px',
-          minHeight: '250px',
+          width: { base: '150px', '2xl': '200px' },
+          minHeight: { base: '200px', '2xl': '250px' },
           border: '3px solid #000000'
         }
       },
       extended: {
         flexDirection: 'row',
-        width: '300px',
-        height: '125px',
+        width: { base: '250px', '2xl': '300px' },
+        height: { base: '100px', '2xl': '125px' },
         '& .actor-picture': {
-          minWidth: '100px',
-          height: '125px',
+          minWidth: { base: '80px', '2xl': '100px' },
+          height: { base: '100px', '2xl': '125px' },
           border: '3px solid #000000'
         }
       }

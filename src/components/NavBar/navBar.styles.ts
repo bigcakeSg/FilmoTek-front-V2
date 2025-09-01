@@ -28,17 +28,25 @@ export const navSecondaryNav = css({
 });
 
 export const filmotekTitle = css({
+  backgroundColor: '#ffffff',
+  color: '{secondaryBackground}',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '5px',
   fontSize: '1.5rem',
   border: 'solid 1px',
   borderColor: '#ffffff',
-  rounded: '10px',
+  rounded: '5px',
   padding: '0px 10px',
-  marginLeft: '10px',
+  marginLeft: '0px',
   '& .filmo': {
     fontWeight: '300'
   },
   '& .tek': {
     fontWeight: '600'
+  },
+  '& svg': {
+    fill: '{secondaryBackground}'
   }
 });
 

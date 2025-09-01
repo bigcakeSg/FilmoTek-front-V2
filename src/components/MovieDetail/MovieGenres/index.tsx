@@ -1,13 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 import { genreTag, movieDetailGenres } from './movieGenres.styles';
-import { Genre } from '@/interfaces/movies.interfaces';
-import useUiStore from '@/stores/ui.store';
+import { Genre } from '@interfaces/movies.interfaces';
+import useUiStore from '@stores/ui.store';
 
 interface MovieGenresProps {
-  genres: Array<{
-    id: string;
-    text: string;
-  }>;
+  genres: Genre[];
   setGenre: Dispatch<SetStateAction<Genre | null>>;
 }
 

@@ -6,6 +6,7 @@ export const userInfos = css({
   display: 'flex',
   flexDirection: 'column',
   gap: '10px',
+  fontWeight: '400',
   '& .name': {
     fontWeight: '700'
   }

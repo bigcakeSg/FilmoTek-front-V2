@@ -1,17 +1,19 @@
-import { z } from 'zod';
-import { Movie } from '@/interfaces/movies.interfaces';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import ButtonComponent from '../ui/ButtonComponent';
-import TextfieldComponent from '../ui/TextfieldComponent';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { z } from 'zod';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Movie } from '@interfaces/movies.interfaces';
+import { zodResolver } from '@hookform/resolvers/zod';
+import ButtonComponent from '@components/ui/ButtonComponent';
+import TextfieldComponent from '@components/ui/TextfieldComponent';
 import {
   useGetMovieDetail,
   useMovieFromApi,
   usePatchMovie,
   usePostMovie
 } from '@/hooks/movies.hook';
-import { useEffect } from 'react';
+import { formContainer, loaderContainer } from './editMovieForm.styles';
+import Loader from '../ui/Loader';
 
 const formEditMovieSchema = z.object({
   originalTitle: z.string().min(1, {
@@ -69,8 +71,8 @@ export default function EditMovieForm({
     refetch
   } = useMovieFromApi(type === 'create' ? movieId : undefined);
 
-  const { mutate: createMovie } = usePostMovie();
-  const { mutate: updateMovie } = usePatchMovie();
+  const { mutate: createMovie, isPending: isCreatingMovie } = usePostMovie();
+  const { mutate: updateMovie, isPending: isPatchingMovie } = usePatchMovie();
 
   useEffect(() => {
     refetch();
@@ -83,7 +85,7 @@ export default function EditMovieForm({
   const {
     control,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors }
   } = useForm<FormEditMovie>({
     resolver: zodResolver(formEditMovieSchema),
@@ -115,8 +117,25 @@ export default function EditMovieForm({
     }
   };
 
+  if (isPatchingMovie)
+    return (
+      <div className={loaderContainer}>
+        <Loader label={t('saving')} />
+      </div>
+    );
+
+  if (isCreatingMovie)
+    return (
+      <div className={loaderContainer}>
+        <Loader label={t('saving')} />
+      </div>
+    );
+
   return (
-    <form onSubmit={handleSubmit(handleSubmitEditMovie)}>
+    <form
+      className={formContainer}
+      onSubmit={handleSubmit(handleSubmitEditMovie)}
+    >
       <div>{movieData?.imdbId}</div>
       <Controller
         name="originalTitle"

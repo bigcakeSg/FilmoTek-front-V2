@@ -1,13 +1,13 @@
-import { Pagination } from '@ark-ui/react/pagination';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Pagination } from '@ark-ui/react/pagination';
 import { pagination, paginationSelect } from './moviesPagination.styles';
 import { useNavigate, useSearch } from '@tanstack/react-router';
-import { usePrefetchMovies } from '@/hooks/movies.hook';
-import { useNavigation } from '@/hooks/navigation.hook';
-import useRouteStore from '@/stores/route.store';
+import { usePrefetchMovies } from '@hooks/movies.hook';
+import { useNavigation } from '@hooks/navigation.hook';
+import useRouteStore from '@stores/route.store';
 import { BiLeftArrow, BiRightArrow } from 'react-icons/bi';
-import SelectComponent from '@/components/ui/SelectComponent';
-import { useTranslation } from 'react-i18next';
+import SelectComponent from '@components/ui/SelectComponent';
 
 interface MoviesPaginationProps {
   count: number | undefined;

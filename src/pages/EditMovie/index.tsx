@@ -1,5 +1,5 @@
-import EditMovieForm from '@/components/EditMovieForm';
-import { Route } from '@/routes/movie_/$movieId/edit';
+import EditMovieForm from '@components/EditMovieForm';
+import { Route } from '@routes/movie_/$movieId/edit';
 
 export default function EditMovie() {
   const { movieId } = Route.useParams();

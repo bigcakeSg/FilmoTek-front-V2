@@ -1,19 +1,20 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
+import { t } from 'i18next';
 import noName from '@assets/noName.jpg';
-import RightPanel from '@/components/ui/RightPanel';
+import RightPanel from '@components/ui/RightPanel';
 import {
   useGetMovieListByGenre,
   useGetMovieListByName
-} from '@/hooks/movies.hook';
-import { Genre, Name } from '@/interfaces/movies.interfaces';
+} from '@hooks/movies.hook';
+import { Genre, Name } from '@interfaces/movies.interfaces';
 import MovieTilePanel from './MovieTilePanel';
 import {
   moviePanelList,
   nameContainer,
   namePicture
 } from './movieNamePanel.styles';
-import { t } from 'i18next';
 import MovieImdbLink from '../MovieImdbLink';
+import Loader from '@/components/ui/Loader';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
@@ -53,6 +54,9 @@ export default function MoviePanel({
 
   return (
     <RightPanel
+      // TODO: mettre un typeOfPanel (name | genre) dans les props
+      // ne pas effacer les données lors de la fermeture
+      // afficher en fonction du type
       onClose={() => {
         setName(null);
         setGenre(null);
@@ -104,9 +108,8 @@ export default function MoviePanel({
           )}
         </div>
       </div>
-      {/* TODO: loading */}
       {isNameMoviesFetching || isGenreMoviesFetching ? (
-        <div>Loading...</div>
+        <Loader label={t('loading')} />
       ) : (
         <div className={moviePanelList}>
           {nameMovies

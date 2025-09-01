@@ -4,7 +4,7 @@ import { combine } from 'zustand/middleware';
 interface UiStore {
   modalOpen: boolean;
   modalContent: {
-    title: React.ReactNode | string;
+    title?: React.ReactNode | string;
     content: React.ReactNode;
   } | null;
   rightPanelOpen: boolean;
@@ -14,7 +14,7 @@ interface UiStore {
 export interface UiActions {
   openModal: (
     content: {
-      title: React.ReactNode | string;
+      title?: React.ReactNode | string;
       content: React.ReactNode;
     } | null
   ) => void;

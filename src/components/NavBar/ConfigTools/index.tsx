@@ -1,8 +1,8 @@
 import UserAvatar from '@components/UserAvatar';
-import { configTools } from './configTools.styles';
 import MenuLang from '@components/MenuLang';
 import ColorModeButton from '@components/ColorModeButton';
-import FilterTextfield from '@/components/FilterComponents/FilterTextfield';
+import FilterTextfield from '@components/FilterComponents/FilterTextfield';
+import { configTools } from './configTools.styles';
 
 interface ConfigToolsProps {
   path: string;

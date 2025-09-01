@@ -1,5 +1,7 @@
 {
   "loading": "Loading...",
+  "saving": "Saving...",
+  "deleting": "Deleting...",
   "movies": "movies",
   "movie": "movie",
   "welcome": "Welcome",
@@ -13,9 +15,14 @@
   "mainNav": {
     "movieList": "Movie List",
     "addMovie": "Add movie",
+    "randomMovie": "Random movie",
+    "trailers": "Trailers",
     "stats": "Stats",
     "movieListTooltip": "View the list of movies",
     "addMovieTooltip": "Add a new movie to the list",
+    "randomMovieTooltip": "View a random movie",
+    "trailersTooltip": "Launch trailers randomly",
+    "filters": "(take filters into account)",
     "statsTooltip": "View statistics about movies",
     "openFilters": "Open filters",
     "sortBy": "Sort by",
@@ -35,26 +42,29 @@
     "passwordError": "Password must be at least 4 characters."
   },
   "tileTooltip": {
-    "watched": "Already watched",
+    "watched": "Watched",
     "notWatched": "Not yet watched",
-    "favorite": "Added to favorites",
-    "notFavorite": "Not yet added to favorites",
+    "favorite": "Favorite",
+    "notFavorite": "Not in favorites",
     "pinned": "Pinned",
-    "notPinned": "Not yet pinned"
+    "notPinned": "Not pinned"
   },
   "movieDetail": {
     "director": "Director:",
     "writer": "Writer:",
     "directors": "Directors:",
     "writers": "Writers:",
-    "casting": "Casting"
+    "casting": "Casting",
+    "more": "Show more",
+    "less": "Show less"
   },
   "filters": {
     "collections": "Collections",
     "supports": "Supports",
     "search": "Search for a movie...",
     "filter": "Filter",
-    "removeFilters": "Remove filters"
+    "removeFilters": "Remove filters",
+    "resetFilters": "Reset all filters"
   },
   "job": {
     "director": "Director",
@@ -69,13 +79,38 @@
     "production_designer": "Chef décorateur"
   },
   "edition": {
-    "editMovie": "Edit movie",
-    "deleteMovie": "Delete movie"
+    "editMovie": "Edit movie"
   },
   "addMovie": {
     "imdbId": "IMDb ID",
     "imdbIdError": "IMDb ID is mandatory",
     "unknownImdbId": "IMDb ID unknown",
     "search": "Search for the movie"
+  },
+  "delete": {
+    "movie": "Delete movie",
+    "sure": "Are you sure you want to delete \"{{movie}}\"?",
+    "deleted": "The movie \"{{movie}}\" has been deleted.",
+    "confirm": "Delete"
+  },
+  "toaster": {
+    "success": {
+      "title": "Success!",
+      "created": "The movie has been created successfully.",
+      "updated": "The movie has been updated successfully.",
+      "deleted": "The movie has been deleted successfully."
+    },
+    "error": {
+      "title": "Error!",
+      "created": "An error occurred during creation.",
+      "updated": "An error occurred during update.",
+      "deleted": "An error occurred during deletion.",
+      "unknown": "The movie with the IMDb ID \"{{id}}\" does not exist."
+    },
+    "info": { "title": "Info !" },
+    "warning": {
+      "title": "Warning!",
+      "alreadyExists": "The movie with the IMDb ID \"{{id}}\" already exists."
+    }
   }
 }

@@ -10,9 +10,9 @@ import {
   nameStyle,
   principalCast
 } from './movieDetailCast.styles';
-import { Name } from '@/interfaces/movies.interfaces';
+import { Name } from '@interfaces/movies.interfaces';
 import CastName from './CastName';
-import useUiStore from '@/stores/ui.store';
+import useUiStore from '@stores/ui.store';
 
 interface MovieDetailCastProps {
   directors: Name[];
@@ -83,8 +83,8 @@ export default function MovieDetailCast({
         <div className={crewStyle}>
           <Collapsible.Root>
             <Collapsible.Trigger>
-              <div className="more">Show more</div>
-              <div className="less">Show less</div>
+              <div className="more">{t('movieDetail.more')}</div>
+              <div className="less">{t('movieDetail.less')}</div>
               <Collapsible.Indicator>
                 <GoTriangleDown />
               </Collapsible.Indicator>

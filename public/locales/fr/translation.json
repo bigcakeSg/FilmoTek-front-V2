@@ -1,5 +1,7 @@
 {
   "loading": "Chargement...",
+  "saving": "Enregistrement...",
+  "deleting": "Suppression...",
   "movies": "films",
   "movie": "film",
   "welcome": "Bienvenue",
@@ -13,9 +15,14 @@
   "mainNav": {
     "movieList": "Liste de films",
     "addMovie": "Ajouter un film",
+    "randomMovie": "Film aléatoire",
+    "trailers": "Bande-annonces",
     "stats": "Statistiques",
     "movieListTooltip": "Voir la liste des films",
     "addMovieTooltip": "Ajouter un nouveau film à la liste",
+    "randomMovieTooltip": "Voir un film aléatoire",
+    "trailersTooltip": "Lancer des bandes-annonces aléatoirement",
+    "filters": "(tiens compte des filtres)",
     "statsTooltip": "Voir les statistiques sur les films",
     "openFilters": "Ouvrir les filtres",
     "sortBy": "Trier par",
@@ -35,26 +42,29 @@
     "passwordError": "Le mot de passe doit comporter au moins 4 caractères."
   },
   "tileTooltip": {
-    "watched": "Déjà visionné",
-    "notWatched": "Pas encore visionné",
-    "favorite": "Ajouté aux favoris",
-    "notFavorite": "Pas encore ajouté aux favoris",
+    "watched": "Visionné",
+    "notWatched": "Non visionné",
+    "favorite": "Favoris",
+    "notFavorite": "Pas dans les favoris",
     "pinned": "Épinglé",
-    "notPinned": "Pas encore épinglé"
+    "notPinned": "Pas épinglé"
   },
   "movieDetail": {
     "director": "Réalisateur :",
     "writer": "Scénariste :",
     "directors": "Réalisateurs :",
     "writers": "Scénaristes :",
-    "casting": "Distribution"
+    "casting": "Distribution",
+    "more": "Afficher plus",
+    "less": "Afficher moins"
   },
   "filters": {
     "collections": "Collections",
     "supports": "Supports",
     "search": "Rechercher un film...",
     "filter": "Filtrer",
-    "removeFilters": "Effacer les filtres"
+    "removeFilters": "Effacer les filtres",
+    "resetFilters": "Réinitialiser tous les filtres"
   },
   "job": {
     "director": "Réalisateur",
@@ -69,13 +79,38 @@
     "production_designer": "Directeur de la production"
   },
   "edition": {
-    "editMovie": "Modifier le film",
-    "deleteMovie": "Supprimer le film"
+    "editMovie": "Modifier le film"
   },
   "addMovie": {
     "imdbId": "IMDb ID",
     "imdbIdError": "IMDb ID est obligatoire",
     "unknownImdbId": "IMDb ID inconnu",
     "search": "Rechercher le film"
+  },
+  "delete": {
+    "movie": "Supprimer le film",
+    "sure": "Êtes-vous sûr de vouloir supprimer \"{{movie}}\" ?",
+    "deleted": "Le film \"{{movie}}\" a été supprimé.",
+    "confirm": "Supprimer"
+  },
+  "toaster": {
+    "success": {
+      "title": "Succès !",
+      "created": "Le film a été créé avec succès.",
+      "updated": "Le film a été mis à jour avec succès.",
+      "deleted": "Le film a été supprimé avec succès."
+    },
+    "error": {
+      "title": "Erreur !",
+      "created": "Une erreur s'est produite pendant la création.",
+      "updated": "Une erreur s'est produite pendant la mise à jour.",
+      "deleted": "Une erreur s'est produite pendant la suppression.",
+      "unknown": "Le film avec l'ID IMDb \"{{id}}\" n'existe pas."
+    },
+    "info": { "title": "Info !" },
+    "warning": {
+      "title": "Avertissement !",
+      "alreadyExists": "Le film avec l'ID IMDb \"{{id}}\" existe déjà."
+    }
   }
 }

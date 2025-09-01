@@ -1,4 +1,4 @@
-import useUiStore from '@/stores/ui.store';
+import useUiStore from '@stores/ui.store';
 import { topPanel, topPanelOverlay } from './topPanel.styles';
 
 interface TopPanelProps {

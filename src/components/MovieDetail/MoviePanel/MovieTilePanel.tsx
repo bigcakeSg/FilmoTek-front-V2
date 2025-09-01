@@ -1,9 +1,9 @@
-import { format } from 'date-fns';
-import { Movie } from '@/interfaces/movies.interfaces';
-import useUiStore from '@/stores/ui.store';
-import { Link } from '@tanstack/react-router';
-import { imageFrame, movieTilePanel } from './movieNamePanel.styles';
 import { useTranslation } from 'react-i18next';
+import { Link } from '@tanstack/react-router';
+import { format } from 'date-fns';
+import { Movie } from '@interfaces/movies.interfaces';
+import useUiStore from '@stores/ui.store';
+import { imageFrame, movieTilePanel } from './movieNamePanel.styles';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 

@@ -11,7 +11,7 @@ export const fieldText = css({
     border: '1px solid',
     borderColor: '{foreground}',
     rounded: '5px',
-    padding: '3px',
+    padding: '7px 15px',
     backgroundColor: { base: '#00000011', _dark: '#ffffff11' },
     width: '100%',
     fontWeight: '300',
