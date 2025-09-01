@@ -16,10 +16,12 @@
     "movieList": "Movie List",
     "addMovie": "Add movie",
     "randomMovie": "Random movie",
+    "trailers": "Trailers",
     "stats": "Stats",
     "movieListTooltip": "View the list of movies",
     "addMovieTooltip": "Add a new movie to the list",
     "randomMovieTooltip": "View a random movie",
+    "trailersTooltip": "Launch trailers randomly",
     "filters": "(take filters into account)",
     "statsTooltip": "View statistics about movies",
     "openFilters": "Open filters",
@@ -52,7 +54,9 @@
     "writer": "Writer:",
     "directors": "Directors:",
     "writers": "Writers:",
-    "casting": "Casting"
+    "casting": "Casting",
+    "more": "Show more",
+    "less": "Show less"
   },
   "filters": {
     "collections": "Collections",

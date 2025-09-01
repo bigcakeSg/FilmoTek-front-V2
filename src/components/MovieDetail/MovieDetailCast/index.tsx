@@ -83,8 +83,8 @@ export default function MovieDetailCast({
         <div className={crewStyle}>
           <Collapsible.Root>
             <Collapsible.Trigger>
-              <div className="more">Show more</div>
-              <div className="less">Show less</div>
+              <div className="more">{t('movieDetail.more')}</div>
+              <div className="less">{t('movieDetail.less')}</div>
               <Collapsible.Indicator>
                 <GoTriangleDown />
               </Collapsible.Indicator>

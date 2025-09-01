@@ -8,7 +8,14 @@ interface MovieVideoProps {
 export default function MovieVideo({ video }: Readonly<MovieVideoProps>) {
   return (
     <div className={videoPlayer}>
-      <ReactPlayer src={video} width="100%" height="100%" controls />
+      <ReactPlayer
+        src={video}
+        width="100%"
+        height="100%"
+        controls
+        light
+        playing
+      />
     </div>
   );
 }

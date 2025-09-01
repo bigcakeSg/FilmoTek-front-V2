@@ -29,7 +29,9 @@ export default function ModalComponent() {
         <Dialog.Backdrop />
         <Dialog.Positioner>
           <Dialog.Content>
-            <Dialog.Title>{modalContent?.title}</Dialog.Title>
+            {modalContent?.title && (
+              <Dialog.Title>{modalContent.title}</Dialog.Title>
+            )}
             <Dialog.Description>{modalContent?.content}</Dialog.Description>
             <Dialog.CloseTrigger>
               <IoClose />

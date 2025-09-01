@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { MdMovie, MdMovieEdit } from 'react-icons/md';
 import { BiSolidBarChartSquare } from 'react-icons/bi';
+import { RiMovie2Fill } from 'react-icons/ri';
 import { FaDice } from 'react-icons/fa';
 import { navButtons } from './navButtons.sttyles';
 import NavButton from './NavButton';
@@ -11,8 +12,11 @@ import { useRole } from '@hooks/auth.hook';
 import { css } from '@styled-system/css';
 import { useGetRandomMovie } from '@/hooks/movies.hook';
 import { useNavigate } from '@tanstack/react-router';
+import RandomTrailers from '@/components/RandomTrailers';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function NavButtons() {
+  const queryClient = useQueryClient();
   const { t } = useTranslation();
   const navigate = useNavigate({ from: '/movie/$movieId' });
   const { page, limit, sort, filter } = useRouteStore();
@@ -61,7 +65,7 @@ export default function NavButtons() {
         />
       )}
       <NavButton
-        onClick={async () => {
+        onClick={() => {
           fetchRandomMovie().then((randomMovie) => {
             if (randomMovie.isSuccess && randomMovie.data)
               navigate({
@@ -79,6 +83,17 @@ export default function NavButtons() {
             {t('mainNav.filters')}
           </>
         }
+      />
+      <NavButton
+        onClick={() => {
+          queryClient.resetQueries({ queryKey: ['randomMovie'] });
+          openModal({
+            content: <RandomTrailers />
+          });
+        }}
+        label={t('mainNav.trailers')}
+        icon={<RiMovie2Fill />}
+        tootltipMessage={<>{t('mainNav.trailersTooltip')}</>}
       />
       <NavButton
         to="/statistics/genre"
