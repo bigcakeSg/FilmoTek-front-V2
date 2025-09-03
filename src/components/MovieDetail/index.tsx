@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Genre, Movie, Name } from '@interfaces/movies.interfaces';
 import {
   movieBanner,
@@ -22,6 +22,7 @@ import MoviePanel from './MoviePanel';
 import MovieVideo from './MovieVideo';
 import MovieImdbLink from './MovieImdbLink';
 import NotFound from '@/pages/NotFound';
+import useUiStore from '@/stores/ui.store';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URI;
 
@@ -30,6 +31,14 @@ interface MovieDetailProps {
 }
 
 export default function MovieDetail({ movieData }: Readonly<MovieDetailProps>) {
+  const { closeRightPanel } = useUiStore();
+
+  useEffect(() => {
+    return () => {
+      closeRightPanel();
+    };
+  }, [closeRightPanel]);
+
   const [name, setName] = useState<Name | null>(null);
   const [genre, setGenre] = useState<Genre | null>(null);
 
