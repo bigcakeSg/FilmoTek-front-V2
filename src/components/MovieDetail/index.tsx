@@ -34,10 +34,12 @@ export default function MovieDetail({ movieData }: Readonly<MovieDetailProps>) {
   const { closeRightPanel } = useUiStore();
 
   useEffect(() => {
+    closeRightPanel();
     return () => {
       closeRightPanel();
     };
-  }, [closeRightPanel]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [name, setName] = useState<Name | null>(null);
   const [genre, setGenre] = useState<Genre | null>(null);

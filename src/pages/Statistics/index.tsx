@@ -1,21 +1,14 @@
-import GenreChart from './GenreChart';
-import DateChart from './DateChart';
-import SupportChart from './SupportChart';
+import GenreChart from '@components/Charts/GenreChart';
+import DateChart from '@components/Charts/DateChart';
+import SupportChart from '@components/Charts/SupportChart';
+import KeyFigures from '@components/KeyFigures';
+import { statsContainer, statsContent } from './statistics.styles';
 
 export default function Statistics() {
   return (
-    <div
-      style={{
-        overflow: 'auto',
-        height: '100%'
-      }}
-    >
-      <div
-        style={{
-          width: '1000px',
-          margin: '0 auto'
-        }}
-      >
+    <div className={statsContainer}>
+      <div className={statsContent}>
+        <KeyFigures />
         <DateChart />
         <SupportChart />
         <GenreChart />

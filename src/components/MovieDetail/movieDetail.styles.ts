@@ -47,9 +47,9 @@ export const movieDetailContainer = css({
 });
 
 export const movieDetailContent = css({
-  width: '1850px',
+  maxWidth: '1850px',
   position: 'relative',
-  margin: '0 30px',
+  margin: { base: '0', sm: '0 0 0 30px', ['2xl']: '0 30px' },
   display: 'grid',
   height: { base: 'fit-content', sm: 'auto' },
   gridTemplateColumns: {
@@ -86,6 +86,7 @@ export const movieDetailInfos = css({
 });
 
 export const movieDetailPlot = css({
+  paddingRight: { base: '0', sm: '30px', ['2xl']: '0' },
   gridColumnStart: { base: 'start', sm: 'start', ['2xl']: 'start' },
   gridColumnEnd: { base: 'span end', sm: 'span end', ['2xl']: 'span col2' },
   gridRowStart: { base: 'row4', sm: 'row3', ['2xl']: 'row4' },
@@ -106,6 +107,12 @@ export const movieDetailTitle = css({
 });
 
 export const movieDetailCast = css({
+  marginRight: { ['2xl']: 'calc(((100% + 300px) - 100vw) / 2)' },
+  paddingRight: {
+    base: '0',
+    sm: '30px',
+    ['2xl']: 'calc((100vw - (100% + 300px)) / 2)'
+  },
   gridColumnStart: { base: 'col1', sm: 'col1', ['2xl']: 'col2' },
   gridColumnEnd: { base: 'span end', sm: 'span end', ['2xl']: 'span end' },
   gridRowStart: { base: 'row5', sm: 'row4', ['2xl']: 'row2' },

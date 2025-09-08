@@ -1,7 +1,8 @@
 import {
   getStatsByDate,
   getStatsByGenre,
-  getStatsBySupport
+  getStatsBySupport,
+  getStatsDuration
 } from '@/api/stats.api';
 import { useQuery } from '@tanstack/react-query';
 
@@ -36,4 +37,15 @@ export const useStatsByDate = () => {
   });
 
   return { data: data || {}, error, isFetching, refetch, isError, isSuccess };
+};
+
+export const useStatsDuration = () => {
+  const { data, error, isFetching, refetch, isError, isSuccess } = useQuery({
+    queryKey: ['stats', 'duration'],
+    queryFn: getStatsDuration,
+    refetchOnWindowFocus: false,
+    staleTime: 60000 * 5 // 5 minutes
+  });
+
+  return { data: data || 0, error, isFetching, refetch, isError, isSuccess };
 };

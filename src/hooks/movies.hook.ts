@@ -163,9 +163,6 @@ export const usePatchMovie = () => {
       movieData: Partial<Movie>;
       redirect?: boolean;
     }) => patchMovie(movieId, movieData),
-    onMutate: () => {
-      // TODO: Optimistically update???
-    },
     onSuccess: async (data, params) => {
       toaster.success({
         title: t('toaster.success.title'),
@@ -182,7 +179,8 @@ export const usePatchMovie = () => {
         predicate: (query) =>
           query.queryKey[0] === 'movieList' ||
           query.queryKey[0] === 'movieListByName' ||
-          (query.queryKey[0] === 'movie' && query.queryKey[1] === data._id)
+          (query.queryKey[0] === 'movie' && query.queryKey[1] === data._id) ||
+          query.queryKey[0] === 'stats'
       });
     },
     onError: () => {
@@ -227,9 +225,6 @@ export const usePostMovie = () => {
 
   const { data, mutate, isSuccess, error, isPending } = useMutation({
     mutationFn: (movieData: Movie) => postMovie(movieData),
-    onMutate: () => {
-      // TODO: Optimistically update???
-    },
     onSuccess: async (data) => {
       toaster.success({
         title: t('toaster.success.title'),
@@ -244,7 +239,8 @@ export const usePostMovie = () => {
         predicate: (query) =>
           query.queryKey[0] === 'movieList' ||
           query.queryKey[0] === 'movieListByName' ||
-          query.queryKey[0] === 'movieFromApi'
+          query.queryKey[0] === 'movieFromApi' ||
+          query.queryKey[0] === 'stats'
       });
     },
     onError: () => {
@@ -267,9 +263,6 @@ export const useDeleteMovie = (movieId: string) => {
 
   const { data, mutate, isSuccess, error, isPending } = useMutation({
     mutationFn: () => deleteMovie(movieId),
-    onMutate: () => {
-      // TODO: Optimistically update???
-    },
     onSuccess: async () => {
       toaster.success({
         title: t('toaster.success.title'),
@@ -289,7 +282,8 @@ export const useDeleteMovie = (movieId: string) => {
         predicate: (query) =>
           query.queryKey[0] === 'movieList' ||
           query.queryKey[0] === 'movieListByName' ||
-          (query.queryKey[0] === 'movie' && query.queryKey[1] === movieId)
+          (query.queryKey[0] === 'movie' && query.queryKey[1] === movieId) ||
+          query.queryKey[0] === 'stats'
       });
     },
     onError: () => {

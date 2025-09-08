@@ -1,4 +1,12 @@
-export type Supports = 'vhs' | 'ld' | 'dvd' | 'bd' | 'uhd';
+export const SupportsEnum = {
+  vhs: 'VHS',
+  ld: 'Laserdisc',
+  dvd: 'DVD',
+  bd: 'Blu-Ray',
+  uhd: 'Blu-Ray 4K UHD'
+};
+
+export type Supports = (typeof SupportsEnum)[keyof typeof SupportsEnum];
 
 export interface Name {
   name: { _id: string; id: string; text: string; picture?: string };

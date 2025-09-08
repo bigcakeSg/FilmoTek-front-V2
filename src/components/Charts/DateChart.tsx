@@ -9,7 +9,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
-import { useStatsByGenre } from '@/hooks/stats.hook';
+import { useStatsByDate } from '@/hooks/stats.hook';
 import Loader from '@/components/ui/Loader';
 
 ChartJS.register(
@@ -25,7 +25,7 @@ const options = {
   plugins: {
     title: {
       display: true,
-      text: 'Genres'
+      text: 'Release dates'
     },
     legend: {
       display: false
@@ -34,16 +34,24 @@ const options = {
   responsive: true
 };
 
-export default function GenreChart() {
+export default function DateChart() {
   const { t } = useTranslation();
-  const { data: genres, isFetching } = useStatsByGenre();
+  const { data: dates, isFetching } = useStatsByDate();
 
-  const chartGenre = {
-    labels: Object.keys(genres),
+  const count = [];
+  const list = [];
+
+  const dateKeys = Object.keys(dates);
+  for (let i = +dateKeys[0]; i <= +dateKeys[dateKeys.length - 1]; i++) {
+    count.push(dates[i] ? dates[i].total : 0);
+    list.push(i);
+  }
+
+  const chartDate = {
+    labels: list,
     datasets: [
       {
-        label: 'Movies',
-        data: Object.values(genres),
+        data: count,
         backgroundColor: 'rgba(255, 99, 132, 0.5)'
       }
     ]
@@ -62,7 +70,7 @@ export default function GenreChart() {
       {isFetching ? (
         <Loader label={t('loading')} />
       ) : (
-        <Bar options={options} data={chartGenre} />
+        <Bar options={options} data={chartDate} />
       )}
     </div>
   );

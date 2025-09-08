@@ -16,3 +16,8 @@ export const getStatsByDate = async (): Promise<
   const response = await axiosInstance.get(`/stats/bydate`);
   return response.data;
 };
+
+export const getStatsDuration = async (): Promise<number> => {
+  const response = await axiosInstance.get(`/stats/duration`);
+  return response.data;
+};
