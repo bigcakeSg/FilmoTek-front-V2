@@ -144,7 +144,7 @@ export default function EditMovieForm({
         render={({ field }) => {
           return (
             <TextfieldComponent
-              label={t('movie.originalTitle')}
+              label={t('movieEdition.originalTitle')}
               required
               errorText={
                 errors.originalTitle?.message &&
@@ -160,7 +160,10 @@ export default function EditMovieForm({
         control={control}
         render={({ field }) => {
           return (
-            <TextfieldComponent label={t('movie.frenchTitle')} {...field} />
+            <TextfieldComponent
+              label={t('movieEdition.frenchTitle')}
+              {...field}
+            />
           );
         }}
       />
@@ -169,7 +172,10 @@ export default function EditMovieForm({
         control={control}
         render={({ field }) => {
           return (
-            <TextfieldComponent label={t('movie.englishTitle')} {...field} />
+            <TextfieldComponent
+              label={t('movieEdition.englishTitle')}
+              {...field}
+            />
           );
         }}
       />
@@ -180,7 +186,7 @@ export default function EditMovieForm({
         render={({ field }) => {
           return (
             <TextfieldComponent
-              label={t('movie.picture')}
+              label={t('movieEdition.picture')}
               required
               errorText={errors.picture?.message && t(errors.picture?.message)}
               {...field}
@@ -195,7 +201,7 @@ export default function EditMovieForm({
         render={({ field }) => {
           return (
             <TextfieldComponent
-              label={t('movie.releaseDate')}
+              label={t('movieEdition.releaseDate')}
               required
               errorText={
                 errors.releaseDate?.message && t(errors.releaseDate?.message)
@@ -212,7 +218,7 @@ export default function EditMovieForm({
         render={({ field }) => {
           return (
             <TextfieldComponent
-              label={t('movie.duration')}
+              label={t('movieEdition.duration')}
               required
               errorText={
                 errors.duration?.message && t(errors.duration?.message)
@@ -229,7 +235,7 @@ export default function EditMovieForm({
         render={({ field }) => {
           return (
             <TextfieldComponent
-              label={t('movie.plot')}
+              label={t('movieEdition.plot')}
               required
               errorText={errors.plot?.message && t(errors.plot?.message)}
               {...field}
@@ -244,7 +250,7 @@ export default function EditMovieForm({
         render={({ field }) => {
           return (
             <>
-              <label>{t('movie.videos')}</label>
+              <label>{t('movieEdition.videos')}</label>
               <button
                 type="button"
                 onClick={() => {
@@ -295,7 +301,7 @@ export default function EditMovieForm({
           );
         }}
       />
-      <ButtonComponent label="Valider" type="submit" />
+      <ButtonComponent label={t('validate')} type="submit" />
     </form>
   );
 }

@@ -43,7 +43,18 @@ export default function GenreChart() {
     datasets: [
       {
         data: Object.values(genres),
-        backgroundColor: 'rgba(255, 99, 132, 0.5)'
+        backgroundColor: [
+          'rgba(0, 3, 153, 0.7)',
+          'rgba(153, 0, 79, 0.7)',
+          'rgba(99, 153, 0, 0.7)',
+          'rgba(179, 93, 2, 0.7)',
+          'rgba(0, 153, 97, 0.7)',
+          'rgba(102, 0, 153, 0.7)',
+          'rgba(0, 102, 153, 0.7)',
+          'rgba(0, 153, 13, 0.7)',
+          'rgba(153, 128, 0, 0.7)',
+          'rgba(153, 25, 0, 0.7)'
+        ]
       }
     ]
   };

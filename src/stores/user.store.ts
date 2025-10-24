@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { combine, persist } from 'zustand/middleware';
+import { combine, createJSONStorage, persist } from 'zustand/middleware';
 import { User } from '@interfaces/user.interfaces';
 
 export interface UserActions {
@@ -19,18 +19,7 @@ const useUserStore = create<{ user: User | null } & UserActions>()(
     })),
     {
       name: 'user-store',
-      storage: {
-        getItem: (name) => {
-          const item = localStorage.getItem(name);
-          return item ? JSON.parse(item) : null;
-        },
-        setItem: (name, value) => {
-          localStorage.setItem(name, JSON.stringify(value));
-        },
-        removeItem: (name) => {
-          localStorage.removeItem(name);
-        }
-      }
+      storage: createJSONStorage(() => localStorage)
     }
   )
 );

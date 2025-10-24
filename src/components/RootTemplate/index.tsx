@@ -5,9 +5,20 @@ import NavBar from '@components/NavBar';
 import { rootContent, rootFooter, rootTemplate } from './rootTemplate.styles';
 import ModalComponent from '@components/ui/ModalComponent';
 import ToasterComponent from '../ui/ToasterComponent';
+import useColorModeStore from '@/stores/colorMode.store';
+import { useEffect } from 'react';
 
 export default function RootTemplate() {
   useCollections();
+  const { colorMode } = useColorModeStore();
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-color-mode', colorMode);
+    const meta = document.querySelector('meta[name="color-scheme"]');
+    if (meta) {
+      meta.setAttribute('content', colorMode);
+    }
+  }, [colorMode]);
 
   return (
     <div className={rootTemplate}>

@@ -50,7 +50,7 @@ export default function AddMovie() {
 
   const handleSubmitMovieId: SubmitHandler<FormAddMovie> = async () => {
     const { data, error } = await fetchMovieApi();
-    console.log('movieApiError', error);
+
     if (error?.status === 500) {
       toaster.error({
         title: t('toaster.error.title'),
