@@ -9,5 +9,8 @@ export const loaderContainer = css({
 
 export const formContainer = css({
   height: '100%',
-  overflow: 'auto'
+  overflow: 'auto',
+  width: '80%',
+  margin: '0 auto',
+  padding: '20px'
 });

@@ -96,7 +96,7 @@ export default function NavButtons() {
         tootltipMessage={<>{t('mainNav.trailersTooltip')}</>}
       />
       <NavButton
-        to="/statistics/genre"
+        to="/statistics"
         label={t('mainNav.stats')}
         icon={<BiSolidBarChartSquare />}
         tootltipMessage={t('mainNav.statsTooltip')}

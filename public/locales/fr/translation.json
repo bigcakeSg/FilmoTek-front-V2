@@ -6,6 +6,7 @@
   "movie": "film",
   "welcome": "Bienvenue",
   "cancel": "Annuler",
+  "validate": "Valider",
   "goImdb": "Aller à la page IMDb",
   "pagination": {
     "previous": "Précédent",
@@ -112,5 +113,15 @@
       "title": "Avertissement !",
       "alreadyExists": "Le film avec l'ID IMDb \"{{id}}\" existe déjà."
     }
+  },
+  "movieEdition": {
+    "originalTitle": "Titre original",
+    "frenchTitle": "Titre français",
+    "englishTitle": "Titre anglais",
+    "picture": "Affiche",
+    "releaseDate": "Date de sortie",
+    "duration": "Durée (en minutes)",
+    "plot": "Résumé",
+    "videos": "Vidéos"
   }
 }

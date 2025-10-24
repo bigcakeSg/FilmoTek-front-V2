@@ -11,8 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StatisticsRouteImport } from './routes/statistics'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as StatisticsReleasedateRouteImport } from './routes/statistics/releasedate'
-import { Route as StatisticsGenreRouteImport } from './routes/statistics/genre'
 import { Route as MovieMovieIdIndexRouteImport } from './routes/movie.$movieId.index'
 import { Route as MovieMovieIdEditRouteImport } from './routes/movie_/$movieId/edit'
 
@@ -25,16 +23,6 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const StatisticsReleasedateRoute = StatisticsReleasedateRouteImport.update({
-  id: '/releasedate',
-  path: '/releasedate',
-  getParentRoute: () => StatisticsRoute,
-} as any)
-const StatisticsGenreRoute = StatisticsGenreRouteImport.update({
-  id: '/genre',
-  path: '/genre',
-  getParentRoute: () => StatisticsRoute,
 } as any)
 const MovieMovieIdIndexRoute = MovieMovieIdIndexRouteImport.update({
   id: '/movie/$movieId/',
@@ -49,59 +37,39 @@ const MovieMovieIdEditRoute = MovieMovieIdEditRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/statistics': typeof StatisticsRouteWithChildren
-  '/statistics/genre': typeof StatisticsGenreRoute
-  '/statistics/releasedate': typeof StatisticsReleasedateRoute
+  '/statistics': typeof StatisticsRoute
   '/movie/$movieId/edit': typeof MovieMovieIdEditRoute
   '/movie/$movieId': typeof MovieMovieIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/statistics': typeof StatisticsRouteWithChildren
-  '/statistics/genre': typeof StatisticsGenreRoute
-  '/statistics/releasedate': typeof StatisticsReleasedateRoute
+  '/statistics': typeof StatisticsRoute
   '/movie/$movieId/edit': typeof MovieMovieIdEditRoute
   '/movie/$movieId': typeof MovieMovieIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/statistics': typeof StatisticsRouteWithChildren
-  '/statistics/genre': typeof StatisticsGenreRoute
-  '/statistics/releasedate': typeof StatisticsReleasedateRoute
+  '/statistics': typeof StatisticsRoute
   '/movie_/$movieId/edit': typeof MovieMovieIdEditRoute
   '/movie/$movieId/': typeof MovieMovieIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/statistics'
-    | '/statistics/genre'
-    | '/statistics/releasedate'
-    | '/movie/$movieId/edit'
-    | '/movie/$movieId'
+  fullPaths: '/' | '/statistics' | '/movie/$movieId/edit' | '/movie/$movieId'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/statistics'
-    | '/statistics/genre'
-    | '/statistics/releasedate'
-    | '/movie/$movieId/edit'
-    | '/movie/$movieId'
+  to: '/' | '/statistics' | '/movie/$movieId/edit' | '/movie/$movieId'
   id:
     | '__root__'
     | '/'
     | '/statistics'
-    | '/statistics/genre'
-    | '/statistics/releasedate'
     | '/movie_/$movieId/edit'
     | '/movie/$movieId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  StatisticsRoute: typeof StatisticsRouteWithChildren
+  StatisticsRoute: typeof StatisticsRoute
   MovieMovieIdEditRoute: typeof MovieMovieIdEditRoute
   MovieMovieIdIndexRoute: typeof MovieMovieIdIndexRoute
 }
@@ -122,20 +90,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/statistics/releasedate': {
-      id: '/statistics/releasedate'
-      path: '/releasedate'
-      fullPath: '/statistics/releasedate'
-      preLoaderRoute: typeof StatisticsReleasedateRouteImport
-      parentRoute: typeof StatisticsRoute
-    }
-    '/statistics/genre': {
-      id: '/statistics/genre'
-      path: '/genre'
-      fullPath: '/statistics/genre'
-      preLoaderRoute: typeof StatisticsGenreRouteImport
-      parentRoute: typeof StatisticsRoute
-    }
     '/movie/$movieId/': {
       id: '/movie/$movieId/'
       path: '/movie/$movieId'
@@ -153,23 +107,9 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface StatisticsRouteChildren {
-  StatisticsGenreRoute: typeof StatisticsGenreRoute
-  StatisticsReleasedateRoute: typeof StatisticsReleasedateRoute
-}
-
-const StatisticsRouteChildren: StatisticsRouteChildren = {
-  StatisticsGenreRoute: StatisticsGenreRoute,
-  StatisticsReleasedateRoute: StatisticsReleasedateRoute,
-}
-
-const StatisticsRouteWithChildren = StatisticsRoute._addFileChildren(
-  StatisticsRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  StatisticsRoute: StatisticsRouteWithChildren,
+  StatisticsRoute: StatisticsRoute,
   MovieMovieIdEditRoute: MovieMovieIdEditRoute,
   MovieMovieIdIndexRoute: MovieMovieIdIndexRoute,
 }
